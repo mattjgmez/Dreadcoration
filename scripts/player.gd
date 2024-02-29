@@ -12,15 +12,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var cam = $Camera3D
 
 
-func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-
 func _input(event):
-	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().quit()
-	
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and Input.mouse_mode != Input.MOUSE_MODE_VISIBLE:
 		rotation_degrees.y += event.relative.x * -mouse_sensitivity
 		cam.rotation_degrees.x += event.relative.y * -mouse_sensitivity
 		cam.rotation_degrees.x = clamp(cam.rotation_degrees.x, -90, 90)
