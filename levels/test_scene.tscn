@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://drtm5vsexog8i"]
+
+[ext_resource type="Material" uid="uid://knbnie5irsuo" path="res://materials/grid.tres" id="1_rcbcf"]
+[ext_resource type="PackedScene" uid="uid://coogjs1mlytdk" path="res://player/player.tscn" id="2_y2c3k"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g7cpf"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_q2vsj"]
+sky_material = SubResource("ProceduralSkyMaterial_g7cpf")
+
+[sub_resource type="Environment" id="Environment_aeay2"]
+background_mode = 2
+sky = SubResource("Sky_q2vsj")
+tonemap_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_6c4yr"]
+material = ExtResource("1_rcbcf")
+size = Vector2(2000, 2000)
+orientation = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cykx4"]
+size = Vector3(2000, 0.1, 2000)
+
+[node name="TestScene" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_aeay2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_6c4yr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_cykx4")
+
+[node name="Player" parent="." instance=ExtResource("2_y2c3k")]
+SPEED = 8.0
