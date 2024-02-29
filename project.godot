@@ -30,6 +30,10 @@ window/stretch/aspect="ignore"
 
 project/assembly_name="Acerola Jam"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/health_node/plugin.cfg")
+
 [filesystem]
 
 import/fbx/enabled=false

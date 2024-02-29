@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 16 16"
+   version="1.1"
+   id="svg136"
+   sodipodi:docname="hearts.svg"
+   width="16"
+   height="16"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs140" />
+  <sodipodi:namedview
+     id="namedview138"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="true"
+     inkscape:zoom="36.990523"
+     inkscape:cx="7.5559894"
+     inkscape:cy="8.8401021"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg136">
+    <inkscape:grid
+       type="xygrid"
+       id="grid10300"
+       dotted="false"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <g
+     class=""
+     id="g134"
+     transform="matrix(0.03344535,0,0,0.03349524,-1.0497018,-0.1186048)">
+    <path
+       d="m 480.25,148.62503 c 0,150.24018 -210.10471,302.29733 -210.10471,302.29733 0,0 -210.104712,-152.05715 -210.104712,-302.29733 0,-85.173998 66.174782,-116.593614 100.972062,-116.593614 72.75198,0 109.13265,61.236571 109.13265,61.236571 0,0 36.38067,-61.245889 109.13265,-61.245889 C 414.07521,32.031433 480.25,63.441715 480.25,148.62503 Z"
+       fill="#ffffff"
+       fill-opacity="1"
+       id="path132"
+       style="stroke-width:0.934347" />
+  </g>
+</svg>
