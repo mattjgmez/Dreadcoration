@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://coogjs1mlytdk"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_eygd0"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_eygd0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xxxqj"]
 

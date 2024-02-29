@@ -18,6 +18,10 @@ config/icon="res://icon.svg"
 
 project/assembly_name="Acerola Jam"
 
+[filesystem]
+
+import/fbx/enabled=false
+
 [input]
 
 gameplay_left={
@@ -43,5 +47,4 @@ gameplay_back={
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
