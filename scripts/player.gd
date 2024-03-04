@@ -18,7 +18,7 @@ var player_dead := false
 
 
 func _ready():
-	EnemyManager.call_deferred("activate_enemies")
+	EnemyManager.activate_enemies()
 
 
 func _input(event):
@@ -32,6 +32,9 @@ func _input(event):
 	
 	if event.is_action_pressed("gameplay_action"):
 		fire_weapon()
+	
+	if event.is_action_pressed("gameplay_reload"):
+		gun.reload()
 
 
 func _physics_process(delta):

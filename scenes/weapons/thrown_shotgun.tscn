@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb1wpt08dady"]
+
+[ext_resource type="PackedScene" uid="uid://s71uohvgh8hn" path="res://models/shotgun.blend" id="1_6rlkj"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hmnll"]
+points = PackedVector3Array(0.015, -0.235, 0.93, 0.015, 0.035, 0.94, 0.08, 0.2, 0.08, 0.07, 0.2, -0.905, -0.015, -0.235, 0.93, -0.015, 0.035, 0.94, -0.08, 0.2, 0.08, -0.07, 0.2, -0.905)
+
+[node name="ThrownShotgun" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 6
+gravity_scale = 1.2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0941162, -0.0900269)
+shape = SubResource("ConvexPolygonShape3D_hmnll")
+
+[node name="shotgun" parent="." instance=ExtResource("1_6rlkj")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)

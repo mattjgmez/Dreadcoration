@@ -12,13 +12,18 @@ func activate_enemies():
 	var enemies := get_tree().get_nodes_in_group("Enemy")
 	var enemy_amount := calculate_enemy_count()
 	
+	if not enemies:
+		printerr("No enemies found, enemies not initialized")
+		return
+	
 	for i in enemy_amount:
 		var random_enemy = enemies.pick_random()
 		random_enemy.call_deferred("start_following_player")
-		pass
+	
 	
 	enemies_initialized = true
 
 
 func calculate_enemy_count() -> int:
-	return randi() % max_enemy_count + min_enemy_count
+	var number = randi_range(min_enemy_count, max_enemy_count)
+	return number
