@@ -11,12 +11,15 @@ config_version=5
 [application]
 
 config/name="Acerola Jam"
+run/main_scene="res://scenes/levels/post_processing.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-MouseManager="*res://managers/mouse_manager.tscn"
+MouseManager="*res://scripts/mouse_manager.gd"
+DeathUi="*res://scenes/interface/death_ui.tscn"
+EnemyManager="*res://scripts/enemy_manager.gd"
 
 [display]
 
@@ -25,6 +28,7 @@ window/size/viewport_height=520
 window/size/mode=2
 window/stretch/mode="viewport"
 window/stretch/aspect="ignore"
+mouse_cursor/custom_image="res://click.svg"
 
 [dotnet]
 
@@ -37,6 +41,10 @@ enabled=PackedStringArray("res://addons/health_node/plugin.cfg")
 [filesystem]
 
 import/fbx/enabled=false
+
+[gui]
+
+theme/custom_font="res://fonts/mc-ten-lowercase-alt.ttf"
 
 [input]
 

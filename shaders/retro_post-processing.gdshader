@@ -62,7 +62,6 @@ vec3 rgb2hsv(vec3 rgb) { //Converts RGB values to HSV
 	}
 	
 	return vec3(h,s,cmax); // Keep original alpha value 
-	
 }
 
 vec3 hsv2rgb(vec3 hsv) { //Converts HSV values to RGB

@@ -1,10 +1,11 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bo1ih7addsekw"]
 
-[ext_resource type="Shader" uid="uid://mh2bbri2w6dj" path="res://shaders/muzzle_test.tres" id="1_xxqy0"]
+[ext_resource type="Shader" uid="uid://mh2bbri2w6dj" path="res://shaders/muzzle_flash.tres" id="1_vpn1i"]
 
 [resource]
+resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("1_xxqy0")
+shader = ExtResource("1_vpn1i")
 shader_parameter/FloatParameter = 2.294
-shader_parameter/frame = 0.451
-shader_parameter/radius = 0.5
+shader_parameter/frame = -0.224
+shader_parameter/radius = 0.25

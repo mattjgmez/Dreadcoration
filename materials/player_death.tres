@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dvi2u2adh0ivf"]
+
+[ext_resource type="Shader" path="res://shaders/player_death.gdshader" id="1_03p5s"]
+
+[resource]
+shader = ExtResource("1_03p5s")
+shader_parameter/direction = Vector2(-0.05, 0.25)
+shader_parameter/speed = 1.8
+shader_parameter/alpha = 1.0
+shader_parameter/inner_radius = 0.0
+shader_parameter/outer_radius = 1.0

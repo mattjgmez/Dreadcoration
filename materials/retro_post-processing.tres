@@ -15,12 +15,12 @@ gradient = SubResource("Gradient_60ha1")
 [resource]
 shader = ExtResource("1_2bh43")
 shader_parameter/change_color_depth = true
-shader_parameter/target_color_depth = 3
+shader_parameter/target_color_depth = 4
 shader_parameter/dithering = true
 shader_parameter/scale_resolution = true
 shader_parameter/target_resolution_scale = 2
 shader_parameter/enable_recolor = true
 shader_parameter/to_gradient = SubResource("GradientTexture2D_hadhs")
-shader_parameter/enable_scanlines = true
+shader_parameter/enable_scanlines = false
 shader_parameter/scanline_count = 240.0
 shader_parameter/scanline_brightness = 0.03

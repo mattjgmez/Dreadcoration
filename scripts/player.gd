@@ -6,23 +6,41 @@ extends CharacterBody3D
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var player_caught := false
+var player_dead := false
 
 
 @onready var mouse_sensitivity = 0.15 / (get_viewport().get_visible_rect().size.x/1152.0)
 @onready var cam = $Camera3D
+@onready var gun = $Camera3D/Shotgun
+@onready var health = $Health
+@onready var animation = $AnimationPlayer
+
+
+func _ready():
+	EnemyManager.call_deferred("activate_enemies")
 
 
 func _input(event):
-	if event is InputEventMouseMotion and Input.mouse_mode != Input.MOUSE_MODE_VISIBLE:
+	if event is InputEventMouseMotion:
 		rotation_degrees.y += event.relative.x * -mouse_sensitivity
 		cam.rotation_degrees.x += event.relative.y * -mouse_sensitivity
-		cam.rotation_degrees.x = clamp(cam.rotation_degrees.x, -90, 90)
+		cam.rotation_degrees.x = clamp(cam.rotation_degrees.x, -40, 70)
+	
+	if player_dead:
+		return
+	
+	if event.is_action_pressed("gameplay_action"):
+		fire_weapon()
 
 
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+	
+	if player_caught:
+		return
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -36,3 +54,27 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	
 	move_and_slide()
+
+
+func fire_weapon():
+	gun.fire_weapon()
+
+
+func trigger_player_caught():
+	if (player_caught):
+		return
+	
+	player_caught = true
+	animation.play("caught")
+	pass
+
+
+func _on_health_died():
+	player_dead = true
+	animation.play("death")
+	pass
+
+
+func show_death_ui():
+	DeathUi.enable_death_ui()
+	pass

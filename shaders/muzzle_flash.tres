@@ -102,7 +102,6 @@ expanded_output_ports = [0]
 input_name = "uv"
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_bkhix"]
-output_port_for_preview = 3
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ktrob"]
 noise_type = 3
@@ -127,6 +126,7 @@ min = 1.0
 max = 100.0
 
 [resource]
+resource_local_to_scene = true
 code = "shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, shadows_disabled;
 
@@ -280,7 +280,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-689.128, 19.2202)
 flags/shadows_disabled = true
 nodes/fragment/0/position = Vector2(540, 300)
 nodes/fragment/2/node = SubResource("VisualShaderNodeVec3Constant_ufbq2")

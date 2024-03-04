@@ -3,6 +3,7 @@ extends Node
 const CAPTURED := Input.MOUSE_MODE_CAPTURED
 const RELEASED := Input.MOUSE_MODE_VISIBLE
 
+var gameplay_active := true
 var screen_resolutions := [
 	Vector2(1920, 1080),
 	Vector2(860, 520)
@@ -13,9 +14,12 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
-		Input.mouse_mode = RELEASED
+		print("Bro close the shit")
+		get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
+		get_tree().quit()
+		#Input.mouse_mode = RELEASED
 	
-	if event.is_action_pressed("gameplay_action"):
+	if event.is_action_pressed("gameplay_action") and gameplay_active:
 		if Input.mouse_mode == RELEASED:
 			Input.mouse_mode = CAPTURED
 	

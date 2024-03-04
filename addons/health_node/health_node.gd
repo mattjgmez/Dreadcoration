@@ -9,6 +9,7 @@ signal died()
 
 var current_health : int
 var dead := false
+var invulnerable := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,7 +18,7 @@ func _ready():
 
 
 func take_damage(amount):
-	if dead:
+	if dead or invulnerable:
 		return
 	
 	current_health -= amount

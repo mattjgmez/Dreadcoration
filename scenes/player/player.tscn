@@ -1,0 +1,278 @@
+[gd_scene load_steps=17 format=3 uid="uid://coogjs1mlytdk"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_1voek"]
+[ext_resource type="PackedScene" uid="uid://bh2310vi1m4wd" path="res://scenes/weapons/shotgun.tscn" id="2_yb26w"]
+[ext_resource type="AudioStream" uid="uid://l2gultc6xik8" path="res://audio/footstep.mp3" id="3_65bn1"]
+[ext_resource type="AudioStream" uid="uid://c8rbnyv24x5q6" path="res://audio/kill_scream.mp3" id="4_krulo"]
+[ext_resource type="Script" path="res://addons/health_node/health_node.gd" id="4_vqw36"]
+[ext_resource type="Shader" path="res://shaders/player_death.gdshader" id="5_eo2is"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xxxqj"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rqdxa"]
+
+[sub_resource type="Animation" id="Animation_0wvsr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Audio/FootstepCarpet:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:material:shader_parameter/alpha")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.15]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect:material:shader_parameter/inner_radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.9]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect:material:shader_parameter/outer_radius")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Audio/DeathNoise:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_hdet7"]
+resource_name = "caught"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:material:shader_parameter/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.15, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:material:shader_parameter/inner_radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.9, 0.67]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect:material:shader_parameter/outer_radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0, 1.44]
+}
+
+[sub_resource type="Animation" id="Animation_m28yw"]
+resource_name = "death"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:material:shader_parameter/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:material:shader_parameter/inner_radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 0.0980732),
+"update": 0,
+"values": [0.67, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect:material:shader_parameter/outer_radius")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 6.49802),
+"update": 0,
+"values": [1.44, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Audio/DeathNoise:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"show_death_ui"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_aonse"]
+resource_name = "walking"
+length = 0.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Audio/FootstepCarpet:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eb2ou"]
+_data = {
+"RESET": SubResource("Animation_0wvsr"),
+"caught": SubResource("Animation_hdet7"),
+"death": SubResource("Animation_m28yw"),
+"walking": SubResource("Animation_aonse")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_a1kbo"]
+frequency = 1.0
+fractal_type = 3
+fractal_octaves = 10
+fractal_lacunarity = 3.01
+fractal_gain = 0.345
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_88pvg"]
+seamless = true
+noise = SubResource("FastNoiseLite_a1kbo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n5i3e"]
+resource_local_to_scene = true
+shader = ExtResource("5_eo2is")
+shader_parameter/direction = Vector2(-0.05, 0.25)
+shader_parameter/speed = 20.0
+shader_parameter/alpha = 0.15
+shader_parameter/inner_radius = 0.9
+shader_parameter/outer_radius = 2.0
+shader_parameter/vignette_noise = SubResource("NoiseTexture2D_88pvg")
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+script = ExtResource("1_1voek")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_xxxqj")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+
+[node name="Shotgun" parent="Camera3D" instance=ExtResource("2_yb26w")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+light_energy = 16.0
+shadow_enabled = true
+distance_fade_enabled = true
+spot_range = 77.6896
+spot_angle = 28.9896
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Camera3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_rqdxa")
+
+[node name="Audio" type="Node3D" parent="."]
+
+[node name="FootstepCarpet" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("3_65bn1")
+
+[node name="DeathNoise" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("4_krulo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_eb2ou")
+}
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("4_vqw36")
+
+[node name="TextureRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_n5i3e")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="died" from="Health" to="." method="_on_health_died"]
