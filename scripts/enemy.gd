@@ -11,11 +11,13 @@ var occlusion_check_rays : Array[RayCast3D]
 var is_looked_at := true
 var follow_player := false
 var killing_player := false
+var aggressive := false
 
 @onready var ray_holder := $RayHolder
 @onready var visible_notifier := $LoSAlert
 @onready var nav_agent := $NavigationAgent3D
 @onready var health := $Health
+@onready var animation := $AnimationPlayer
 
 
 func _ready():
@@ -28,9 +30,11 @@ func _physics_process(delta):
 	
 	is_looked_at = is_viewed()
 	
-	if is_looked_at:
+	if is_looked_at or aggressive:
 		if killing_player:
 			target_player.health.take_damage(1000)
+	
+	if is_looked_at:
 		return
 	
 	if global_position.distance_to(target_player.global_position) <= player_kill_range:
@@ -44,6 +48,9 @@ func _physics_process(delta):
 func handle_movement(delta):
 	angular_velocity = Vector3.ZERO
 	linear_velocity = Vector3.ZERO
+	
+	if aggressive:
+		speed += 1.0 * delta
 	
 	# Movement directions
 	var direction := Vector3.ZERO
@@ -96,6 +103,9 @@ func stop_following_player():
 
 
 func is_viewed() -> bool:
+	if aggressive:
+		return false
+	
 	var viewed = visible_notifier.is_on_screen()
 	
 	if not viewed:
@@ -119,5 +129,10 @@ func is_viewed() -> bool:
 
 func on_died():
 	stop_following_player()
-	$AnimationPlayer.play("death")
+	animation.play("death")
+	remove_from_group("ActiveEnemy")
 
+
+func trigger_aggressive():
+	aggressive = true
+	animation.play("aggression")

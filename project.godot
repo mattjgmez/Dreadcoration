@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 MouseManager="*res://scripts/mouse_manager.gd"
 DeathUi="*res://scenes/interface/death_ui.tscn"
 EnemyManager="*res://scripts/enemy_manager.gd"
+SceneLoader="*res://addons/scene_loader/autoloads/scene_loader.gd"
+GameManager="*res://scripts/game_manager.gd"
 
 [display]
 
@@ -36,7 +38,7 @@ project/assembly_name="Acerola Jam"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/health_node/plugin.cfg")
+enabled=PackedStringArray("res://addons/health_node/plugin.cfg", "res://addons/scene_loader/plugin.cfg")
 
 [filesystem]
 

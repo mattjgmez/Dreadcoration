@@ -53,6 +53,7 @@ func reload():
 		return
 	
 	reloading = true
+	$ReloadTimer.start()
 	
 	current_reloads -= 1
 	current_ammo = max_ammo
@@ -62,6 +63,8 @@ func reload():
 	else:
 		model.visible = false
 		ready_to_fire = false
+		$Audio/NoAmmoScream.playing = true
+		EnemyManager.trigger_active_enemy_aggressive()
 	
 	var instance = thrown_model.instantiate()
 	add_child(instance)
@@ -69,5 +72,8 @@ func reload():
 	instance.global_position = model.global_position
 	
 	var throw_direction = -global_transform.basis.z
-	
 	instance.apply_impulse(throw_direction * 10)
+
+
+func _on_reload_timer_timeout():
+	reloading = false

@@ -132,3 +132,5 @@ flat = true
 libraries = {
 "": SubResource("AnimationLibrary_irkxf")
 }
+
+[connection signal="pressed" from="UI/Retry" to="." method="reload_level"]

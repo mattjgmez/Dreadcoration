@@ -4,6 +4,7 @@ var min_enemy_count := 5
 var max_enemy_count := 5
 var enemies_initialized := false
 
+
 # Called when the node enters the scene tree for the first time.
 func activate_enemies():
 	if enemies_initialized:
@@ -19,7 +20,7 @@ func activate_enemies():
 	for i in enemy_amount:
 		var random_enemy = enemies.pick_random()
 		random_enemy.call_deferred("start_following_player")
-	
+		random_enemy.add_to_group("ActiveEnemy")
 	
 	enemies_initialized = true
 
@@ -27,3 +28,8 @@ func activate_enemies():
 func calculate_enemy_count() -> int:
 	var number = randi_range(min_enemy_count, max_enemy_count)
 	return number
+
+
+func trigger_active_enemy_aggressive():
+	get_tree().call_group("ActiveEnemy", "trigger_aggressive")
+

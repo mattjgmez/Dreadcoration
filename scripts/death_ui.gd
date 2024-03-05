@@ -10,12 +10,17 @@ func enable_death_ui():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
-
 func load_main_menu():
 	# Call scene loader to go to main menu
 	pass
 
 
-func reload_level(level):
-	# Call scene loader to reload game
-	pass
+func reload_level():
+	SceneLoader.load_scene(get_tree().get_current_scene(), "scene1")
+	
+	MouseManager.gameplay_active = true
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	EnemyManager.enemies_initialized = false
+	
+	animation.play("RESET")

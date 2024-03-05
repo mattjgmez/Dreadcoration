@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://llgmvxi8mt8w"]
+[gd_scene load_steps=17 format=3 uid="uid://llgmvxi8mt8w"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_wnigs"]
 [ext_resource type="Script" path="res://addons/health_node/health_node.gd" id="2_yjuuu"]
 [ext_resource type="PackedScene" uid="uid://cv0g63wxd8m70" path="res://models/lamp.blend" id="3_mh48j"]
 [ext_resource type="Shader" path="res://shaders/aberration.gdshader" id="5_eiyc6"]
 [ext_resource type="AudioStream" uid="uid://3dgdqo8hus2b" path="res://audio/death_scream.mp3" id="5_m4h3k"]
+[ext_resource type="AudioStream" uid="uid://c7wh60g1drmdj" path="res://audio/aggressive_scream.mp3" id="6_snthx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4srcr"]
 size = Vector3(0.5, 2, 0.5)
@@ -28,7 +29,7 @@ shader = ExtResource("5_eiyc6")
 shader_parameter/speed = 20.0
 shader_parameter/base_color = Color(0.184314, 0.160784, 0.0588235, 1)
 shader_parameter/fade_threshold = 2.0
-shader_parameter/static_radius = 0.2
+shader_parameter/static_radius = 0.6
 shader_parameter/static_texture = SubResource("NoiseTexture2D_aa4rp")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_voicf"]
@@ -48,7 +49,7 @@ shader = ExtResource("5_eiyc6")
 shader_parameter/speed = 20.0
 shader_parameter/base_color = Color(0.490196, 0.843137, 0.666667, 1)
 shader_parameter/fade_threshold = 2.0
-shader_parameter/static_radius = 0.2
+shader_parameter/static_radius = 0.7
 shader_parameter/static_texture = SubResource("NoiseTexture2D_aa4rp")
 
 [sub_resource type="Animation" id="Animation_ar6pa"]
@@ -93,6 +94,18 @@ tracks/3/path = NodePath("Audio/DeathScream:playing")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Audio/AggressionScream:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -162,9 +175,48 @@ tracks/4/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_0uyj5"]
+resource_name = "aggression"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Audio/AggressionScream:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("lamp/Circle_002:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.3, 0.000330128, -0.00796986, -0.3, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("lamp/Circle:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rnx35"]
 _data = {
 "RESET": SubResource("Animation_ar6pa"),
+"aggression": SubResource("Animation_0uyj5"),
 "death": SubResource("Animation_iqjxg")
 }
 
@@ -229,6 +281,11 @@ libraries = {
 [node name="DeathScream" type="AudioStreamPlayer3D" parent="Audio"]
 stream = ExtResource("5_m4h3k")
 volume_db = -10.0
+
+[node name="AggressionScream" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("6_snthx")
+volume_db = -25.0
+max_distance = 10.0
 
 [connection signal="died" from="Health" to="." method="on_died"]
 
