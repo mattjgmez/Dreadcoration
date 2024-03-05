@@ -20,12 +20,8 @@ var aggressive := false
 @onready var animation := $AnimationPlayer
 
 
-func _ready():
-	stop_following_player.call_deferred()
-
-
 func _physics_process(delta):
-	if not follow_player:
+	if not follow_player or not target_player:
 		return
 	
 	is_looked_at = is_viewed()
@@ -50,7 +46,8 @@ func handle_movement(delta):
 	linear_velocity = Vector3.ZERO
 	
 	if aggressive:
-		speed += 1.0 * delta
+		var s = clampf(speed, speed + delta * 1.0, 10.0)
+		speed = s
 	
 	# Movement directions
 	var direction := Vector3.ZERO
@@ -73,6 +70,8 @@ func handle_movement(delta):
 
 
 func start_following_player():
+	await get_tree().physics_frame
+	
 	target_player = get_tree().get_first_node_in_group("Player")
 	
 	if not target_player:
@@ -87,7 +86,6 @@ func start_following_player():
 			r.add_exception(target_player)
 			occlusion_check_rays.append(r)
 	
-	await get_tree().physics_frame
 	health.invulnerable = false
 	
 	follow_player = true
