@@ -24,10 +24,10 @@ enum ThreadStatus {
 func set_configuration(config: Dictionary) -> void:
 	if config.has("scenes"):
 		scenes = config["scenes"]
-
+	
 	if config.has("path_to_progress_bar"):
 		path_to_progress_bar = config["path_to_progress_bar"]
-
+	
 	if config.has("loading_screen"):
 		loading_screen = load(config["loading_screen"])
 
