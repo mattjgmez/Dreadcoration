@@ -6,12 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://bxypfnemryiwm" path="res://scenes/environment/ceiling_light.tscn" id="4_6gl0i"]
 [ext_resource type="PackedScene" uid="uid://bl47lgp28h55u" path="res://scenes/environment/clock.tscn" id="5_a8vkq"]
 
-[sub_resource type="Sky" id="Sky_dwee1"]
+[sub_resource type="Sky" id="Sky_qwpmu"]
 
 [sub_resource type="Environment" id="Environment_t5bu1"]
 background_color = Color(1, 1, 1, 1)
 background_energy_multiplier = 0.0
-sky = SubResource("Sky_dwee1")
+sky = SubResource("Sky_qwpmu")
 ambient_light_source = 1
 ambient_light_energy = 0.0
 reflected_light_source = 1
@@ -23,8 +23,8 @@ fog_light_color = Color(0.188235, 0.207843, 0.235294, 1)
 fog_light_energy = 0.55
 fog_density = 0.014
 volumetric_fog_enabled = true
-volumetric_fog_albedo = Color(0.239216, 0.239216, 0.239216, 1)
-volumetric_fog_length = 0.01
+volumetric_fog_density = 0.025
+volumetric_fog_albedo = Color(0.447059, 0.447059, 0.447059, 1)
 adjustment_enabled = true
 adjustment_brightness = 0.83
 adjustment_contrast = 1.27

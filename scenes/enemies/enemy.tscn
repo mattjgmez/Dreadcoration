@@ -10,7 +10,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_4srcr"]
 size = Vector3(0.5, 2, 0.5)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_sroxc"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0kojf"]
 frequency = 1.0
 fractal_type = 3
 fractal_octaves = 10
@@ -20,7 +20,7 @@ fractal_weighted_strength = 1.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aa4rp"]
 seamless = true
-noise = SubResource("FastNoiseLite_sroxc")
+noise = SubResource("FastNoiseLite_0kojf")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_we1gj"]
 resource_local_to_scene = true
