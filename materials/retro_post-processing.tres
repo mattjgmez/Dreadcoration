@@ -13,6 +13,7 @@ metadata/_snap_count = 16
 gradient = SubResource("Gradient_60ha1")
 
 [resource]
+resource_local_to_scene = true
 shader = ExtResource("1_2bh43")
 shader_parameter/change_color_depth = true
 shader_parameter/target_color_depth = 4

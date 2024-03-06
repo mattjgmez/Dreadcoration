@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="1_j2pxe"]
 
-[sub_resource type="Shader" id="Shader_5bvuc"]
+[sub_resource type="Shader" id="Shader_6utxk"]
 code = "shader_type spatial;
 
 
@@ -14,7 +14,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_asepf"]
 render_priority = 0
-shader = SubResource("Shader_5bvuc")
+shader = SubResource("Shader_6utxk")
 
 [resource]
 resource_local_to_scene = true

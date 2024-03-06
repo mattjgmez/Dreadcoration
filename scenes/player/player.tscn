@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://coogjs1mlytdk"]
+[gd_scene load_steps=18 format=3 uid="uid://coogjs1mlytdk"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1voek"]
 [ext_resource type="PackedScene" uid="uid://bh2310vi1m4wd" path="res://scenes/weapons/shotgun.tscn" id="2_yb26w"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://c8rbnyv24x5q6" path="res://audio/kill_scream.mp3" id="4_krulo"]
 [ext_resource type="Script" path="res://addons/health_node/health_node.gd" id="4_vqw36"]
 [ext_resource type="Shader" path="res://shaders/player_death.gdshader" id="5_eo2is"]
+[ext_resource type="Script" path="res://scripts/player_hud.gd" id="6_2m1ok"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xxxqj"]
 
@@ -28,7 +29,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TextureRect:material:shader_parameter/alpha")
+tracks/1/path = NodePath("HUD/ColorRect:material:shader_parameter/alpha")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -40,7 +41,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("TextureRect:material:shader_parameter/inner_radius")
+tracks/2/path = NodePath("HUD/ColorRect:material:shader_parameter/inner_radius")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -52,7 +53,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("TextureRect:material:shader_parameter/outer_radius")
+tracks/3/path = NodePath("HUD/ColorRect:material:shader_parameter/outer_radius")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -79,7 +80,7 @@ resource_name = "caught"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:material:shader_parameter/alpha")
+tracks/0/path = NodePath("HUD/ColorRect:material:shader_parameter/alpha")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -91,7 +92,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TextureRect:material:shader_parameter/inner_radius")
+tracks/1/path = NodePath("HUD/ColorRect:material:shader_parameter/inner_radius")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -103,7 +104,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("TextureRect:material:shader_parameter/outer_radius")
+tracks/2/path = NodePath("HUD/ColorRect:material:shader_parameter/outer_radius")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -119,7 +120,7 @@ length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:material:shader_parameter/alpha")
+tracks/0/path = NodePath("HUD/ColorRect:material:shader_parameter/alpha")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -131,7 +132,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TextureRect:material:shader_parameter/inner_radius")
+tracks/1/path = NodePath("HUD/ColorRect:material:shader_parameter/inner_radius")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -143,7 +144,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("TextureRect:material:shader_parameter/outer_radius")
+tracks/2/path = NodePath("HUD/ColorRect:material:shader_parameter/outer_radius")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -204,7 +205,7 @@ _data = {
 "walking": SubResource("Animation_aonse")
 }
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_a1kbo"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wwa2a"]
 frequency = 1.0
 fractal_type = 3
 fractal_octaves = 10
@@ -214,7 +215,7 @@ fractal_weighted_strength = 1.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_88pvg"]
 seamless = true
-noise = SubResource("FastNoiseLite_a1kbo")
+noise = SubResource("FastNoiseLite_wwa2a")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n5i3e"]
 resource_local_to_scene = true
@@ -242,8 +243,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 light_energy = 16.0
 shadow_enabled = true
 distance_fade_enabled = true
-spot_range = 77.6896
-spot_angle = 28.9896
+spot_range = 45.0
+spot_angle = 30.0
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Camera3D"]
 
@@ -267,12 +268,34 @@ libraries = {
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_vqw36")
 
-[node name="TextureRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_n5i3e")
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("6_2m1ok")
+
+[node name="ColorRect" type="ColorRect" parent="HUD"]
+material = SubResource("ShaderMaterial_n5i3e")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RemainingGuns" type="VBoxContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -170.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 118.0
+grow_horizontal = 0
+theme_override_constants/separation = -25
 
 [connection signal="died" from="Health" to="." method="_on_health_died"]

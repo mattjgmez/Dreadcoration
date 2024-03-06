@@ -48,9 +48,9 @@ func deal_damage(body : Node3D):
 		body.apply_impulse(knockback_vector)
 
 
-func reload():
+func reload() -> int:
 	if not ready_to_fire or current_reloads <= 0 or reloading:
-		return
+		return current_reloads
 	
 	reloading = true
 	$ReloadTimer.start()
@@ -73,6 +73,8 @@ func reload():
 	
 	var throw_direction = -global_transform.basis.z
 	instance.apply_impulse(throw_direction * 10)
+	
+	return current_reloads
 
 
 func _on_reload_timer_timeout():

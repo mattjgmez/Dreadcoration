@@ -17,6 +17,10 @@ var player_dead := false
 @onready var animation = $AnimationPlayer
 
 
+func _ready():
+	$HUD.set_remaining_guns(gun.current_reloads)
+
+
 func _input(event):
 	if event is InputEventMouseMotion:
 		rotation_degrees.y += event.relative.x * -mouse_sensitivity
@@ -30,7 +34,9 @@ func _input(event):
 		fire_weapon()
 	
 	if event.is_action_pressed("gameplay_reload"):
-		gun.reload()
+		var remaining_reloads = gun.reload()
+		$HUD.set_remaining_guns(remaining_reloads)
+		print(remaining_reloads)
 
 
 func _physics_process(delta):
