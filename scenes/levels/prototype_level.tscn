@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6rdtnkvtygxj"]
+[gd_scene load_steps=9 format=3 uid="uid://b6rdtnkvtygxj"]
 
 [ext_resource type="Material" uid="uid://knbnie5irsuo" path="res://materials/grid.tres" id="1_0romt"]
 [ext_resource type="PackedScene" uid="uid://llgmvxi8mt8w" path="res://scenes/enemies/enemy.tscn" id="2_vug43"]
 [ext_resource type="PackedScene" uid="uid://coogjs1mlytdk" path="res://scenes/player/player.tscn" id="3_h7313"]
 [ext_resource type="PackedScene" uid="uid://bxypfnemryiwm" path="res://scenes/environment/ceiling_light.tscn" id="4_6gl0i"]
+[ext_resource type="PackedScene" uid="uid://bl47lgp28h55u" path="res://scenes/environment/clock.tscn" id="5_a8vkq"]
 
 [sub_resource type="Sky" id="Sky_dwee1"]
 
@@ -492,23 +493,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.90386, 2.38419e-07, -19.378
 [node name="Player" parent="." instance=ExtResource("3_h7313")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -53.625, 0, 0)
 
-[node name="CeilingLight" parent="." instance=ExtResource("4_6gl0i")]
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Lights" type="Node3D" parent="Environment"]
+
+[node name="CeilingLight" parent="Environment/Lights" instance=ExtResource("4_6gl0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.27614, 16)
 
-[node name="CeilingLight2" parent="." instance=ExtResource("4_6gl0i")]
+[node name="CeilingLight2" parent="Environment/Lights" instance=ExtResource("4_6gl0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.27614, 15)
 
-[node name="CeilingLight3" parent="." instance=ExtResource("4_6gl0i")]
+[node name="CeilingLight3" parent="Environment/Lights" instance=ExtResource("4_6gl0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0.27614, 0)
 
-[node name="CeilingLight4" parent="." instance=ExtResource("4_6gl0i")]
+[node name="CeilingLight4" parent="Environment/Lights" instance=ExtResource("4_6gl0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, -1.68854, 0)
 
-[node name="CeilingLight5" parent="." instance=ExtResource("4_6gl0i")]
+[node name="CeilingLight5" parent="Environment/Lights" instance=ExtResource("4_6gl0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, -1.68854, 0)
 
-[node name="CeilingLight6" parent="." instance=ExtResource("4_6gl0i")]
+[node name="CeilingLight6" parent="Environment/Lights" instance=ExtResource("4_6gl0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0.27614, -15)
 
-[node name="CeilingLight7" parent="." instance=ExtResource("4_6gl0i")]
+[node name="CeilingLight7" parent="Environment/Lights" instance=ExtResource("4_6gl0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0.27614, -1)
+
+[node name="Clock" parent="Environment" instance=ExtResource("5_a8vkq")]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, -11.5412, 3.98154, 0)

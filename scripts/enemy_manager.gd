@@ -22,6 +22,7 @@ func activate_enemies():
 		random_enemy.call_deferred("start_following_player")
 		random_enemy.add_to_group("ActiveEnemy")
 	
+	print("Enemies initialized; begin the hunt.")
 	enemies_initialized = true
 
 

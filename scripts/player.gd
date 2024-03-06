@@ -17,10 +17,6 @@ var player_dead := false
 @onready var animation = $AnimationPlayer
 
 
-func _ready():
-	EnemyManager.activate_enemies()
-
-
 func _input(event):
 	if event is InputEventMouseMotion:
 		rotation_degrees.y += event.relative.x * -mouse_sensitivity
