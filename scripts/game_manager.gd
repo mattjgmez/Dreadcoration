@@ -1,9 +1,12 @@
 extends Node
 
 
+var current_scene : Node
+
+
 var scene_dictionary := {
 	"loading_screen" : "res://scenes/interface/loading_scene.tscn",
-	"scene1" : "res://scenes/levels/post_processing.tscn"
+	"scene1" : "res://scenes/levels/level_1.tscn"
 }
 
 var config := {

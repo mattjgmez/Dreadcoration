@@ -1,11 +1,20 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dvi2u2adh0ivf"]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dvi2u2adh0ivf"]
 
 [ext_resource type="Shader" path="res://shaders/player_death.gdshader" id="1_03p5s"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fp5fj"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_eeqyj"]
+seamless = true
+noise = SubResource("FastNoiseLite_fp5fj")
+
 [resource]
+resource_local_to_scene = true
 shader = ExtResource("1_03p5s")
 shader_parameter/direction = Vector2(-0.05, 0.25)
-shader_parameter/speed = 1.8
+shader_parameter/speed = 12.9
 shader_parameter/alpha = 1.0
 shader_parameter/inner_radius = 0.0
-shader_parameter/outer_radius = 1.0
+shader_parameter/outer_radius = 0.0
+shader_parameter/vignette_noise = SubResource("NoiseTexture2D_eeqyj")

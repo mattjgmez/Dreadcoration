@@ -14,7 +14,6 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
-		print("Bro close the shit")
 		get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 		get_tree().quit()
 		#Input.mouse_mode = RELEASED

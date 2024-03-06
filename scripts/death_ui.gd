@@ -16,7 +16,8 @@ func load_main_menu():
 
 
 func reload_level():
-	SceneLoader.load_scene(get_tree().get_current_scene(), "scene1")
+	print("Current scene from tree: ",get_tree().get_current_scene())
+	SceneLoader.load_scene(GameManager.current_scene, "scene1")
 	
 	MouseManager.gameplay_active = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
