@@ -6,10 +6,10 @@ signal damaged(amount : int)
 signal died()
 
 @export var maximum_health : int = 100
+@export var invulnerable := false
 
 var current_health : int
 var dead := false
-var invulnerable := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

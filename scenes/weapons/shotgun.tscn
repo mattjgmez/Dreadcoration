@@ -353,7 +353,7 @@ shape = SubResource("CylinderShape3D_b2ctk")
 disabled = true
 
 [node name="Model" parent="." instance=ExtResource("2_mf1m6")]
-transform = Transform3D(0.199239, 0, 0.0174311, 0, 0.2, 0, -0.0174311, 0, 0.199239, 0.315, -0.296702, -0.593)
+transform = Transform3D(0.199239, 0, 0.0174312, 0, 0.2, 0, -0.0174312, 0, 0.199239, 0.315, -0.296702, -0.593)
 
 [node name="MuzzleFlash" type="Node3D" parent="."]
 transform = Transform3D(0.362025, 0, 0.0265855, 0, 0.363, 0, -0.0265855, 0, 0.362025, 0.205214, -0.210472, -1.61465)
