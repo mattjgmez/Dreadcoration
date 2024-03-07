@@ -13,4 +13,4 @@ func _on_grace_period_timeout():
 
 # Used so that the animator can call the EnemyManager
 func call_enemy_manager():
-	EnemyManager.activate_enemies()
+	EnemyManager.initialize_enemies.emit()

@@ -1,8 +1,16 @@
 extends Node
 
+
+signal initialize_enemies
+
+
 var min_enemy_count := 5
 var max_enemy_count := 5
 var enemies_initialized := false
+
+
+func _ready():
+	connect("initialize_enemies", activate_enemies)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -32,5 +40,6 @@ func calculate_enemy_count() -> int:
 
 
 func trigger_active_enemy_aggressive():
+	await initialize_enemies
 	get_tree().call_group("ActiveEnemy", "trigger_aggressive")
 

@@ -144,9 +144,9 @@ size = Vector3(15.9823, 4, 4.37012)
 material = ExtResource("1_0romt")
 
 [node name="HallwaySpawn" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.136, -2.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.136, -2.52, 0)
 operation = 2
-size = Vector3(33.68, 4, 3.361)
+size = Vector3(33.68, 4.5, 3.361)
 material = ExtResource("1_0romt")
 
 [node name="Enemies" type="Node3D" parent="."]
@@ -507,10 +507,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.27614, 15)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0.27614, 0)
 
 [node name="CeilingLight4" parent="Environment/Lights" instance=ExtResource("4_6gl0i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, -1.68854, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, -1.20125, 0)
 
 [node name="CeilingLight5" parent="Environment/Lights" instance=ExtResource("4_6gl0i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, -1.68854, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, -1.20125, 0)
 
 [node name="CeilingLight6" parent="Environment/Lights" instance=ExtResource("4_6gl0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0.27614, -15)

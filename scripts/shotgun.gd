@@ -63,7 +63,6 @@ func reload() -> int:
 	else:
 		model.visible = false
 		ready_to_fire = false
-		$Audio/NoAmmoScream.playing = true
 		EnemyManager.trigger_active_enemy_aggressive()
 	
 	var instance = thrown_model.instantiate()

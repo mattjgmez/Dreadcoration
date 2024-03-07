@@ -1,11 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://bh2310vi1m4wd"]
+[gd_scene load_steps=14 format=3 uid="uid://bh2310vi1m4wd"]
 
 [ext_resource type="Script" path="res://scripts/shotgun.gd" id="1_tyr8y"]
 [ext_resource type="PackedScene" uid="uid://s71uohvgh8hn" path="res://models/shotgun.blend" id="2_mf1m6"]
 [ext_resource type="Material" uid="uid://bo1ih7addsekw" path="res://materials/muzzle_flash.tres" id="3_l8bvr"]
 [ext_resource type="AudioStream" uid="uid://dxqogasyd4tyf" path="res://audio/shotgun.mp3" id="4_qwgtk"]
 [ext_resource type="AudioStream" uid="uid://cbe4m845ggq0t" path="res://audio/gun_click.mp3" id="5_nigyk"]
-[ext_resource type="AudioStream" uid="uid://dv7yrhj3hrr16" path="res://audio/no_ammo_scream.mp3" id="6_0ijm3"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_b2ctk"]
 height = 5.9999
@@ -374,10 +373,6 @@ volume_db = -30.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.342454, -0.202809, -0.566108)
 stream = ExtResource("5_nigyk")
 volume_db = -30.0
-
-[node name="NoAmmoScream" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("6_0ijm3")
-volume_db = -18.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

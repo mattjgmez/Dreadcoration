@@ -15,10 +15,11 @@ var player_dead := false
 @onready var gun = $Camera3D/Shotgun
 @onready var health = $Health
 @onready var animation = $AnimationPlayer
+@onready var hud = $HUD
 
 
 func _ready():
-	$HUD.set_remaining_guns(gun.current_reloads)
+	hud.set_remaining_guns(gun.current_reloads)
 
 
 func _input(event):
@@ -35,7 +36,7 @@ func _input(event):
 	
 	if event.is_action_pressed("gameplay_reload"):
 		var remaining_reloads = gun.reload()
-		$HUD.set_remaining_guns(remaining_reloads)
+		hud.set_remaining_guns(remaining_reloads)
 		print(remaining_reloads)
 
 
@@ -76,6 +77,7 @@ func trigger_player_caught():
 
 func _on_health_died():
 	player_dead = true
+	hud.visible = false
 	animation.play("death")
 	pass
 
