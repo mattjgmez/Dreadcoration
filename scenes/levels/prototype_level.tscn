@@ -47,6 +47,7 @@ navigation_mesh = SubResource("NavigationMesh_vwimf")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="TestLevel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.73, 0)
+ignore_occlusion_culling = true
 use_collision = true
 collision_layer = 15
 flip_faces = true
@@ -55,96 +56,112 @@ material = ExtResource("1_0romt")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.77261, 0)
+ignore_occlusion_culling = true
 operation = 2
 size = Vector3(10, 6, 10)
 material = ExtResource("1_0romt")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4466, -1.77261, 0)
+ignore_occlusion_culling = true
 operation = 2
 size = Vector3(10, 6, 10)
 material = ExtResource("1_0romt")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.43904, -1.77261, 16.4503)
+ignore_occlusion_culling = true
 operation = 2
 size = Vector3(10, 6, 10)
 material = ExtResource("1_0romt")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.44743, -1.77261, 15.0577)
+ignore_occlusion_culling = true
 operation = 2
 size = Vector3(18.6167, 6, 10)
 material = ExtResource("1_0romt")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9155, -1.77261, -15.0577)
+ignore_occlusion_culling = true
 operation = 2
 size = Vector3(13.623, 6, 10)
 material = ExtResource("1_0romt")
 
 [node name="CSGBox3D14" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5199, -1.77261, -1.31826)
+ignore_occlusion_culling = true
 operation = 2
 size = Vector3(9.09082, 6, 18.8514)
 material = ExtResource("1_0romt")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8612, -1.77261, -14.3398)
+ignore_occlusion_culling = true
 operation = 2
 size = Vector3(18.1479, 6, 13.3506)
 material = ExtResource("1_0romt")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3575, -1.77261, -7.57235)
+ignore_occlusion_culling = true
 operation = 2
 size = Vector3(10, 6, 10)
 material = ExtResource("1_0romt")
 
 [node name="Hallway" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.66119, -2.75, -16.4006)
+ignore_occlusion_culling = true
 operation = 2
 size = Vector3(10, 4, 2.78809)
 material = ExtResource("1_0romt")
 
 [node name="Hallway2" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.518549, -2.75, -17.0969)
+ignore_occlusion_culling = true
 operation = 2
 size = Vector3(10, 4, 2.78809)
 material = ExtResource("1_0romt")
 
 [node name="Hallway3" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22499, -2.75, -3.58431)
+ignore_occlusion_culling = true
 operation = 2
 size = Vector3(10, 4, 2.78809)
 material = ExtResource("1_0romt")
 
 [node name="Hallway4" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.52609, -2.75, 3.5966)
+ignore_occlusion_culling = true
 operation = 2
 size = Vector3(10, 4, 2.78809)
 material = ExtResource("1_0romt")
 
 [node name="Hallway5" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
 transform = Transform3D(0.763154, 0, 0.646217, 0, 1, 0, -0.646217, 0, 0.763154, -3.80631, -2.75, 7.77801)
+ignore_occlusion_culling = true
 operation = 2
 size = Vector3(15.9823, 4, 2.78809)
 material = ExtResource("1_0romt")
 
 [node name="Hallway6" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
 transform = Transform3D(-0.567772, 0, 0.823186, 0, 1, 0, -0.823186, 0, -0.567772, 7.16055, -2.75, 5.515)
+ignore_occlusion_culling = true
 operation = 2
 size = Vector3(15.9823, 4, 2.78809)
 material = ExtResource("1_0romt")
 
 [node name="Hallway7" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
 transform = Transform3D(-0.999996, 0, -0.0028798, 0, 1, 0, 0.0028798, 0, -0.999996, -1.34564, -2.75, 15.1576)
+ignore_occlusion_culling = true
 operation = 2
 size = Vector3(15.9823, 4, 4.37012)
 material = ExtResource("1_0romt")
 
 [node name="HallwaySpawn" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.136, -2.52, 0)
+ignore_occlusion_culling = true
 operation = 2
 size = Vector3(33.68, 4.5, 3.361)
 material = ExtResource("1_0romt")

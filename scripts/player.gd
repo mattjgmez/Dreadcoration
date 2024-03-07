@@ -37,7 +37,7 @@ func _input(event):
 	if event.is_action_pressed("gameplay_reload"):
 		var remaining_reloads = gun.reload()
 		hud.set_remaining_guns(remaining_reloads)
-		print(remaining_reloads)
+		print("Remaining reloads: ", remaining_reloads)
 
 
 func _physics_process(delta):

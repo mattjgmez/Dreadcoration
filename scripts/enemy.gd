@@ -1,17 +1,18 @@
 extends RigidBody3D
 
 
-const OCC_RAY_TARGET_Y_OFFSET = 0.5
+const OCC_RAY_TARGET_Y_OFFSET = 1.0
 
 @export var speed = 5.0
 @export var target_player : CharacterBody3D
 @export_range(0.0, 10.0) var player_kill_range := 2.0
 
 var occlusion_check_rays : Array[RayCast3D]
-var is_looked_at := true
-var follow_player := false
+var seen_currently := false
+var seen_previously := false
+var active := false
+var angry := false
 var killing_player := false
-var aggressive := false
 
 @onready var ray_holder := $RayHolder
 @onready var visible_notifier := $LoSAlert
@@ -20,17 +21,30 @@ var aggressive := false
 @onready var animation := $AnimationPlayer
 
 
+func _ready():
+	for r in occlusion_check_rays:
+		r.target_position = (target_player.global_position - r.global_position) * self.basis
+		r.target_position.y += OCC_RAY_TARGET_Y_OFFSET
+
+
 func _physics_process(delta):
-	if not follow_player or not target_player:
+	# If this enemy is not active or has no target, we do nothing
+	if not active:
 		return
 	
-	is_looked_at = is_viewed()
+	if not target_player:
+		return
 	
-	if is_looked_at or aggressive:
-		if killing_player:
-			target_player.health.take_damage(1000)
+	seen_currently = await is_viewed()
 	
-	if is_looked_at:
+	if killing_player and (seen_currently or angry):
+		target_player.health.take_damage(1000)
+	
+	if seen_currently and not angry:
+		seen_previously = true
+		return
+	
+	if not seen_previously and not angry:
 		return
 	
 	if global_position.distance_to(target_player.global_position) <= player_kill_range:
@@ -45,7 +59,7 @@ func handle_movement(delta):
 	angular_velocity = Vector3.ZERO
 	linear_velocity = Vector3.ZERO
 	
-	if aggressive:
+	if angry:
 		var s = clampf(speed, speed + delta * 1.0, 10.0)
 		speed = s
 	
@@ -88,7 +102,7 @@ func start_following_player():
 	
 	health.invulnerable = false
 	
-	follow_player = true
+	active = true
 	nav_agent.process_mode = Node.PROCESS_MODE_INHERIT
 
 
@@ -96,14 +110,11 @@ func stop_following_player():
 	await get_tree().physics_frame
 	health.invulnerable = true
 	
-	follow_player = false
+	active = false
 	nav_agent.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 func is_viewed() -> bool:
-	if aggressive:
-		return false
-	
 	var viewed = visible_notifier.is_on_screen()
 	
 	if not viewed:
@@ -132,5 +143,6 @@ func on_died():
 
 
 func trigger_aggressive():
-	aggressive = true
+	angry = true
+	$Audio/NoAmmoScream.playing = true
 	animation.play("aggression")

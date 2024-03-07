@@ -226,8 +226,8 @@ _data = {
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_wnigs")
-speed = 10.0
-player_kill_range = 1.0
+speed = 0.4
+player_kill_range = 1.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -243,12 +243,20 @@ aabb = AABB(-0.226828, 0, -0.19496, 0.453656, 2, 0.389919)
 [node name="RayHolder" type="Node3D" parent="."]
 
 [node name="RayCast3D" type="RayCast3D" parent="RayHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.116447, 0)
+target_position = Vector3(0, 0, -1)
+collision_mask = 16777213
+hit_from_inside = true
+debug_shape_custom_color = Color(0, 1, 1, 1)
+
+[node name="RayCast3D2" type="RayCast3D" parent="RayHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.164547, 1, 0)
 target_position = Vector3(0, 0, -1)
 collision_mask = 16777213
 hit_from_inside = true
 
-[node name="RayCast3D2" type="RayCast3D" parent="RayHolder"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="RayCast3D3" type="RayCast3D" parent="RayHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.176473, 1, 0)
 target_position = Vector3(0, 0, -1)
 collision_mask = 16777213
 hit_from_inside = true
@@ -289,7 +297,7 @@ volume_db = -10.0
 [node name="AggressionScream" type="AudioStreamPlayer3D" parent="Audio"]
 stream = ExtResource("6_snthx")
 volume_db = -5.0
-max_distance = 10.0
+max_distance = 15.0
 
 [node name="NoAmmoScream" type="AudioStreamPlayer3D" parent="Audio"]
 stream = ExtResource("7_5ysmy")

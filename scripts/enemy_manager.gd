@@ -29,6 +29,7 @@ func activate_enemies():
 		var random_enemy = enemies.pick_random()
 		random_enemy.call_deferred("start_following_player")
 		random_enemy.add_to_group("ActiveEnemy")
+		print("Initiated enemy ", i + 1, " of ", enemy_amount)
 	
 	print("Enemies initialized; begin the hunt.")
 	enemies_initialized = true
@@ -40,6 +41,8 @@ func calculate_enemy_count() -> int:
 
 
 func trigger_active_enemy_aggressive():
-	await initialize_enemies
+	if not enemies_initialized:
+		await initialize_enemies
+	
 	get_tree().call_group("ActiveEnemy", "trigger_aggressive")
 
