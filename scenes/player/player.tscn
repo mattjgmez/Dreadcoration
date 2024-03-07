@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://coogjs1mlytdk"]
+[gd_scene load_steps=19 format=3 uid="uid://coogjs1mlytdk"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1voek"]
 [ext_resource type="PackedScene" uid="uid://bh2310vi1m4wd" path="res://scenes/weapons/shotgun.tscn" id="2_yb26w"]
@@ -6,11 +6,14 @@
 [ext_resource type="AudioStream" uid="uid://c8rbnyv24x5q6" path="res://audio/kill_scream.mp3" id="4_krulo"]
 [ext_resource type="Script" path="res://addons/health_node/health_node.gd" id="4_vqw36"]
 [ext_resource type="Shader" path="res://shaders/player_death.gdshader" id="5_eo2is"]
-[ext_resource type="Script" path="res://scripts/player_hud.gd" id="6_2m1ok"]
+[ext_resource type="Script" path="res://scripts/interface/player_hud.gd" id="7_o4gd1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xxxqj"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_rqdxa"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ijfi"]
+size = Vector3(0.3, 0.25, 2)
 
 [sub_resource type="Animation" id="Animation_0wvsr"]
 length = 0.001
@@ -234,6 +237,10 @@ script = ExtResource("1_1voek")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_xxxqj")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_rqdxa")
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 
@@ -246,11 +253,13 @@ distance_fade_enabled = true
 spot_range = 45.0
 spot_angle = 30.0
 
-[node name="AudioListener3D" type="AudioListener3D" parent="Camera3D"]
+[node name="CenterDetection" type="Area3D" parent="Camera3D"]
+collision_layer = 0
+collision_mask = 2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_rqdxa")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/CenterDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.37693)
+shape = SubResource("BoxShape3D_3ijfi")
 
 [node name="Audio" type="Node3D" parent="."]
 
@@ -259,6 +268,9 @@ stream = ExtResource("3_65bn1")
 
 [node name="DeathNoise" type="AudioStreamPlayer3D" parent="Audio"]
 stream = ExtResource("4_krulo")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -283,7 +295,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("6_2m1ok")
+script = ExtResource("7_o4gd1")
 
 [node name="RemainingGuns" type="VBoxContainer" parent="HUD"]
 layout_mode = 1
@@ -297,4 +309,6 @@ offset_bottom = 118.0
 grow_horizontal = 0
 theme_override_constants/separation = -25
 
+[connection signal="body_entered" from="Camera3D/CenterDetection" to="." method="_on_center_detection_body_entered"]
+[connection signal="body_exited" from="Camera3D/CenterDetection" to="." method="_on_center_detection_body_exited"]
 [connection signal="died" from="Health" to="." method="_on_health_died"]

@@ -28,7 +28,7 @@ func _input(event):
 		cam.rotation_degrees.x += event.relative.y * -mouse_sensitivity
 		cam.rotation_degrees.x = clamp(cam.rotation_degrees.x, -40, 70)
 	
-	if player_dead:
+	if player_dead or player_caught:
 		return
 	
 	if event.is_action_pressed("gameplay_action"):
@@ -85,3 +85,13 @@ func _on_health_died():
 func show_death_ui():
 	DeathUi.enable_death_ui()
 	pass
+
+
+func _on_center_detection_body_entered(body : Node3D):
+	if body.is_in_group("ActiveEnemy"):
+		body.in_center_screen = true
+
+
+func _on_center_detection_body_exited(body : Node3D):
+	if body.is_in_group("ActiveEnemy"):
+		body.in_center_screen = false

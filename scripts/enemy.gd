@@ -13,6 +13,7 @@ var seen_previously := false
 var active := false
 var angry := false
 var killing_player := false
+var in_center_screen := false
 
 @onready var ray_holder := $RayHolder
 @onready var visible_notifier := $LoSAlert
@@ -37,7 +38,7 @@ func _physics_process(delta):
 	
 	seen_currently = await is_viewed()
 	
-	if killing_player and (seen_currently or angry):
+	if killing_player and (seen_currently or angry) and (in_center_screen or angry):
 		target_player.health.take_damage(1000)
 	
 	if seen_currently and not angry:
