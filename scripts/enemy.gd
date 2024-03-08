@@ -14,6 +14,7 @@ var active := false
 var angry := false
 var killing_player := false
 var in_center_screen := false
+var obscured := false
 
 @onready var ray_holder := $RayHolder
 @onready var visible_notifier := $LoSAlert
@@ -48,7 +49,7 @@ func _physics_process(delta):
 	if not seen_previously and not angry:
 		return
 	
-	if global_position.distance_to(target_player.global_position) <= player_kill_range:
+	if global_position.distance_to(target_player.global_position) <= player_kill_range and not obscured:
 		target_player.call_deferred("trigger_player_caught")
 		killing_player = true
 		return
@@ -134,6 +135,11 @@ func is_viewed() -> bool:
 	if colliding_rays >= occlusion_check_rays.size():
 		viewed = false
 	
+	if colliding_rays > 0:
+		obscured = true
+	else:
+		obscured = false
+	
 	return viewed
 
 
@@ -141,6 +147,7 @@ func on_died():
 	stop_following_player()
 	animation.play("death")
 	remove_from_group("ActiveEnemy")
+	EnemyManager.enemy_slain()
 
 
 func trigger_aggressive():

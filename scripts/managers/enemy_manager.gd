@@ -7,6 +7,7 @@ signal initialize_enemies
 var min_enemy_count := 5
 var max_enemy_count := 5
 var enemies_initialized := false
+var remaining_enemies : int
 
 
 func _ready():
@@ -31,6 +32,7 @@ func activate_enemies():
 		random_enemy.add_to_group("ActiveEnemy")
 		print("Initiated enemy ", i + 1, " of ", enemy_amount)
 	
+	remaining_enemies = enemy_amount
 	print("Enemies initialized; begin the hunt.")
 	enemies_initialized = true
 
@@ -46,3 +48,9 @@ func trigger_active_enemy_aggressive():
 	
 	get_tree().call_group("ActiveEnemy", "trigger_aggressive")
 
+
+func enemy_slain():
+	remaining_enemies -= 1
+	
+	if remaining_enemies <= 0:
+		EndUi.enable_end_ui("THE ANOMALIES ARE SLAIN", true, "For Now...")

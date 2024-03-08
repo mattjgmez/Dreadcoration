@@ -25,7 +25,7 @@ func _ready():
 
 
 func _input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and not EndUi.ui_active:
 		rotation_degrees.y += event.relative.x * -mouse_sensitivity
 		cam.rotation_degrees.x += event.relative.y * -mouse_sensitivity
 		cam.rotation_degrees.x = clamp(cam.rotation_degrees.x, -40, 70)
@@ -46,7 +46,7 @@ func _input(event):
 
 
 func _physics_process(delta):
-	if player_caught:
+	if player_caught or EndUi.ui_active:
 		return
 	
 	if door_detection.is_colliding():
@@ -97,7 +97,7 @@ func _on_health_died():
 
 
 func show_death_ui():
-	DeathUi.enable_death_ui()
+	EndUi.enable_end_ui("A MOST UNWELCOME END")
 	pass
 
 
