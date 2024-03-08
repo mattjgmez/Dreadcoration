@@ -8,6 +8,7 @@ extends CharacterBody3D
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var player_caught := false
 var player_dead := false
+var door_to_open
 
 
 @onready var mouse_sensitivity = 0.15 / (get_viewport().get_visible_rect().size.x/1152.0)
@@ -16,6 +17,7 @@ var player_dead := false
 @onready var health = $Health
 @onready var animation = $AnimationPlayer
 @onready var hud = $HUD
+@onready var door_detection = $Camera3D/DoorDetection
 
 
 func _ready():
@@ -38,16 +40,28 @@ func _input(event):
 		var remaining_reloads = gun.reload()
 		hud.set_remaining_guns(remaining_reloads)
 		print("Remaining reloads: ", remaining_reloads)
+	
+	if event.is_action_pressed("gameplay_interact") and door_to_open:
+		door_to_open.open_door()
 
 
 func _physics_process(delta):
 	if player_caught:
 		return
 	
-	handle_movement(delta)
+	if door_detection.is_colliding():
+		var collision = door_detection.get_collider()
+		if collision.is_in_group("Door"):
+			$HUD/DoorOpenLabel.visible = true
+			door_to_open = collision
+	else:
+		$HUD/DoorOpenLabel.visible = false
+		door_to_open = null
+	
+	handle_movement()
 
 
-func handle_movement(delta):
+func handle_movement():
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("gameplay_left", "gameplay_right", "gameplay_forward", "gameplay_back")

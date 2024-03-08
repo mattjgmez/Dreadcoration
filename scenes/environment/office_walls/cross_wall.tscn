@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://djtq2f7ysqd8n"]
+
+[ext_resource type="PackedScene" uid="uid://c21hda27n62ka" path="res://models/modular_office/wall_cross.blend" id="1_np33l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gw0mw"]
+size = Vector3(0.420898, 3.06146, 8.04839)
+
+[node name="CrossWall" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49671, -0.0281405)
+shape = SubResource("BoxShape3D_gw0mw")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.00200708, 0, 0.999998, 0, 1, 0, -0.999998, 0, 0.00200708, -0.00848054, 1.5004, 0.00537853)
+shape = SubResource("BoxShape3D_gw0mw")
+
+[node name="wall_cross" parent="." instance=ExtResource("1_np33l")]

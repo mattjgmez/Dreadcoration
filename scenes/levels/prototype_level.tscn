@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b6rdtnkvtygxj"]
+[gd_scene load_steps=10 format=3 uid="uid://b6rdtnkvtygxj"]
 
 [ext_resource type="Material" uid="uid://knbnie5irsuo" path="res://materials/grid.tres" id="1_0romt"]
 [ext_resource type="PackedScene" uid="uid://llgmvxi8mt8w" path="res://scenes/enemies/enemy.tscn" id="2_vug43"]
@@ -6,12 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://bxypfnemryiwm" path="res://scenes/environment/ceiling_light.tscn" id="4_6gl0i"]
 [ext_resource type="PackedScene" uid="uid://bl47lgp28h55u" path="res://scenes/environment/clock.tscn" id="5_a8vkq"]
 
-[sub_resource type="Sky" id="Sky_qwpmu"]
+[sub_resource type="Sky" id="Sky_ip22p"]
 
 [sub_resource type="Environment" id="Environment_t5bu1"]
 background_color = Color(1, 1, 1, 1)
 background_energy_multiplier = 0.0
-sky = SubResource("Sky_qwpmu")
+sky = SubResource("Sky_ip22p")
 ambient_light_source = 1
 ambient_light_energy = 0.0
 reflected_light_source = 1
@@ -37,6 +37,9 @@ agent_radius = 0.75
 filter_baking_aabb = AABB(0, 0, 0, 190, 190, 190)
 filter_baking_aabb_offset = Vector3(-95, -95, -95)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1qlyg"]
+size = Vector3(113.016, 2, 100)
+
 [node name="TestLevel" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -50,19 +53,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.73, 0)
 ignore_occlusion_culling = true
 use_collision = true
 collision_layer = 15
+collision_priority = 20.0
 flip_faces = true
 size = Vector3(200, 200, 200)
 material = ExtResource("1_0romt")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.77261, 0)
+[node name="FloorCollision" type="StaticBody3D" parent="TestLevel/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.75, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestLevel/CSGBox3D/FloorCollision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.50781, -0.949034, 0)
+shape = SubResource("BoxShape3D_1qlyg")
+
+[node name="Lobby" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4466, -1.77261, 0)
 ignore_occlusion_culling = true
 operation = 2
 size = Vector3(10, 6, 10)
 material = ExtResource("1_0romt")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4466, -1.77261, 0)
+[node name="CSGBox3D" type="CSGBox3D" parent="TestLevel/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.77261, 0)
 ignore_occlusion_culling = true
 operation = 2
 size = Vector3(10, 6, 10)

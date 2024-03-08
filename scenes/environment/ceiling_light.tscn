@@ -9,14 +9,16 @@ density = 0.0
 [node name="CeilingLight" type="Node3D"]
 
 [node name="ceiling_light" parent="." instance=ExtResource("1_or77h")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.03, 5.62562, -0.086)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.03, 2.954, -0.086)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="ceiling_light"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.37407, 0)
 light_color = Color(1, 0.85098, 0.588235, 1)
 light_energy = 7.0
 light_volumetric_fog_energy = 4.0
-omni_range = 10.0
+shadow_enabled = true
+omni_range = 4.41796
+omni_attenuation = 0.5
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ceiling_light"]
 stream = ExtResource("2_mfvbu")

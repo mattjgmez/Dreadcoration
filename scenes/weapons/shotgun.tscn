@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scripts/shotgun.gd" id="1_tyr8y"]
 [ext_resource type="PackedScene" uid="uid://s71uohvgh8hn" path="res://models/shotgun.blend" id="2_mf1m6"]
 [ext_resource type="Material" uid="uid://bo1ih7addsekw" path="res://materials/muzzle_flash.tres" id="3_l8bvr"]
-[ext_resource type="AudioStream" uid="uid://dxqogasyd4tyf" path="res://audio/shotgun.mp3" id="4_qwgtk"]
-[ext_resource type="AudioStream" uid="uid://cbe4m845ggq0t" path="res://audio/gun_click.mp3" id="5_nigyk"]
+[ext_resource type="AudioStream" uid="uid://dxqogasyd4tyf" path="res://audio/player/shotgun.mp3" id="4_qwgtk"]
+[ext_resource type="AudioStream" uid="uid://cbe4m845ggq0t" path="res://audio/player/gun_click.mp3" id="5_nigyk"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_b2ctk"]
 height = 5.9999

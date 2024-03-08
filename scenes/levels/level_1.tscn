@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://fb131pai1tb8" path="res://materials/retro_post-processing.tres" id="1_1gcv7"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_c7ola"]
-[ext_resource type="PackedScene" uid="uid://b6rdtnkvtygxj" path="res://scenes/levels/prototype_level.tscn" id="2_fq2f5"]
+[ext_resource type="PackedScene" uid="uid://cdmb3jeutbc7m" path="res://scenes/levels/level_1_gameplay.tscn" id="3_sdsup"]
 
 [node name="Level1" type="Node"]
 script = ExtResource("1_c7ola")
@@ -23,4 +23,4 @@ audio_listener_enable_3d = true
 size = Vector2i(860, 520)
 render_target_update_mode = 4
 
-[node name="TestLevel" parent="PostProcessing/SubViewport" instance=ExtResource("2_fq2f5")]
+[node name="Level1" parent="PostProcessing/SubViewport" instance=ExtResource("3_sdsup")]

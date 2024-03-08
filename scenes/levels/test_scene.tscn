@@ -1,45 +1,60 @@
-[gd_scene load_steps=10 format=3 uid="uid://drtm5vsexog8i"]
+[gd_scene load_steps=17 format=3 uid="uid://drtm5vsexog8i"]
 
-[ext_resource type="Material" uid="uid://knbnie5irsuo" path="res://materials/grid.tres" id="1_rcbcf"]
+[ext_resource type="Material" uid="uid://c7480phq8idck" path="res://materials/shag_carpet.tres" id="2_2q1wo"]
+[ext_resource type="Shader" path="res://shaders/grid.gdshader" id="2_guv5c"]
 [ext_resource type="PackedScene" uid="uid://coogjs1mlytdk" path="res://scenes/player/player.tscn" id="2_y2c3k"]
-[ext_resource type="PackedScene" uid="uid://llgmvxi8mt8w" path="res://scenes/enemies/enemy.tscn" id="3_mdt71"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g7cpf"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_q2vsj"]
-sky_material = SubResource("ProceduralSkyMaterial_g7cpf")
-
-[sub_resource type="Environment" id="Environment_aeay2"]
-background_mode = 2
-sky = SubResource("Sky_q2vsj")
-tonemap_mode = 2
+[ext_resource type="PackedScene" uid="uid://cl837av6n2lds" path="res://scenes/environment/office_walls/blank_wall.tscn" id="3_k785k"]
+[ext_resource type="PackedScene" uid="uid://23yo4qmrsl18" path="res://scenes/environment/office_walls/corner_wall.tscn" id="4_6l441"]
+[ext_resource type="PackedScene" uid="uid://djtq2f7ysqd8n" path="res://scenes/environment/office_walls/cross_wall.tscn" id="5_bstf6"]
+[ext_resource type="PackedScene" uid="uid://crpa28isiivs1" path="res://scenes/environment/office_walls/wall_door.tscn" id="6_b5bcl"]
+[ext_resource type="PackedScene" uid="uid://bxypfnemryiwm" path="res://scenes/environment/ceiling_light.tscn" id="7_js54b"]
+[ext_resource type="PackedScene" uid="uid://by43c4wv6hqui" path="res://scenes/environment/office_walls/elevator.tscn" id="9_kxd45"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_1mngo"]
-vertices = PackedVector3Array(-91, 0.5, -91, -91, 0.5, 91, 91, 0.5, 91, 91, 0.5, -91)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 agent_radius = 9.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7vihn"]
-material = ExtResource("1_rcbcf")
+material = ExtResource("2_2q1wo")
 size = Vector2(200, 200)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cykx4"]
 size = Vector3(183.164, 0.5, 183.292)
 
+[sub_resource type="Shader" id="Shader_d6tio"]
+code = "shader_type spatial;
+
+
+void fragment() {
+	ALPHA = 0.0;
+}
+
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_asepf"]
+render_priority = 0
+shader = SubResource("Shader_d6tio")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o6l7m"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_asepf")
+shader = ExtResource("2_guv5c")
+shader_parameter/scale_0 = 660
+shader_parameter/scale_1 = 800
+shader_parameter/line_scale_0 = 0.138
+shader_parameter/line_scale_1 = 0.043
+shader_parameter/color_0 = Color(0.168627, 0.133333, 0.0470588, 1)
+shader_parameter/color_1 = Color(0.258824, 0.301961, 0.145098, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_8k4ta"]
+material = SubResource("ShaderMaterial_o6l7m")
+size = Vector2(200, 200)
+orientation = 1
+
 [node name="TestScene" type="Node3D"]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
-shadow_enabled = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_aeay2")
-
 [node name="Player" parent="." instance=ExtResource("2_y2c3k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.558155)
-SPEED = 8.0
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 1.46772)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_1mngo")
@@ -54,6 +69,32 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 shape = SubResource("BoxShape3D_cykx4")
 
-[node name="Enemy" parent="." instance=ExtResource("3_mdt71")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.241353, 0.389079, -8.04669)
-speed = 5.0
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 2.94639, 0)
+mesh = SubResource("QuadMesh_8k4ta")
+skeleton = NodePath("../..")
+
+[node name="BlankWall" parent="." instance=ExtResource("3_k785k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -10)
+
+[node name="CornerWall" parent="." instance=ExtResource("4_6l441")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -10)
+
+[node name="CrossWall" parent="." instance=ExtResource("5_bstf6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="WallDoor" parent="." instance=ExtResource("6_b5bcl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.97004, 0, -10.0008)
+
+[node name="CeilingLight" parent="." instance=ExtResource("7_js54b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.50745, -2.67238, -6.87484)
+
+[node name="OmniLight3D" parent="CeilingLight/ceiling_light" index="1"]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, -0.645409, 0)
+omni_range = 4.998
+omni_attenuation = 0.594604
+
+[node name="Elevator" parent="." instance=ExtResource("9_kxd45")]
+visible = false
+
+[editable path="CeilingLight"]

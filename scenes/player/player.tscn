@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1voek"]
 [ext_resource type="PackedScene" uid="uid://bh2310vi1m4wd" path="res://scenes/weapons/shotgun.tscn" id="2_yb26w"]
-[ext_resource type="AudioStream" uid="uid://l2gultc6xik8" path="res://audio/footstep.mp3" id="3_65bn1"]
 [ext_resource type="Texture2D" uid="uid://c43gxbxq8h75n" path="res://light_cookie.png" id="3_n4mpt"]
-[ext_resource type="AudioStream" uid="uid://c8rbnyv24x5q6" path="res://audio/kill_scream.mp3" id="4_krulo"]
+[ext_resource type="AudioStream" uid="uid://l2gultc6xik8" path="res://audio/player/footstep.mp3" id="4_kfc5l"]
 [ext_resource type="Script" path="res://addons/health_node/health_node.gd" id="4_vqw36"]
+[ext_resource type="AudioStream" uid="uid://c8rbnyv24x5q6" path="res://audio/enemy/kill_scream.mp3" id="5_22yip"]
 [ext_resource type="Shader" path="res://shaders/player_death.gdshader" id="5_eo2is"]
 [ext_resource type="Script" path="res://scripts/interface/player_hud.gd" id="7_o4gd1"]
 
@@ -232,8 +232,8 @@ shader_parameter/outer_radius = 2.0
 shader_parameter/vignette_noise = SubResource("NoiseTexture2D_88pvg")
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 script = ExtResource("1_1voek")
-SPEED = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -250,10 +250,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
 light_energy = 16.0
+light_indirect_energy = 5.0
 light_projector = ExtResource("3_n4mpt")
 shadow_enabled = true
 distance_fade_enabled = true
-spot_range = 45.0
+spot_range = 30.0
+spot_attenuation = 0.5
 spot_angle = 30.0
 
 [node name="CenterDetection" type="Area3D" parent="Camera3D"]
@@ -264,13 +266,20 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.37693)
 shape = SubResource("BoxShape3D_3ijfi")
 
+[node name="DoorDetection" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -1)
+collision_mask = 16
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
 [node name="Audio" type="Node3D" parent="."]
 
 [node name="FootstepCarpet" type="AudioStreamPlayer3D" parent="Audio"]
-stream = ExtResource("3_65bn1")
+stream = ExtResource("4_kfc5l")
 
 [node name="DeathNoise" type="AudioStreamPlayer3D" parent="Audio"]
-stream = ExtResource("4_krulo")
+stream = ExtResource("5_22yip")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Audio"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
@@ -311,6 +320,18 @@ offset_right = -5.0
 offset_bottom = 118.0
 grow_horizontal = 0
 theme_override_constants/separation = -25
+
+[node name="DoorOpenLabel" type="Label" parent="HUD"]
+modulate = Color(1, 1, 1, 0.482353)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press F to open Door"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="body_entered" from="Camera3D/CenterDetection" to="." method="_on_center_detection_body_entered"]
 [connection signal="body_exited" from="Camera3D/CenterDetection" to="." method="_on_center_detection_body_exited"]
