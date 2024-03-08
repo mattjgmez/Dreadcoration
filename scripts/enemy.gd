@@ -61,7 +61,7 @@ func handle_movement(delta):
 	linear_velocity = Vector3.ZERO
 	
 	if angry:
-		var s = clampf(speed, speed + delta * 1.0, 10.0)
+		var s = clampf(speed, speed + delta * 2.0, 20.0)
 		speed = s
 	
 	# Movement directions

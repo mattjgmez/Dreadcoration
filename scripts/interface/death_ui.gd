@@ -16,7 +16,7 @@ func load_main_menu():
 
 
 func reload_level():
-	SceneLoader.load_scene(GameManager.current_scene, "scene1")
+	SceneLoader.load_scene(GameManager.current_scene, GameManager.current_scene_string)
 	
 	MouseManager.gameplay_active = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

@@ -58,7 +58,7 @@ length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("lamp/Circle:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/0/path = NodePath("Model/Circle:surface_material_override/0:shader_parameter/fade_threshold")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -69,7 +69,7 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("lamp/Circle_001:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/1/path = NodePath("Model/Circle_001:surface_material_override/0:shader_parameter/fade_threshold")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -80,7 +80,7 @@ tracks/1/keys = {
 tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("lamp/Circle_002:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/2/path = NodePath("Model/Circle_002:surface_material_override/0:shader_parameter/fade_threshold")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -132,7 +132,7 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("lamp/Circle_002:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/1/path = NodePath("Model/Circle_002:surface_material_override/0:shader_parameter/fade_threshold")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -143,7 +143,7 @@ tracks/1/keys = {
 tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("lamp/Circle:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/2/path = NodePath("Model/Circle:surface_material_override/0:shader_parameter/fade_threshold")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -158,7 +158,7 @@ length = 1.5
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("lamp/Circle:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/0/path = NodePath("Model/Circle:surface_material_override/0:shader_parameter/fade_threshold")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -169,7 +169,7 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("lamp/Circle_001:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/1/path = NodePath("Model/Circle_001:surface_material_override/0:shader_parameter/fade_threshold")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -180,7 +180,7 @@ tracks/1/keys = {
 tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("lamp/Circle_002:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/2/path = NodePath("Model/Circle_002:surface_material_override/0:shader_parameter/fade_threshold")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -225,6 +225,7 @@ _data = {
 [node name="Enemy" type="RigidBody3D" groups=["Damageable", "Enemy"]]
 collision_layer = 2
 collision_mask = 5
+continuous_cd = true
 script = ExtResource("1_wnigs")
 speed = 0.4
 player_kill_range = 1.5
@@ -233,14 +234,35 @@ player_kill_range = 1.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_4srcr")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-path_max_distance = 100.01
-debug_path_custom_color = Color(1, 0, 0, 1)
+[node name="Model" parent="." instance=ExtResource("3_mh48j")]
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0, 0)
 
-[node name="LoSAlert" type="VisibleOnScreenNotifier3D" parent="."]
-aabb = AABB(-0.226828, 0, -0.19496, 0.453656, 2, 0.389919)
+[node name="Circle" parent="Model" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_we1gj")
+
+[node name="Circle_001" parent="Model" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_voicf")
+
+[node name="Circle_002" parent="Model" index="2"]
+surface_material_override/0 = SubResource("ShaderMaterial_d3w1b")
+
+[node name="Audio" type="Node3D" parent="."]
+
+[node name="DeathScream" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("5_m4h3k")
+volume_db = -10.0
+
+[node name="AggressionScream" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("6_snthx")
+volume_db = -5.0
+max_distance = 15.0
+
+[node name="NoAmmoScream" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("7_5ysmy")
+volume_db = -18.0
 
 [node name="RayHolder" type="Node3D" parent="."]
+visible = false
 
 [node name="RayCast3D" type="RayCast3D" parent="RayHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.116447, 0)
@@ -267,42 +289,23 @@ target_position = Vector3(0, 0, -1)
 collision_mask = 16777213
 hit_from_inside = true
 
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_max_distance = 100.01
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+
+[node name="LoSAlert" type="VisibleOnScreenNotifier3D" parent="."]
+aabb = AABB(-0.226828, 0, -0.19496, 0.453656, 2, 0.389919)
+
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_yjuuu")
 invulnerable = true
-
-[node name="lamp" parent="." instance=ExtResource("3_mh48j")]
-transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0, 0)
-
-[node name="Circle" parent="lamp" index="0"]
-surface_material_override/0 = SubResource("ShaderMaterial_we1gj")
-
-[node name="Circle_001" parent="lamp" index="1"]
-surface_material_override/0 = SubResource("ShaderMaterial_voicf")
-
-[node name="Circle_002" parent="lamp" index="2"]
-surface_material_override/0 = SubResource("ShaderMaterial_d3w1b")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_rnx35")
 }
 
-[node name="Audio" type="Node3D" parent="."]
-
-[node name="DeathScream" type="AudioStreamPlayer3D" parent="Audio"]
-stream = ExtResource("5_m4h3k")
-volume_db = -10.0
-
-[node name="AggressionScream" type="AudioStreamPlayer3D" parent="Audio"]
-stream = ExtResource("6_snthx")
-volume_db = -5.0
-max_distance = 15.0
-
-[node name="NoAmmoScream" type="AudioStreamPlayer3D" parent="Audio"]
-stream = ExtResource("7_5ysmy")
-volume_db = -18.0
-
 [connection signal="died" from="Health" to="." method="on_died"]
 
-[editable path="lamp"]
+[editable path="Model"]

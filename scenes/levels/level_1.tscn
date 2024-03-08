@@ -6,6 +6,7 @@
 
 [node name="Level1" type="Node"]
 script = ExtResource("1_c7ola")
+scene_name = "level_1"
 
 [node name="PostProcessing" type="SubViewportContainer" parent="."]
 material = ExtResource("1_1gcv7")
