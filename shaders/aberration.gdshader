@@ -28,9 +28,9 @@ void fragment( ){
 		
 		final_color.rgb = (static_texture_1 - static_texture_2).rgb;
 		final_color.a = 1.0;
+		EMISSION = final_color.rgb;
 	}
 	
 	ALBEDO = final_color.rgb;
 	ALPHA = final_color.a;
-	EMISSION = vec3(0.0);
 }

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://crpa28isiivs1"]
 
+[ext_resource type="Script" path="res://scripts/interactables/door.gd" id="1_28nkr"]
 [ext_resource type="PackedScene" uid="uid://bgj2eue44ovw4" path="res://models/modular_office/wall_door.blend" id="1_d0rww"]
-[ext_resource type="Script" path="res://scenes/environment/office_walls/door.gd" id="1_om5h3"]
 [ext_resource type="AudioStream" uid="uid://bina0rd4mm183" path="res://audio/door_open_normal.mp3" id="2_ithfc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4fnqm"]
@@ -146,9 +146,9 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_vvreo"]
 size = Vector3(1.347, 3.072, 0.45)
 
-[node name="WallDoor" type="Area3D" groups=["Door"]]
+[node name="WallDoor" type="Area3D" groups=["Interactable"]]
 collision_layer = 16
-script = ExtResource("1_om5h3")
+script = ExtResource("1_28nkr")
 
 [node name="DoorDetectionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20601, 0)

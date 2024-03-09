@@ -8,7 +8,7 @@ extends CharacterBody3D
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var player_caught := false
 var player_dead := false
-var door_to_open
+var interactable
 
 
 @onready var mouse_sensitivity = 0.15 / (get_viewport().get_visible_rect().size.x/1152.0)
@@ -17,7 +17,7 @@ var door_to_open
 @onready var health = $Health
 @onready var animation = $AnimationPlayer
 @onready var hud = $HUD
-@onready var door_detection = $Camera3D/DoorDetection
+@onready var interaction = $Camera3D/InteractionDetection
 
 
 func _ready():
@@ -41,22 +41,15 @@ func _input(event):
 		hud.set_remaining_guns(remaining_reloads)
 		print("Remaining reloads: ", remaining_reloads)
 	
-	if event.is_action_pressed("gameplay_interact") and door_to_open:
-		door_to_open.open_door()
+	if event.is_action_pressed("gameplay_interact") and interactable:
+		interactable.interact(self)
 
 
 func _physics_process(delta):
 	if player_caught or EndUi.ui_active:
 		return
 	
-	if door_detection.is_colliding():
-		var collision = door_detection.get_collider()
-		if collision.is_in_group("Door"):
-			$HUD/DoorOpenLabel.visible = true
-			door_to_open = collision
-	else:
-		$HUD/DoorOpenLabel.visible = false
-		door_to_open = null
+	handle_interaction()
 	
 	handle_movement()
 
@@ -74,6 +67,16 @@ func handle_movement():
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	
 	move_and_slide()
+
+
+func handle_interaction():
+	if interaction.is_colliding() and interaction.get_collider().visible:
+		interactable = interaction.get_collider()
+		if interactable.enabled:
+			hud.enable_interaction_label(interactable.message)
+	else:
+		hud.disable_interaction_label()
+		interactable = null
 
 
 func fire_weapon():

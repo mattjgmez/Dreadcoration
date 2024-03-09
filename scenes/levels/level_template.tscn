@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://p2iuemjoiw1e"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_n65fh"]
+[ext_resource type="Shader" path="res://shaders/retro_post-processing.gdshader" id="2_650fu"]
+
+[sub_resource type="Gradient" id="Gradient_60ha1"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.0625, 0.125, 0.1875, 0.25, 0.3125, 0.375, 0.4375, 0.5, 0.5625, 0.625, 0.6875, 0.75, 0.8125, 0.875, 0.9375, 1)
+colors = PackedColorArray(0.168627, 0.133333, 0.0470588, 1, 0.184314, 0.160784, 0.0588235, 1, 0.203922, 0.192157, 0.0745098, 1, 0.203922, 0.192157, 0.0745098, 1, 0.239216, 0.262745, 0.117647, 1, 0.258824, 0.301961, 0.145098, 1, 0.278431, 0.34902, 0.180392, 1, 0.301961, 0.396078, 0.215686, 1, 0.321569, 0.447059, 0.258824, 1, 0.372549, 0.564706, 0.364706, 1, 0.396078, 0.627451, 0.427451, 1, 0.427451, 0.698039, 0.498039, 1, 0.458824, 0.768627, 0.580392, 1, 0.490196, 0.843137, 0.666667, 1, 0.533333, 0.92549, 0.760784, 1, 0.510539, 0.87598, 0.716177, 1, 0.533333, 0.92549, 0.760784, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 16
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hadhs"]
+gradient = SubResource("Gradient_60ha1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kw8cg"]
+resource_local_to_scene = true
+shader = ExtResource("2_650fu")
+shader_parameter/change_color_depth = true
+shader_parameter/target_color_depth = 4
+shader_parameter/dithering = true
+shader_parameter/scale_resolution = true
+shader_parameter/target_resolution_scale = 2
+shader_parameter/enable_recolor = true
+shader_parameter/to_gradient = SubResource("GradientTexture2D_hadhs")
+shader_parameter/enable_scanlines = false
+shader_parameter/scanline_count = 240.0
+shader_parameter/scanline_brightness = 0.03
+
+[node name="LevelTemplate" type="Node"]
+script = ExtResource("1_n65fh")
+
+[node name="PostProcessing" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_kw8cg")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="PostProcessing"]
+handle_input_locally = false
+audio_listener_enable_3d = true
+size = Vector2i(860, 520)
+render_target_update_mode = 4

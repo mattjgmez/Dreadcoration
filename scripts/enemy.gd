@@ -21,6 +21,7 @@ var obscured := false
 @onready var nav_agent := $NavigationAgent3D
 @onready var health := $Health
 @onready var animation := $AnimationPlayer
+@onready var movement_audio := $Audio/Movement
 
 
 func _ready():
@@ -49,10 +50,14 @@ func _physics_process(delta):
 	if not seen_previously and not angry:
 		return
 	
-	if global_position.distance_to(target_player.global_position) <= player_kill_range and not obscured:
-		target_player.call_deferred("trigger_player_caught")
-		killing_player = true
+	if global_position.distance_to(target_player.global_position) <= player_kill_range and not obscured and not killing_player:
+		start_killing_player()
 		return
+	
+	if not seen_currently:
+		movement_audio.audio_timer.paused = false
+	else:
+		movement_audio.audio_timer.paused = true
 	
 	handle_movement(delta)
 
@@ -85,6 +90,12 @@ func handle_movement(delta):
 	move_and_collide(velocity)
 
 
+func start_killing_player():
+	target_player.call_deferred("trigger_player_caught")
+	animation.play("caught_player_start")
+	killing_player = true
+
+
 func start_following_player():
 	await get_tree().physics_frame
 	
@@ -106,6 +117,8 @@ func start_following_player():
 	
 	active = true
 	nav_agent.process_mode = Node.PROCESS_MODE_INHERIT
+	
+	movement_audio.initialize_audio_timer()
 
 
 func stop_following_player():
@@ -114,6 +127,8 @@ func stop_following_player():
 	
 	active = false
 	nav_agent.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	movement_audio.audio_timer.stop()
 
 
 func is_viewed() -> bool:

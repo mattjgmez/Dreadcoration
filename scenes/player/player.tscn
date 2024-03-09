@@ -266,7 +266,7 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.37693)
 shape = SubResource("BoxShape3D_3ijfi")
 
-[node name="DoorDetection" type="RayCast3D" parent="Camera3D"]
+[node name="InteractionDetection" type="RayCast3D" parent="Camera3D"]
 target_position = Vector3(0, 0, -1)
 collision_mask = 16
 hit_from_inside = true
@@ -321,7 +321,7 @@ offset_bottom = 118.0
 grow_horizontal = 0
 theme_override_constants/separation = -25
 
-[node name="DoorOpenLabel" type="Label" parent="HUD"]
+[node name="InteractionLabel" type="Label" parent="HUD"]
 modulate = Color(1, 1, 1, 0.482353)
 layout_mode = 1
 anchors_preset = 15
@@ -329,6 +329,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
 text = "Press F to open Door"
 horizontal_alignment = 1
 vertical_alignment = 1

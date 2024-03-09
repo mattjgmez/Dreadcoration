@@ -1,0 +1,277 @@
+[gd_scene load_steps=31 format=3 uid="uid://csq7lqp5lcts2"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_h5xc7"]
+[ext_resource type="Shader" path="res://shaders/retro_post-processing.gdshader" id="2_apriv"]
+[ext_resource type="Material" uid="uid://c7480phq8idck" path="res://materials/shag_carpet.tres" id="3_7iohl"]
+[ext_resource type="PackedScene" uid="uid://cl837av6n2lds" path="res://scenes/environment/office_walls/blank_wall.tscn" id="4_1bgwx"]
+[ext_resource type="PackedScene" uid="uid://23yo4qmrsl18" path="res://scenes/environment/office_walls/corner_wall.tscn" id="5_73aj0"]
+[ext_resource type="Script" path="res://scripts/tutorial/bag_of_guns.gd" id="6_entsq"]
+[ext_resource type="PackedScene" uid="uid://by43c4wv6hqui" path="res://scenes/environment/office_walls/elevator.tscn" id="6_nyqol"]
+[ext_resource type="PackedScene" uid="uid://crpa28isiivs1" path="res://scenes/environment/office_walls/wall_door.tscn" id="7_tlxmr"]
+[ext_resource type="PackedScene" uid="uid://bxypfnemryiwm" path="res://scenes/environment/ceiling_light.tscn" id="8_vvw1p"]
+[ext_resource type="PackedScene" uid="uid://llgmvxi8mt8w" path="res://scenes/enemies/enemy.tscn" id="9_flm5c"]
+[ext_resource type="PackedScene" uid="uid://coogjs1mlytdk" path="res://scenes/player/player.tscn" id="10_cq3hw"]
+[ext_resource type="Shader" path="res://shaders/player_death.gdshader" id="11_y328b"]
+[ext_resource type="Shader" path="res://shaders/grid.gdshader" id="12_5qybj"]
+
+[sub_resource type="Gradient" id="Gradient_60ha1"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.0625, 0.125, 0.1875, 0.25, 0.3125, 0.375, 0.4375, 0.5, 0.5625, 0.625, 0.6875, 0.75, 0.8125, 0.875, 0.9375, 1)
+colors = PackedColorArray(0.168627, 0.133333, 0.0470588, 1, 0.184314, 0.160784, 0.0588235, 1, 0.203922, 0.192157, 0.0745098, 1, 0.203922, 0.192157, 0.0745098, 1, 0.239216, 0.262745, 0.117647, 1, 0.258824, 0.301961, 0.145098, 1, 0.278431, 0.34902, 0.180392, 1, 0.301961, 0.396078, 0.215686, 1, 0.321569, 0.447059, 0.258824, 1, 0.372549, 0.564706, 0.364706, 1, 0.396078, 0.627451, 0.427451, 1, 0.427451, 0.698039, 0.498039, 1, 0.458824, 0.768627, 0.580392, 1, 0.490196, 0.843137, 0.666667, 1, 0.533333, 0.92549, 0.760784, 1, 0.510539, 0.87598, 0.716177, 1, 0.533333, 0.92549, 0.760784, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 16
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hadhs"]
+gradient = SubResource("Gradient_60ha1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ov58m"]
+resource_local_to_scene = true
+shader = ExtResource("2_apriv")
+shader_parameter/change_color_depth = true
+shader_parameter/target_color_depth = 4
+shader_parameter/dithering = true
+shader_parameter/scale_resolution = true
+shader_parameter/target_resolution_scale = 2
+shader_parameter/enable_recolor = true
+shader_parameter/to_gradient = SubResource("GradientTexture2D_hadhs")
+shader_parameter/enable_scanlines = false
+shader_parameter/scanline_count = 240.0
+shader_parameter/scanline_brightness = 0.03
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ydcio"]
+material = ExtResource("3_7iohl")
+size = Vector2(60, 55)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yasvj"]
+size = Vector3(60, 1, 55)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ew5th"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_58407"]
+size = Vector3(4.40015, 1.36621, 1.41211)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bnq1u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bpvfp"]
+albedo_color = Color(0.752941, 0.368627, 0.160784, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_cq2mv"]
+material = SubResource("StandardMaterial3D_bpvfp")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wwa2a"]
+frequency = 1.0
+fractal_type = 3
+fractal_octaves = 10
+fractal_lacunarity = 3.01
+fractal_gain = 0.345
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_88pvg"]
+seamless = true
+noise = SubResource("FastNoiseLite_wwa2a")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l23lu"]
+resource_local_to_scene = true
+shader = ExtResource("11_y328b")
+shader_parameter/direction = Vector2(-0.05, 0.25)
+shader_parameter/speed = 20.0
+shader_parameter/alpha = 0.15
+shader_parameter/inner_radius = 0.9
+shader_parameter/outer_radius = 2.0
+shader_parameter/vignette_noise = SubResource("NoiseTexture2D_88pvg")
+
+[sub_resource type="Shader" id="Shader_6utxk"]
+code = "shader_type spatial;
+
+
+void fragment() {
+	ALPHA = 0.0;
+}
+
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qrh2e"]
+render_priority = 0
+shader = SubResource("Shader_6utxk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ylwb3"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_qrh2e")
+shader = ExtResource("12_5qybj")
+shader_parameter/scale_0 = 660
+shader_parameter/scale_1 = 800
+shader_parameter/line_scale_0 = 0.138
+shader_parameter/line_scale_1 = 0.043
+shader_parameter/color_0 = Color(0.168627, 0.133333, 0.0470588, 1)
+shader_parameter/color_1 = Color(0.258824, 0.301961, 0.145098, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_lovpk"]
+material = SubResource("ShaderMaterial_ylwb3")
+size = Vector2(60, 55)
+orientation = 1
+
+[node name="Tutorial" type="Node"]
+script = ExtResource("1_h5xc7")
+scene_name = "tutorial"
+
+[node name="PostProcessing" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_ov58m")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="PostProcessing"]
+handle_input_locally = false
+audio_listener_enable_3d = true
+size = Vector2i(860, 520)
+render_target_update_mode = 4
+
+[node name="Floor" type="MeshInstance3D" parent="PostProcessing/SubViewport"]
+transform = Transform3D(0.66, 0, 0, 0, 0.66, 0, 0, 0, 0.66, 11, 0, -4)
+mesh = SubResource("PlaneMesh_ydcio")
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="PostProcessing/SubViewport/Floor"]
+collision_layer = 15
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PostProcessing/SubViewport/Floor/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.497555, 0)
+shape = SubResource("BoxShape3D_yasvj")
+
+[node name="Walls" type="Node3D" parent="PostProcessing/SubViewport"]
+
+[node name="BlankWall" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="BlankWall6" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+
+[node name="BlankWall2" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="BlankWall8" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -4)
+
+[node name="BlankWall9" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -4)
+
+[node name="BlankWall10" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
+
+[node name="BlankWall3" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="CornerWall" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("5_73aj0")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, 0)
+
+[node name="CornerWall4" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("5_73aj0")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 0, -4)
+
+[node name="BlankWall4" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, -6)
+
+[node name="BlankWall5" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, -10)
+
+[node name="BlankWall7" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 0, -10)
+
+[node name="CornerWall2" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("5_73aj0")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, -16)
+
+[node name="CornerWall3" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("5_73aj0")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6, 0, -16)
+
+[node name="FrontDesk" type="StaticBody3D" parent="PostProcessing/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PostProcessing/SubViewport/FrontDesk"]
+transform = Transform3D(4.42, 0, 0, 0, 2.135, 0, 0, 0, 1.415, 0, -0.195666, 0)
+mesh = SubResource("BoxMesh_ew5th")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PostProcessing/SubViewport/FrontDesk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.183105, 0)
+shape = SubResource("BoxShape3D_58407")
+
+[node name="BagOfGuns" type="Area3D" parent="PostProcessing/SubViewport" groups=["Interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20587, -14)
+collision_layer = 16
+script = ExtResource("6_entsq")
+message = "Press F to pick up the tools of your trade"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PostProcessing/SubViewport/BagOfGuns"]
+shape = SubResource("SphereShape3D_bnq1u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PostProcessing/SubViewport/BagOfGuns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.111744, 0)
+mesh = SubResource("SphereMesh_cq2mv")
+
+[node name="Elevator4" parent="PostProcessing/SubViewport" instance=ExtResource("6_nyqol")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
+
+[node name="Elevator" parent="PostProcessing/SubViewport" instance=ExtResource("6_nyqol")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+
+[node name="Elevator2" parent="PostProcessing/SubViewport" instance=ExtResource("6_nyqol")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 20, 0, -4)
+
+[node name="Elevator3" parent="PostProcessing/SubViewport" instance=ExtResource("6_nyqol")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 16, 0, -4)
+
+[node name="WallDoor" parent="PostProcessing/SubViewport" instance=ExtResource("7_tlxmr")]
+enabled = false
+
+[node name="WallDoor2" parent="PostProcessing/SubViewport" instance=ExtResource("7_tlxmr")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 26, 0, -2)
+enabled = false
+
+[node name="CeilingLight" parent="PostProcessing/SubViewport" instance=ExtResource("8_vvw1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+flicker_chance = 0.0
+
+[node name="CeilingLight2" parent="PostProcessing/SubViewport" instance=ExtResource("8_vvw1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+flicker_chance = 0.0
+
+[node name="CeilingLight4" parent="PostProcessing/SubViewport" instance=ExtResource("8_vvw1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -2)
+flicker_chance = 0.0
+start_on = false
+
+[node name="CeilingLight5" parent="PostProcessing/SubViewport" instance=ExtResource("8_vvw1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -2)
+flicker_chance = 1.0
+
+[node name="Enemy" parent="PostProcessing/SubViewport" instance=ExtResource("9_flm5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -15)
+
+[node name="Enemy2" parent="PostProcessing/SubViewport" instance=ExtResource("9_flm5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1)
+
+[node name="Enemy3" parent="PostProcessing/SubViewport" instance=ExtResource("9_flm5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -15)
+
+[node name="Enemy4" parent="PostProcessing/SubViewport" instance=ExtResource("9_flm5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -2)
+
+[node name="Player" parent="PostProcessing/SubViewport" instance=ExtResource("10_cq3hw")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, -1)
+
+[node name="SpotLight3D" parent="PostProcessing/SubViewport/Player/Camera3D" index="1"]
+visible = false
+
+[node name="AudioListener3D" parent="PostProcessing/SubViewport/Player/Audio" index="2"]
+current = true
+
+[node name="ColorRect" parent="PostProcessing/SubViewport/Player" index="6"]
+material = SubResource("ShaderMaterial_l23lu")
+
+[node name="Ceiling" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 2.94639, 0)
+mesh = SubResource("QuadMesh_lovpk")
+
+[editable path="PostProcessing/SubViewport/Player"]

@@ -78,3 +78,7 @@ func reload() -> int:
 
 func _on_reload_timer_timeout():
 	reloading = false
+
+
+func add_reloads(amount : int):
+	current_reloads += amount

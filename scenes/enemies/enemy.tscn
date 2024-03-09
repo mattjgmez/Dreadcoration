@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://llgmvxi8mt8w"]
+[gd_scene load_steps=29 format=3 uid="uid://llgmvxi8mt8w"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_wnigs"]
 [ext_resource type="Script" path="res://addons/health_node/health_node.gd" id="2_yjuuu"]
@@ -7,11 +7,21 @@
 [ext_resource type="AudioStream" uid="uid://c7wh60g1drmdj" path="res://audio/enemy/aggressive_scream.mp3" id="5_aiebq"]
 [ext_resource type="Shader" path="res://shaders/aberration.gdshader" id="5_eiyc6"]
 [ext_resource type="AudioStream" uid="uid://dv7yrhj3hrr16" path="res://audio/enemy/no_ammo_scream.mp3" id="6_uv56j"]
+[ext_resource type="Script" path="res://scripts/random_sound.gd" id="7_c6t5f"]
+[ext_resource type="AudioStream" uid="uid://b2b60ljoud276" path="res://audio/enemy/movement/movement_1.mp3" id="8_ml3o2"]
+[ext_resource type="AudioStream" uid="uid://c2gg5apx38cr4" path="res://audio/enemy/movement/movement_2.mp3" id="9_aqdy6"]
+[ext_resource type="AudioStream" uid="uid://ojfyb5vngbyd" path="res://audio/enemy/movement/movement_3.mp3" id="10_288nv"]
+[ext_resource type="AudioStream" uid="uid://cno8qf6kt5ii1" path="res://audio/enemy/movement/movement_4.mp3" id="11_mts5k"]
+[ext_resource type="AudioStream" uid="uid://bv5m2skxreo8l" path="res://audio/enemy/movement/movement_5.mp3" id="12_ub6ps"]
+[ext_resource type="AudioStream" uid="uid://d0jvu31e3sxej" path="res://audio/enemy/movement/movement_6.mp3" id="13_i43dp"]
+[ext_resource type="AudioStream" uid="uid://ch2mumevauxkq" path="res://audio/enemy/movement/movement_7.mp3" id="14_65hym"]
+[ext_resource type="AudioStream" uid="uid://buy67rqw8bv8p" path="res://audio/enemy/movement/movement_8.mp3" id="15_0tfjc"]
+[ext_resource type="AudioStream" uid="uid://cog15m0m2t6jl" path="res://audio/enemy/movement/movement_9.mp3" id="16_s7tc0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4srcr"]
 size = Vector3(0.5, 1.6925, 0.5)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_0kojf"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_t2huq"]
 frequency = 1.0
 fractal_type = 3
 fractal_octaves = 10
@@ -21,7 +31,7 @@ fractal_weighted_strength = 1.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aa4rp"]
 seamless = true
-noise = SubResource("FastNoiseLite_0kojf")
+noise = SubResource("FastNoiseLite_t2huq")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_we1gj"]
 resource_local_to_scene = true
@@ -112,6 +122,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Audio/AggressionScream:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-5.0]
+}
 
 [sub_resource type="Animation" id="Animation_0uyj5"]
 resource_name = "aggression"
@@ -150,6 +172,71 @@ tracks/2/keys = {
 "handle_modes": PackedInt32Array(0, 0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 2.3)
+}
+
+[sub_resource type="Animation" id="Animation_8a8wi"]
+resource_name = "caught_player_start"
+length = 2.35
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Audio/AggressionScream:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model/Circle_002:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.3, 0.000330128, -0.00796986, -0.3, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.3)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Model/Circle:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.3)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Audio/AggressionScream:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-55.314, -5.0]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimationPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["aggression", -1, 1.0, false],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_iqjxg"]
@@ -219,6 +306,7 @@ tracks/4/keys = {
 _data = {
 "RESET": SubResource("Animation_ar6pa"),
 "aggression": SubResource("Animation_0uyj5"),
+"caught_player_start": SubResource("Animation_8a8wi"),
 "death": SubResource("Animation_iqjxg")
 }
 
@@ -228,7 +316,7 @@ collision_mask = 5
 continuous_cd = true
 script = ExtResource("1_wnigs")
 speed = 0.4
-player_kill_range = 1.5
+player_kill_range = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.846252, 0)
@@ -261,8 +349,17 @@ max_distance = 15.0
 stream = ExtResource("6_uv56j")
 volume_db = -18.0
 
+[node name="Movement" type="AudioStreamPlayer3D" parent="Audio"]
+volume_db = -5.0
+max_distance = 20.0
+script = ExtResource("7_c6t5f")
+sound_list = [ExtResource("8_ml3o2"), ExtResource("9_aqdy6"), ExtResource("10_288nv"), ExtResource("11_mts5k"), ExtResource("12_ub6ps"), ExtResource("13_i43dp"), ExtResource("14_65hym"), ExtResource("15_0tfjc"), ExtResource("16_s7tc0")]
+min_pitch = 0.81
+max_pitch = 0.935
+
+[node name="AudioTimer" type="Timer" parent="Audio"]
+
 [node name="RayHolder" type="Node3D" parent="."]
-visible = false
 
 [node name="RayCast3D" type="RayCast3D" parent="RayHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.116447, 0)
@@ -307,6 +404,8 @@ libraries = {
 "": SubResource("AnimationLibrary_rnx35")
 }
 
+[connection signal="timeout" from="Audio/AudioTimer" to="Audio/Movement" method="initialize_audio_timer"]
+[connection signal="timeout" from="Audio/AudioTimer" to="Audio/Movement" method="trigger_random_sound"]
 [connection signal="died" from="Health" to="." method="on_died"]
 
 [editable path="Model"]

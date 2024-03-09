@@ -7,5 +7,5 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_vpn1i")
 shader_parameter/FloatParameter = 2.294
-shader_parameter/frame = -0.224
+shader_parameter/frame = 0.907
 shader_parameter/radius = 0.25
