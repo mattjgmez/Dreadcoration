@@ -144,6 +144,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"elevator_closed"],
+"method": &"emit_signal"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_2u772"]
 resource_name = "open"
@@ -256,7 +270,6 @@ shape = SubResource("BoxShape3D_dnfds")
 libraries = {
 "": SubResource("AnimationLibrary_pwjtg")
 }
-autoplay = "open"
 
 [node name="ElevatorOpen" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24868, 0)

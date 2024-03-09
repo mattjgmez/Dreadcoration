@@ -163,7 +163,7 @@ theme_override_font_sizes/font_size = 30
 text = "Main Menu"
 flat = true
 
-[node name="Retry" type="Button" parent="UI"]
+[node name="Reload" type="Button" parent="UI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -187,8 +187,7 @@ theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 0)
 theme_override_colors/icon_focus_color = Color(0, 0, 0, 0)
 theme_override_colors/icon_disabled_color = Color(0, 0, 0, 0)
 theme_override_font_sizes/font_size = 30
-text = "Retry
-"
+text = "Play Again?"
 flat = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -196,4 +195,4 @@ libraries = {
 "": SubResource("AnimationLibrary_irkxf")
 }
 
-[connection signal="pressed" from="UI/Retry" to="." method="reload_level"]
+[connection signal="pressed" from="UI/Reload" to="." method="reload_level"]

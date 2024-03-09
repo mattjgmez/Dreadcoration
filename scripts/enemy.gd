@@ -3,7 +3,8 @@ extends RigidBody3D
 
 const OCC_RAY_TARGET_Y_OFFSET = 1.0
 
-@export var speed = 5.0
+@export_range(0.0, 10.0, 0.01) var speed = 5.0
+@export_range(0.0, 100.0, 0.01) var max_speed = 20.0
 @export var target_player : CharacterBody3D
 @export_range(0.0, 10.0) var player_kill_range := 2.0
 
@@ -67,7 +68,7 @@ func handle_movement(delta):
 	linear_velocity = Vector3.ZERO
 	
 	if angry:
-		var s = clampf(speed, speed + delta * 2.0, 20.0)
+		var s = clampf(speed, speed + delta * 2.0, max_speed)
 		speed = s
 	
 	# Movement directions

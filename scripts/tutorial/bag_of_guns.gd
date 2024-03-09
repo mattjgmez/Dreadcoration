@@ -1,5 +1,6 @@
 extends Interactable
 
+signal guns_collected
 
 @export var amount := 1
 
@@ -13,3 +14,4 @@ func _effect(node):
 	
 	enabled = false
 	visible = false
+	guns_collected.emit()

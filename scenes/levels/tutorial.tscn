@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://csq7lqp5lcts2"]
+[gd_scene load_steps=32 format=3 uid="uid://csq7lqp5lcts2"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_h5xc7"]
 [ext_resource type="Shader" path="res://shaders/retro_post-processing.gdshader" id="2_apriv"]
@@ -7,12 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://23yo4qmrsl18" path="res://scenes/environment/office_walls/corner_wall.tscn" id="5_73aj0"]
 [ext_resource type="Script" path="res://scripts/tutorial/bag_of_guns.gd" id="6_entsq"]
 [ext_resource type="PackedScene" uid="uid://by43c4wv6hqui" path="res://scenes/environment/office_walls/elevator.tscn" id="6_nyqol"]
+[ext_resource type="PackedScene" uid="uid://dhwekoplyfxb5" path="res://models/bag_of_guns.blend" id="7_ecjgj"]
 [ext_resource type="PackedScene" uid="uid://crpa28isiivs1" path="res://scenes/environment/office_walls/wall_door.tscn" id="7_tlxmr"]
 [ext_resource type="PackedScene" uid="uid://bxypfnemryiwm" path="res://scenes/environment/ceiling_light.tscn" id="8_vvw1p"]
 [ext_resource type="PackedScene" uid="uid://llgmvxi8mt8w" path="res://scenes/enemies/enemy.tscn" id="9_flm5c"]
 [ext_resource type="PackedScene" uid="uid://coogjs1mlytdk" path="res://scenes/player/player.tscn" id="10_cq3hw"]
 [ext_resource type="Shader" path="res://shaders/player_death.gdshader" id="11_y328b"]
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="12_5qybj"]
+[ext_resource type="Script" path="res://scenes/levels/tutorial_manager.gd" id="15_p7pmk"]
 
 [sub_resource type="Gradient" id="Gradient_60ha1"]
 interpolation_mode = 1
@@ -37,48 +39,6 @@ shader_parameter/to_gradient = SubResource("GradientTexture2D_hadhs")
 shader_parameter/enable_scanlines = false
 shader_parameter/scanline_count = 240.0
 shader_parameter/scanline_brightness = 0.03
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_ydcio"]
-material = ExtResource("3_7iohl")
-size = Vector2(60, 55)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_yasvj"]
-size = Vector3(60, 1, 55)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ew5th"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_58407"]
-size = Vector3(4.40015, 1.36621, 1.41211)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_bnq1u"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bpvfp"]
-albedo_color = Color(0.752941, 0.368627, 0.160784, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_cq2mv"]
-material = SubResource("StandardMaterial3D_bpvfp")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_wwa2a"]
-frequency = 1.0
-fractal_type = 3
-fractal_octaves = 10
-fractal_lacunarity = 3.01
-fractal_gain = 0.345
-fractal_weighted_strength = 1.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_88pvg"]
-seamless = true
-noise = SubResource("FastNoiseLite_wwa2a")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l23lu"]
-resource_local_to_scene = true
-shader = ExtResource("11_y328b")
-shader_parameter/direction = Vector2(-0.05, 0.25)
-shader_parameter/speed = 20.0
-shader_parameter/alpha = 0.15
-shader_parameter/inner_radius = 0.9
-shader_parameter/outer_radius = 2.0
-shader_parameter/vignette_noise = SubResource("NoiseTexture2D_88pvg")
 
 [sub_resource type="Shader" id="Shader_6utxk"]
 code = "shader_type spatial;
@@ -111,6 +71,48 @@ material = SubResource("ShaderMaterial_ylwb3")
 size = Vector2(60, 55)
 orientation = 1
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_2xwel"]
+size = Vector3(0.702881, 0.668945, 0.808594)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wwa2a"]
+frequency = 1.0
+fractal_type = 3
+fractal_octaves = 10
+fractal_lacunarity = 3.01
+fractal_gain = 0.345
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_88pvg"]
+seamless = true
+noise = SubResource("FastNoiseLite_wwa2a")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l23lu"]
+resource_local_to_scene = true
+shader = ExtResource("11_y328b")
+shader_parameter/direction = Vector2(-0.05, 0.25)
+shader_parameter/speed = 20.0
+shader_parameter/alpha = 0.15
+shader_parameter/inner_radius = 0.9
+shader_parameter/outer_radius = 2.0
+shader_parameter/vignette_noise = SubResource("NoiseTexture2D_88pvg")
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_arlbx"]
+resource_local_to_scene = true
+vertices = PackedVector3Array(-6.8, 0.486834, -16.65, 5.2, 0.486834, -16.9, 5.45, 0.486834, -21.65, -8.3, 0.486834, -21.65, -8.3, 0.486834, -1.4, -6.8, 0.486834, -1.4, -6.8, 0.486834, -16.65, -8.3, 0.486834, -21.65, 14.45, 0.486834, -3.15, 12.7, 0.486834, -3.15, 13.2, 0.486834, -0.900002, 18.45, 0.486834, -0.900002, 21.7, 0.486834, -0.900002, 23.45, 0.486834, -0.900002, 23.45, 0.486834, -3.15, 21.7, 0.486834, -3.15, 6.95, 0.486834, -16.65, 6.95, 0.486834, -4.9, 14.7, 0.486834, -4.65, 21.45, 0.486834, -0.150002, 21.7, 0.486834, -0.900002, 21.7, 0.486834, -3.15, 18.45, 0.486834, -0.900002, 18.7, 0.486834, -0.150002, 21.45, 0.486834, -0.150002, 26.45, 0.486834, -4.9, 26.7, 0.486834, -4.15, 30.2, 0.486834, -4.15, 30.2, 0.486834, -21.65, 18.45, 0.486834, -0.900002, 21.45, 0.486834, -0.150002, 21.7, 0.486834, -3.15, 21.45, 0.486834, -4.65, 14.7, 0.486834, -4.65, 14.45, 0.486834, -3.15, 5.45, 0.486834, -21.65, 5.2, 0.486834, -16.9, 6.95, 0.486834, -16.65, 14.7, 0.486834, -4.65, 21.45, 0.486834, -4.65, 26.45, 0.486834, -4.9, 30.2, 0.486834, -21.65, 5.45, 0.486834, -21.65, 6.95, 0.486834, -16.65, -1.3, 0.486834, 0.0999985, 1.45, 0.486834, 0.0999985, 1.7, 0.486834, -0.900002, -1.55, 0.486834, -0.900002, -1.3, 0.486834, 0.0999985, 1.7, 0.486834, -0.900002, 5.2, 0.486834, -3.4, 5.2, 0.486834, -15.15, 2.95, 0.486834, -15.15, 2.7, 0.486834, -12.65, 5.2, 0.486834, -3.4, -2.55, 0.486834, -12.65, -2.8, 0.486834, -15.15, -5.05, 0.486834, -15.15, -5.05, 0.486834, -0.900002, 13.2, 0.486834, -0.900002, 12.7, 0.486834, -3.15, 5.2, 0.486834, -3.4, 1.7, 0.486834, -0.900002, -5.05, 0.486834, -0.900002, -1.55, 0.486834, -0.900002, 5.2, 0.486834, -3.4, 2.7, 0.486834, -12.65, -2.55, 0.486834, -12.65, -1.8, 1.23683, -14.4, -1.8, 1.23683, -13.65, 1.95, 1.23683, -13.65, 1.95, 1.23683, -14.4, 21.45, 0.486834, -0.150002, 18.7, 0.486834, -0.150002, 18.7, 0.486834, 0.599998, 18.7, 0.486834, 0.599998, 17.95, 0.486834, 0.849998, 17.95, 0.486834, 3.35, 21.7, 0.486834, 0.849998, 21.45, 0.486834, -0.150002, 17.95, 0.486834, 3.35, 15.95, 0.486834, 3.6, 15.95, 0.486834, 13.6, 23.45, 0.486834, -3.15, 23.45, 0.486834, -0.900002, 26.45, 0.486834, -0.900002, 26.45, 0.486834, -3.15, 26.7, 0.486834, 0.599998, 21.7, 0.486834, 0.849998, 17.95, 0.486834, 3.35, 15.95, 0.486834, 13.6, 30.2, 0.486834, 13.6, 26.7, 0.486834, -4.15, 26.45, 0.486834, -3.15, 26.45, 0.486834, -0.900002, 26.7, 0.486834, 0.599998, 30.2, 0.486834, 13.6, 30.2, 0.486834, -4.15, -6.55, 0.486834, 0.849998, -6.8, 0.486834, -1.4, -8.3, 0.486834, -1.4, -8.3, 0.486834, 13.6, 1.7, 0.486834, 0.849998, 1.45, 0.486834, 0.0999985, -1.3, 0.486834, 0.0999985, -1.55, 0.486834, 0.849998, 2.95, 0.486834, 13.6, -8.3, 0.486834, 13.6, 2.95, 0.486834, 13.6, -1.55, 0.486834, 0.849998, -6.55, 0.486834, 0.849998, 2.95, 0.486834, 13.6, 3.2, 0.486834, 0.849998, 1.7, 0.486834, 0.849998, 15.2, 0.486834, 0.849998, 15.2, 0.486834, 2.35, 16.7, 0.486834, 2.35, 16.45, 0.486834, 0.599998, 15.95, 0.486834, 13.6, 15.95, 0.486834, 3.6, 13.95, 0.486834, 3.35, 13.95, 0.486834, 3.35, 13.95, 0.486834, 0.849998, 3.2, 0.486834, 0.849998, 2.95, 0.486834, 13.6, 15.95, 0.486834, 13.6, 13.95, 0.486834, 3.35, 3.2, 0.486834, 0.849998)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(15, 14, 12), PackedInt32Array(12, 14, 13), PackedInt32Array(18, 17, 16), PackedInt32Array(21, 20, 19), PackedInt32Array(24, 23, 22), PackedInt32Array(26, 25, 27), PackedInt32Array(27, 25, 28), PackedInt32Array(31, 30, 32), PackedInt32Array(32, 30, 29), PackedInt32Array(32, 29, 34), PackedInt32Array(32, 34, 33), PackedInt32Array(37, 36, 35), PackedInt32Array(39, 38, 40), PackedInt32Array(40, 38, 43), PackedInt32Array(40, 43, 42), PackedInt32Array(40, 42, 41), PackedInt32Array(46, 45, 44), PackedInt32Array(48, 47, 49), PackedInt32Array(49, 47, 50), PackedInt32Array(52, 51, 53), PackedInt32Array(53, 51, 54), PackedInt32Array(56, 55, 57), PackedInt32Array(57, 55, 58), PackedInt32Array(60, 59, 61), PackedInt32Array(61, 59, 62), PackedInt32Array(64, 63, 65), PackedInt32Array(65, 63, 66), PackedInt32Array(66, 63, 67), PackedInt32Array(71, 70, 68), PackedInt32Array(68, 70, 69), PackedInt32Array(74, 73, 72), PackedInt32Array(76, 75, 77), PackedInt32Array(77, 75, 78), PackedInt32Array(78, 75, 79), PackedInt32Array(82, 81, 80), PackedInt32Array(86, 85, 83), PackedInt32Array(83, 85, 84), PackedInt32Array(88, 87, 89), PackedInt32Array(89, 87, 90), PackedInt32Array(90, 87, 91), PackedInt32Array(93, 92, 94), PackedInt32Array(94, 92, 95), PackedInt32Array(95, 92, 97), PackedInt32Array(95, 97, 96), PackedInt32Array(99, 98, 100), PackedInt32Array(100, 98, 101), PackedInt32Array(103, 102, 104), PackedInt32Array(104, 102, 105), PackedInt32Array(105, 102, 106), PackedInt32Array(110, 109, 107), PackedInt32Array(107, 109, 108), PackedInt32Array(113, 112, 111), PackedInt32Array(114, 117, 115), PackedInt32Array(115, 117, 116), PackedInt32Array(118, 120, 119), PackedInt32Array(123, 122, 121), PackedInt32Array(125, 124, 126), PackedInt32Array(126, 124, 127)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ydcio"]
+material = ExtResource("3_7iohl")
+size = Vector2(60, 55)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yasvj"]
+size = Vector3(60, 1, 55)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ew5th"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_58407"]
+size = Vector3(4.40015, 1.36621, 1.41211)
+
 [node name="Tutorial" type="Node"]
 script = ExtResource("1_h5xc7")
 scene_name = "tutorial"
@@ -130,136 +132,41 @@ audio_listener_enable_3d = true
 size = Vector2i(860, 520)
 render_target_update_mode = 4
 
-[node name="Floor" type="MeshInstance3D" parent="PostProcessing/SubViewport"]
-transform = Transform3D(0.66, 0, 0, 0, 0.66, 0, 0, 0, 0.66, 11, 0, -4)
-mesh = SubResource("PlaneMesh_ydcio")
+[node name="Ceiling" type="MeshInstance3D" parent="PostProcessing/SubViewport"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 2.94639, 0)
+mesh = SubResource("QuadMesh_lovpk")
 skeleton = NodePath("../../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="PostProcessing/SubViewport/Floor"]
-collision_layer = 15
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PostProcessing/SubViewport/Floor/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.497555, 0)
-shape = SubResource("BoxShape3D_yasvj")
-
-[node name="Walls" type="Node3D" parent="PostProcessing/SubViewport"]
-
-[node name="BlankWall" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
-
-[node name="BlankWall6" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
-
-[node name="BlankWall2" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
-
-[node name="BlankWall8" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -4)
-
-[node name="BlankWall9" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -4)
-
-[node name="BlankWall10" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
-
-[node name="BlankWall3" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
-
-[node name="CornerWall" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("5_73aj0")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, 0)
-
-[node name="CornerWall4" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("5_73aj0")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 0, -4)
-
-[node name="BlankWall4" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, -6)
-
-[node name="BlankWall5" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, -10)
-
-[node name="BlankWall7" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("4_1bgwx")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 0, -10)
-
-[node name="CornerWall2" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("5_73aj0")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, -16)
-
-[node name="CornerWall3" parent="PostProcessing/SubViewport/Walls" instance=ExtResource("5_73aj0")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6, 0, -16)
-
-[node name="FrontDesk" type="StaticBody3D" parent="PostProcessing/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PostProcessing/SubViewport/FrontDesk"]
-transform = Transform3D(4.42, 0, 0, 0, 2.135, 0, 0, 0, 1.415, 0, -0.195666, 0)
-mesh = SubResource("BoxMesh_ew5th")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PostProcessing/SubViewport/FrontDesk"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.183105, 0)
-shape = SubResource("BoxShape3D_58407")
-
 [node name="BagOfGuns" type="Area3D" parent="PostProcessing/SubViewport" groups=["Interactable"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20587, -14)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.861211, -14)
 collision_layer = 16
 script = ExtResource("6_entsq")
 message = "Press F to pick up the tools of your trade"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PostProcessing/SubViewport/BagOfGuns"]
-shape = SubResource("SphereShape3D_bnq1u")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.347757, 0)
+shape = SubResource("BoxShape3D_2xwel")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PostProcessing/SubViewport/BagOfGuns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.111744, 0)
-mesh = SubResource("SphereMesh_cq2mv")
+[node name="bag_of_guns" parent="PostProcessing/SubViewport/BagOfGuns" instance=ExtResource("7_ecjgj")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 
-[node name="Elevator4" parent="PostProcessing/SubViewport" instance=ExtResource("6_nyqol")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
-
-[node name="Elevator" parent="PostProcessing/SubViewport" instance=ExtResource("6_nyqol")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
-
-[node name="Elevator2" parent="PostProcessing/SubViewport" instance=ExtResource("6_nyqol")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 20, 0, -4)
-
-[node name="Elevator3" parent="PostProcessing/SubViewport" instance=ExtResource("6_nyqol")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 16, 0, -4)
-
-[node name="WallDoor" parent="PostProcessing/SubViewport" instance=ExtResource("7_tlxmr")]
-enabled = false
-
-[node name="WallDoor2" parent="PostProcessing/SubViewport" instance=ExtResource("7_tlxmr")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 26, 0, -2)
-enabled = false
-
-[node name="CeilingLight" parent="PostProcessing/SubViewport" instance=ExtResource("8_vvw1p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
-flicker_chance = 0.0
-
-[node name="CeilingLight2" parent="PostProcessing/SubViewport" instance=ExtResource("8_vvw1p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
-flicker_chance = 0.0
-
-[node name="CeilingLight4" parent="PostProcessing/SubViewport" instance=ExtResource("8_vvw1p")]
+[node name="CeilingLightElevator" parent="PostProcessing/SubViewport" instance=ExtResource("8_vvw1p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -2)
 flicker_chance = 0.0
 start_on = false
 
-[node name="CeilingLight5" parent="PostProcessing/SubViewport" instance=ExtResource("8_vvw1p")]
+[node name="EnemyTutorial" parent="PostProcessing/SubViewport" instance=ExtResource("9_flm5c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -2)
-flicker_chance = 1.0
-
-[node name="Enemy" parent="PostProcessing/SubViewport" instance=ExtResource("9_flm5c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -15)
-
-[node name="Enemy2" parent="PostProcessing/SubViewport" instance=ExtResource("9_flm5c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1)
-
-[node name="Enemy3" parent="PostProcessing/SubViewport" instance=ExtResource("9_flm5c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -15)
-
-[node name="Enemy4" parent="PostProcessing/SubViewport" instance=ExtResource("9_flm5c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -2)
+speed = 0.01
+max_speed = 0.01
+player_kill_range = 0.0
 
 [node name="Player" parent="PostProcessing/SubViewport" instance=ExtResource("10_cq3hw")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, -1)
+
+[node name="Shotgun" parent="PostProcessing/SubViewport/Player/Camera3D" index="0"]
+knockback_force = 40.0
+starting_reloads = 0
 
 [node name="SpotLight3D" parent="PostProcessing/SubViewport/Player/Camera3D" index="1"]
 visible = false
@@ -270,8 +177,138 @@ current = true
 [node name="ColorRect" parent="PostProcessing/SubViewport/Player" index="6"]
 material = SubResource("ShaderMaterial_l23lu")
 
-[node name="Ceiling" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 2.94639, 0)
-mesh = SubResource("QuadMesh_lovpk")
+[node name="ReloadLabel" type="Label" parent="PostProcessing/SubViewport/Player/HUD" index="2"]
+visible = false
+modulate = Color(1, 1, 1, 0.482353)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "Press R to \"reload\""
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Environment" type="Node3D" parent="PostProcessing/SubViewport"]
+
+[node name="Elevator" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("6_nyqol")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+
+[node name="Elevator2" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("6_nyqol")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 20, 0, -4)
+
+[node name="Elevator3" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("6_nyqol")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 16, 0, -4)
+
+[node name="WallDoor" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("7_tlxmr")]
+enabled = false
+
+[node name="WallDoor2" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("7_tlxmr")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 26, 0, -2)
+enabled = false
+
+[node name="CeilingLight" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+flicker_chance = 0.0
+
+[node name="CeilingLight2" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+flicker_chance = 0.0
+
+[node name="CeilingLight5" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -2)
+flicker_chance = 1.0
+
+[node name="Enemy" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("9_flm5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -15)
+
+[node name="Enemy2" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("9_flm5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1)
+
+[node name="Enemy3" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("9_flm5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -15)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="PostProcessing/SubViewport"]
+navigation_mesh = SubResource("NavigationMesh_arlbx")
+
+[node name="Floor" type="MeshInstance3D" parent="PostProcessing/SubViewport/NavigationRegion3D"]
+transform = Transform3D(0.66, 0, 0, 0, 0.66, 0, 0, 0, 0.66, 11, 0, -4)
+mesh = SubResource("PlaneMesh_ydcio")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="PostProcessing/SubViewport/NavigationRegion3D/Floor"]
+collision_layer = 15
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PostProcessing/SubViewport/NavigationRegion3D/Floor/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.497555, 0)
+shape = SubResource("BoxShape3D_yasvj")
+
+[node name="Walls" type="Node3D" parent="PostProcessing/SubViewport/NavigationRegion3D"]
+
+[node name="BlankWall" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="BlankWall6" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+
+[node name="BlankWall2" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="BlankWall8" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -4)
+
+[node name="BlankWall9" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -4)
+
+[node name="BlankWall10" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
+
+[node name="BlankWall3" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="CornerWall" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("5_73aj0")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, 0)
+
+[node name="CornerWall4" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("5_73aj0")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 0, -4)
+
+[node name="BlankWall4" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, -6)
+
+[node name="BlankWall5" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, -10)
+
+[node name="BlankWall7" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("4_1bgwx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 0, -10)
+
+[node name="CornerWall2" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("5_73aj0")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, -16)
+
+[node name="CornerWall3" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("5_73aj0")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6, 0, -16)
+
+[node name="FrontDesk" type="StaticBody3D" parent="PostProcessing/SubViewport/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PostProcessing/SubViewport/NavigationRegion3D/FrontDesk"]
+transform = Transform3D(4.42, 0, 0, 0, 2.135, 0, 0, 0, 1.415, 0, -0.195666, 0)
+mesh = SubResource("BoxMesh_ew5th")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PostProcessing/SubViewport/NavigationRegion3D/FrontDesk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.183105, 0)
+shape = SubResource("BoxShape3D_58407")
+
+[node name="ElevatorMain" parent="PostProcessing/SubViewport/NavigationRegion3D" instance=ExtResource("6_nyqol")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
+close_on_exit = false
+
+[node name="TutorialManager" type="Node" parent="."]
+script = ExtResource("15_p7pmk")
+
+[connection signal="guns_collected" from="PostProcessing/SubViewport/BagOfGuns" to="TutorialManager" method="_on_bag_of_guns_guns_collected"]
+[connection signal="elevator_closed" from="PostProcessing/SubViewport/NavigationRegion3D/ElevatorMain" to="TutorialManager" method="_on_elevator_main_elevator_closed"]
 
 [editable path="PostProcessing/SubViewport/Player"]

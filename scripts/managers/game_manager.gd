@@ -6,6 +6,7 @@ var current_scene_string : String
 
 
 var scene_dictionary := {
+	"tutorial" : "res://scenes/levels/tutorial.tscn",
 	"level_1" : "res://scenes/levels/level_1.tscn"
 }
 
