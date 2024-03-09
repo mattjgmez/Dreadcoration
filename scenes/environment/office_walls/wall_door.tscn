@@ -157,7 +157,6 @@ shape = SubResource("BoxShape3D_4fnqm")
 [node name="Model" parent="." instance=ExtResource("1_d0rww")]
 
 [node name="DoorCollision" type="AnimatableBody3D" parent="Model/Door" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.505252, 0, 0)
 
 [node name="DoorCollisionShape" type="CollisionShape3D" parent="Model/Door/DoorCollision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0192, 0)

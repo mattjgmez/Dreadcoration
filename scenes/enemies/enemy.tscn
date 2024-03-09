@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://c7wh60g1drmdj" path="res://audio/enemy/aggressive_scream.mp3" id="5_aiebq"]
 [ext_resource type="Shader" path="res://shaders/aberration.gdshader" id="5_eiyc6"]
 [ext_resource type="AudioStream" uid="uid://dv7yrhj3hrr16" path="res://audio/enemy/no_ammo_scream.mp3" id="6_uv56j"]
-[ext_resource type="Script" path="res://scripts/random_sound.gd" id="7_c6t5f"]
+[ext_resource type="Script" path="res://scripts/random_sound.gd" id="7_6mtma"]
 [ext_resource type="AudioStream" uid="uid://b2b60ljoud276" path="res://audio/enemy/movement/movement_1.mp3" id="8_ml3o2"]
 [ext_resource type="AudioStream" uid="uid://c2gg5apx38cr4" path="res://audio/enemy/movement/movement_2.mp3" id="9_aqdy6"]
 [ext_resource type="AudioStream" uid="uid://ojfyb5vngbyd" path="res://audio/enemy/movement/movement_3.mp3" id="10_288nv"]
@@ -351,9 +351,11 @@ volume_db = -18.0
 
 [node name="Movement" type="AudioStreamPlayer3D" parent="Audio"]
 volume_db = -5.0
-max_distance = 20.0
-script = ExtResource("7_c6t5f")
+max_distance = 10.0
+script = ExtResource("7_6mtma")
 sound_list = [ExtResource("8_ml3o2"), ExtResource("9_aqdy6"), ExtResource("10_288nv"), ExtResource("11_mts5k"), ExtResource("12_ub6ps"), ExtResource("13_i43dp"), ExtResource("14_65hym"), ExtResource("15_0tfjc"), ExtResource("16_s7tc0")]
+min_replay_time = 3.0
+max_replay_time = 10.0
 min_pitch = 0.81
 max_pitch = 0.935
 
@@ -388,7 +390,6 @@ hit_from_inside = true
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_max_distance = 100.01
-debug_enabled = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 
 [node name="LoSAlert" type="VisibleOnScreenNotifier3D" parent="."]
@@ -404,8 +405,8 @@ libraries = {
 "": SubResource("AnimationLibrary_rnx35")
 }
 
-[connection signal="timeout" from="Audio/AudioTimer" to="Audio/Movement" method="initialize_audio_timer"]
 [connection signal="timeout" from="Audio/AudioTimer" to="Audio/Movement" method="trigger_random_sound"]
+[connection signal="timeout" from="Audio/AudioTimer" to="Audio/Movement" method="initialize_audio_timer"]
 [connection signal="died" from="Health" to="." method="on_died"]
 
 [editable path="Model"]
