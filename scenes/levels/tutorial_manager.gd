@@ -12,7 +12,8 @@ var guns_collected := false
 
 func _on_elevator_main_elevator_closed():
 	print(GameManager.current_scene)
-	SceneLoader.load_scene(GameManager.current_scene, "level_1")
+	#SceneLoader.load_scene(GameManager.current_scene, "level_1")
+	SceneLoader.call_deferred("load_scene", GameManager.current_scene, "level_1")
 
 
 func _on_bag_of_guns_guns_collected():

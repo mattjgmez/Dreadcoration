@@ -405,8 +405,8 @@ libraries = {
 "": SubResource("AnimationLibrary_rnx35")
 }
 
-[connection signal="timeout" from="Audio/AudioTimer" to="Audio/Movement" method="trigger_random_sound"]
 [connection signal="timeout" from="Audio/AudioTimer" to="Audio/Movement" method="initialize_audio_timer"]
+[connection signal="timeout" from="Audio/AudioTimer" to="Audio/Movement" method="trigger_random_sound"]
 [connection signal="died" from="Health" to="." method="on_died"]
 
 [editable path="Model"]
