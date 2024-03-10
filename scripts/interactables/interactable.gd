@@ -4,6 +4,7 @@ class_name Interactable
 
 @export var enabled := true
 @export var message := "Press F to interact"
+@export var disabled_message := ""
 
 
 func interact(node):
@@ -11,6 +12,6 @@ func interact(node):
 		_effect(node)
 
 
-func _effect(node):
+func _effect(_node):
 	pass
 

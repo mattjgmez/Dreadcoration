@@ -39,7 +39,7 @@ func _physics_process(delta):
 	if not target_player:
 		return
 	
-	seen_currently = await is_viewed()
+	seen_currently = is_viewed()
 	
 	if killing_player and (seen_currently or angry) and (in_center_screen or angry):
 		target_player.health.take_damage(1000)

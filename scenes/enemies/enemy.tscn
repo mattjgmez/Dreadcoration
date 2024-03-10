@@ -19,7 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://cog15m0m2t6jl" path="res://audio/enemy/movement/movement_9.mp3" id="16_s7tc0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4srcr"]
-size = Vector3(0.5, 1.6925, 0.5)
+size = Vector3(0.45, 1.692, 0.45)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_t2huq"]
 frequency = 1.0
@@ -312,7 +312,7 @@ _data = {
 
 [node name="Enemy" type="RigidBody3D" groups=["Damageable", "Enemy"]]
 collision_layer = 2
-collision_mask = 5
+collision_mask = 13
 continuous_cd = true
 script = ExtResource("1_wnigs")
 speed = 0.4
@@ -364,28 +364,28 @@ max_pitch = 0.935
 [node name="RayHolder" type="Node3D" parent="."]
 
 [node name="RayCast3D" type="RayCast3D" parent="RayHolder"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.116447, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.225551, 0)
 target_position = Vector3(0, 0, -1)
-collision_mask = 16777213
+collision_mask = 4
 hit_from_inside = true
 debug_shape_custom_color = Color(0, 1, 1, 1)
 
 [node name="RayCast3D2" type="RayCast3D" parent="RayHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.164547, 1, 0)
 target_position = Vector3(0, 0, -1)
-collision_mask = 16777213
+collision_mask = 4
 hit_from_inside = true
 
 [node name="RayCast3D3" type="RayCast3D" parent="RayHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.176473, 1, 0)
 target_position = Vector3(0, 0, -1)
-collision_mask = 16777213
+collision_mask = 4
 hit_from_inside = true
 
 [node name="RayCast3D5" type="RayCast3D" parent="RayHolder"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56751, 0)
 target_position = Vector3(0, 0, -1)
-collision_mask = 16777213
+collision_mask = 4
 hit_from_inside = true
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -394,7 +394,7 @@ debug_path_custom_color = Color(1, 0, 0, 1)
 
 [node name="LoSAlert" type="VisibleOnScreenNotifier3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16578, 0)
-aabb = AABB(-0.226828, 0.209617, -0.19496, 0.453656, 1.58077, 0.389919)
+aabb = AABB(-0.175951, 0.209617, -0.184815, 0.351903, 1.58077, 0.369628)
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_yjuuu")

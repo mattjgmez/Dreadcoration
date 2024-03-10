@@ -5,7 +5,7 @@ signal initialize_enemies
 
 
 var min_enemy_count := 5
-var max_enemy_count := 5
+var max_enemy_count := 8
 var enemies_initialized := false
 var remaining_enemies : int
 

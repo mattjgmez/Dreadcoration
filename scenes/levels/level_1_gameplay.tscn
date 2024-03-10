@@ -1,10 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://cdmb3jeutbc7m"]
+[gd_scene load_steps=35 format=3 uid="uid://cdmb3jeutbc7m"]
 
 [ext_resource type="PackedScene" uid="uid://by43c4wv6hqui" path="res://scenes/environment/office_walls/elevator.tscn" id="1_y3ble"]
 [ext_resource type="PackedScene" uid="uid://coogjs1mlytdk" path="res://scenes/player/player.tscn" id="2_am244"]
 [ext_resource type="Material" uid="uid://c7480phq8idck" path="res://materials/shag_carpet.tres" id="3_7iocn"]
 [ext_resource type="PackedScene" uid="uid://cl837av6n2lds" path="res://scenes/environment/office_walls/blank_wall.tscn" id="4_ra75y"]
 [ext_resource type="PackedScene" uid="uid://23yo4qmrsl18" path="res://scenes/environment/office_walls/corner_wall.tscn" id="5_kcdrg"]
+[ext_resource type="Shader" path="res://shaders/player_death.gdshader" id="5_mto5l"]
 [ext_resource type="PackedScene" uid="uid://crpa28isiivs1" path="res://scenes/environment/office_walls/wall_door.tscn" id="7_dxlvv"]
 [ext_resource type="Script" path="res://scripts/interactables/interactable.gd" id="7_eh4fi"]
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="8_sjopm"]
@@ -12,12 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://llgmvxi8mt8w" path="res://scenes/enemies/enemy.tscn" id="10_y4bom"]
 [ext_resource type="PackedScene" uid="uid://bxypfnemryiwm" path="res://scenes/environment/ceiling_light.tscn" id="11_2n8rk"]
 
-[sub_resource type="Sky" id="Sky_1le8r"]
+[sub_resource type="Sky" id="Sky_h82uj"]
 
 [sub_resource type="Environment" id="Environment_7w8a4"]
 background_color = Color(1, 1, 1, 1)
 background_energy_multiplier = 0.0
-sky = SubResource("Sky_1le8r")
+sky = SubResource("Sky_h82uj")
 ambient_light_source = 1
 ambient_light_energy = 0.0
 reflected_light_source = 1
@@ -34,6 +35,28 @@ adjustment_enabled = true
 adjustment_brightness = 0.83
 adjustment_contrast = 1.27
 adjustment_saturation = 0.78
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wwa2a"]
+frequency = 1.0
+fractal_type = 3
+fractal_octaves = 10
+fractal_lacunarity = 3.01
+fractal_gain = 0.345
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_88pvg"]
+seamless = true
+noise = SubResource("FastNoiseLite_wwa2a")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sm5jx"]
+resource_local_to_scene = true
+shader = ExtResource("5_mto5l")
+shader_parameter/direction = Vector2(-0.05, 0.25)
+shader_parameter/speed = 20.0
+shader_parameter/alpha = 0.15
+shader_parameter/inner_radius = 0.9
+shader_parameter/outer_radius = 2.0
+shader_parameter/vignette_noise = SubResource("NoiseTexture2D_88pvg")
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_gdhjk"]
 vertices = PackedVector3Array(-18.75, 0.5, -24.5, -16.75, 0.5, -24.75, -17, 0.5, -26.5, -26.5, 0.5, -26.5, -26.5, 0.5, -16.75, -18.75, 0.5, -16.75, -18.75, 0.5, -24.5, -26.5, 0.5, -26.5, -16.75, 0.5, -24.75, 16.75, 0.5, -24.75, 17, 0.5, -26.5, -17, 0.5, -26.5, 17, 0.5, -26.5, 16.75, 0.5, -24.75, 18.75, 0.5, -24.5, 26.5, 0.5, -26.5, 18.75, 0.5, -24.5, 18.75, 0.5, -1, 26.5, 0.5, -0.75, 26.5, 0.5, -26.5, -17.25, 0.5, -17.5, -10.75, 0.5, -17.5, -10.75, 0.5, -23.25, -17.25, 0.5, -23.25, -9.25, 0.5, -23.25, -9.25, 0.5, -4.75, 9.25, 0.5, -4.75, 9.25, 0.5, -23.25, 10.75, 0.5, -23.25, 10.75, 0.5, -0.75, 17.25, 0.5, -0.75, 17.25, 0.5, -23.25, -17.5, 0.5, -15.25, -19.5, 0.5, -15.25, -19.5, 0.5, -8.75, -17.5, 0.5, -8.75, -17.5, 0.5, -15.25, -17.5, 0.5, -8.75, -17.25, 0.5, -6.5, -10.75, 0.5, -6.5, -10.75, 0.5, -17.5, -17.25, 0.5, -17.5, -19.5, 0.5, -8.75, -19.5, 0.5, -15.25, -25.25, 0.5, -15.25, -25.25, 0.5, -8.75, -25.25, 0.5, -7.25, -25.25, 0.5, -0.75, -18.75, 0.5, -0.75, -18.75, 0.5, -7.25, -10.75, 0.5, -6.5, -17.25, 0.5, -6.5, -17.25, 0.5, -0.75, -10.75, 0.5, -0.75, 4.5, 0.5, -0.75, 4.5, 0.5, -3.25, -9.25, 0.5, -3.25, -9.25, 0.5, -0.75, 4.5, 0.5, -3.25, 4.5, 0.5, -0.75, 6.75, 0.5, -0.5, 9.25, 0.5, -3.25, 6.75, 0.5, -0.5, 6.75, 0.5, 6.5, 9.25, 0.5, 6.5, 9.25, 0.5, -3.25, 26.5, 0.5, -0.75, 18.75, 0.5, -1, 18.5, 0.5, 0.75, 18.5, 0.5, 0.75, 16.5, 0.5, 0.75, 16.5, 0.5, 11.25, 26.5, 0.5, 11.25, 26.5, 0.5, -0.75, 18.5, 0.5, 0.75, 16.5, 0.5, 11.25, -4, 0.5, 19.25, -4, 0.5, 16.75, -6.75, 0.5, 16.5, -6.75, 0.5, 19.5, -6.75, 0.5, 16.5, -6.75, 0.5, 0.75, -25.25, 0.5, 0.75, -25.25, 0.5, 23.25, -25.25, 0.5, 23.25, -6.75, 0.5, 23.25, -6.75, 0.5, 19.5, -25.25, 0.5, 23.25, -6.75, 0.5, 19.5, -6.75, 0.5, 16.5, -1.75, 0.5, 3.5, -2, 0.5, 0.75, -5.25, 0.5, 0.75, -5.25, 0.5, 15.25, -2.5, 0.5, 11.25, -5.25, 0.5, 15.25, -2.75, 0.5, 15.25, -2.5, 0.5, 11.25, -2.5, 0.5, 11.25, 1.25, 0.5, 11.25, 1.25, 0.5, 7.75, 1, 0.5, 3.5, -1.75, 0.5, 3.5, -0.75, 0.5, 0.75, -0.75, 0.5, 2.25, 0.75, 0.5, 2.25, 0.75, 0.5, 0.75, 1, 0.5, 3.5, 1.25, 0.5, 7.75, 1.5, 0.5, 7.25, 2, 0.5, 3.25, 5.25, 0.5, 7.25, 5.25, 0.5, 0.75, 2, 0.5, 3.25, 1.5, 0.5, 7.25, 5.25, 0.5, 0.75, 2, 0.5, 0.75, 2, 0.5, 3.25, 16.5, 0.5, 11.25, 16.5, 0.5, 0.75, 10.75, 0.5, 0.75, 10.75, 0.5, 11.25, 2.75, 0.5, 12.5, 2, 0.5, 12.75, 2, 0.5, 15.25, 9.25, 0.5, 6.5, 6.75, 0.5, 6.5, 6.5, 0.5, 8.75, 2.75, 0.5, 12.5, 2, 0.5, 15.25, 5.25, 0.5, 15.25, 5.5, 0.5, 11.25, 9.25, 0.5, 11.25, 9.25, 0.5, 6.5, 6.5, 0.5, 8.75, 5.5, 0.5, 11.25, 2.75, 0.5, 8.75, 2.75, 0.5, 12.5, 5.5, 0.5, 11.25, 6.5, 0.5, 8.75, 1.25, 0.5, 15.5, 2, 0.5, 15.25, 2, 0.5, 12.75, 1.25, 0.5, 15.5, 2, 0.5, 12.75, -1.25, 0.5, 12.75, -1.25, 0.5, 16.5, 6.5, 0.5, 19.25, 9.25, 0.5, 16.75, 1.5, 0.5, 16.75, 1.5, 0.5, 16.75, 1.25, 0.5, 15.5, -1.25, 0.5, 16.5, -1.25, 0.5, 16.5, -4, 0.5, 16.75, -4, 0.5, 19.25, 6.5, 0.5, 19.25, 1.5, 0.5, 16.75, 6.5, 0.5, 19.25, 6.75, 0.5, 23.25, 9.25, 0.5, 23.25, 9.25, 0.5, 16.75, 6.75, 0.5, 12.75, 6.75, 0.5, 15.25, 9.25, 0.5, 15.25, 9.25, 0.5, 12.75, 27.25, 0.5, 19, 27.25, 0.5, 16.75, 25.25, 0.5, 16.5, 25.25, 0.5, 19.25, 10.75, 0.5, 12.75, 10.75, 0.5, 23.25, 25.25, 0.5, 19.25, 25.25, 0.5, 16.5, 25.25, 0.5, 16.5, 25.25, 0.5, 12.75, 10.75, 0.5, 12.75, 10.75, 0.5, 23.25, 25.25, 0.5, 23.25, 25.25, 0.5, 19.25, 88.5, 0.5, 15, 88.5, 0.5, 13.5, 26.75, 0.5, 13.5, 26.75, 0.5, 15, 90.5, 0.5, 20.75, 88.75, 0.5, 20.75, 89, 0.5, 22.5, 105.5, 0.5, 22.5, 90.5, 0.5, 16.75, 88.75, 0.5, 16.75, 88.75, 0.5, 19, 90.75, 0.5, 19.25, 90.75, 0.5, 19.25, 90.5, 0.5, 20.75, 105.5, 0.5, 22.5, 88.5, 0.5, 13.5, 88.5, 0.5, 15, 90.75, 0.5, 15.25, 105.5, 0.5, 13.5, 90.75, 0.5, 15.25, 90.5, 0.5, 16.75, 90.75, 0.5, 19.25, 105.5, 0.5, 22.5, 105.5, 0.5, 13.5, 27.25, 0.5, 19, 88.75, 0.5, 19, 88.75, 0.5, 16.75, 27.25, 0.5, 16.75, 31.75, 3.25, 17, 31.75, 3.25, 18.75, 32.25, 3.25, 18.75, 32.25, 3.25, 17, 39.75, 3.25, 17, 39.75, 3.25, 18.75, 40.25, 3.25, 18.75, 40.25, 3.25, 17, 47.75, 3.25, 17, 47.75, 3.25, 18.75, 48.25, 3.25, 18.75, 48.25, 3.25, 17, 55.75, 3.25, 17, 55.75, 3.25, 18.75, 56.25, 3.25, 18.75, 56.25, 3.5, 17, 63.75, 3.5, 17, 63.75, 3.25, 18.75, 64.25, 3.25, 18.75, 64.25, 3.5, 17, 71.75, 3.5, 17, 71.75, 3.5, 18.75, 72.25, 3.5, 18.75, 72.25, 3.5, 17, 79.75, 3.5, 17, 79.75, 3.5, 18.75, 80.25, 3.5, 18.75, 80.25, 3.5, 17, 87.75, 3.5, 17, 87.75, 3.5, 18.75, 88.25, 3.5, 18.75, 88.25, 3.5, 17, -7, 0.5, 26.5, 7, 0.5, 26.5, 7.25, 0.5, 24.75, 5.25, 0.5, 24.5, -5.25, 0.5, 24.5, -7.25, 0.5, 24.75, 5.25, 0.5, 24.5, 5.25, 0.5, 20.75, -5.25, 0.5, 20.75, -5.25, 0.5, 24.5, 88.75, 0.5, 20.75, 26.75, 0.5, 20.75, 26.75, 0.5, 22.5, 89, 0.5, 22.5, -7.25, 0.5, 24.75, -26.5, 0.5, 24.75, -26.5, 0.5, 26.5, -7, 0.5, 26.5, 26.5, 0.5, 26.5, 26.5, 0.5, 24.75, 7.25, 0.5, 24.75, 7, 0.5, 26.5)
@@ -510,6 +533,12 @@ flicker_chance = 0.5
 [node name="Player" parent="." instance=ExtResource("2_am244")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 2)
 
+[node name="Shotgun" parent="Player/Camera3D" index="0"]
+starting_reloads = 5
+
+[node name="ColorRect" parent="Player" index="6"]
+material = SubResource("ShaderMaterial_sm5jx")
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_gdhjk")
 
@@ -518,7 +547,7 @@ mesh = SubResource("PlaneMesh_jrahl")
 skeleton = NodePath("../..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Floor"]
-collision_layer = 15
+collision_layer = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.497555, 0)
@@ -950,5 +979,6 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 18, 0,
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 3, 0)
 mesh = SubResource("QuadMesh_gfgua")
 
+[editable path="Player"]
 [editable path="NavigationRegion3D/Elevator"]
 [editable path="NavigationRegion3D/Elevator/Model"]

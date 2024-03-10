@@ -84,6 +84,7 @@ func reload() -> int:
 		var throw_direction = -global_transform.basis.z
 		instance.apply_impulse(throw_direction * 10)
 	
+	gun_in_hand = true
 	return current_reloads
 
 

@@ -6,6 +6,7 @@
 size = Vector3(0.420898, 3.06146, 4.23285)
 
 [node name="CornerWall" type="StaticBody3D"]
+collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49671, -1.90225)

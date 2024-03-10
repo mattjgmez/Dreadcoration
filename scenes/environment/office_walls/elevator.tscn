@@ -233,6 +233,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_sst1c")
 [node name="Collision" type="Node3D" parent="."]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Collision"]
+collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Collision/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71782, 1.39744, 1.59655)
@@ -255,12 +256,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.48564, 1.49072, 0)
 shape = SubResource("BoxShape3D_exefy")
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="Collision"]
+collision_layer = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Collision/AnimatableBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4059, 0)
 shape = SubResource("BoxShape3D_e8aen")
 
 [node name="Area3D" type="Area3D" parent="Collision"]
+collision_layer = 32
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Collision/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0724561, 1.22992, 1.54521)

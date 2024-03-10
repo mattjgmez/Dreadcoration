@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/buzzing.mp3-eea937aaccf9557aa4bd41fb4f9bc69d.
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

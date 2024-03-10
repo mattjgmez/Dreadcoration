@@ -45,7 +45,7 @@ func _input(event):
 		interactable.interact(self)
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if player_caught or EndUi.ui_active:
 		return
 	
@@ -74,6 +74,8 @@ func handle_interaction():
 		interactable = interaction.get_collider()
 		if interactable.enabled:
 			hud.enable_interaction_label(interactable.message)
+		else:
+			hud.enable_interaction_label(interactable.disabled_message)
 	else:
 		hud.disable_interaction_label()
 		interactable = null

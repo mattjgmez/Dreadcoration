@@ -21,3 +21,7 @@ func turn_on():
 		animator.play("flicker")
 	else:
 		animator.play("on")	
+
+
+func turn_off():
+	animator.play("RESET")

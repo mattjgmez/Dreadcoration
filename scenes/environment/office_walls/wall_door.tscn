@@ -149,6 +149,8 @@ size = Vector3(1.347, 3.072, 0.45)
 [node name="WallDoor" type="Area3D" groups=["Interactable"]]
 collision_layer = 16
 script = ExtResource("1_28nkr")
+message = "Press F to open"
+disabled_message = "Locked"
 
 [node name="DoorDetectionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20601, 0)
@@ -157,6 +159,7 @@ shape = SubResource("BoxShape3D_4fnqm")
 [node name="Model" parent="." instance=ExtResource("1_d0rww")]
 
 [node name="DoorCollision" type="AnimatableBody3D" parent="Model/Door" index="1"]
+collision_layer = 4
 
 [node name="DoorCollisionShape" type="CollisionShape3D" parent="Model/Door/DoorCollision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0192, 0)
@@ -173,6 +176,7 @@ stream = ExtResource("2_ithfc")
 volume_db = -7.321
 
 [node name="WallCollision" type="StaticBody3D" parent="."]
+collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallCollision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33035, 1.47144, 0)

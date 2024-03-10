@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://csq7lqp5lcts2"]
+[gd_scene load_steps=35 format=3 uid="uid://csq7lqp5lcts2"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_h5xc7"]
 [ext_resource type="Shader" path="res://shaders/retro_post-processing.gdshader" id="2_apriv"]
@@ -113,6 +113,32 @@ size = Vector3(60, 1, 55)
 [sub_resource type="BoxShape3D" id="BoxShape3D_58407"]
 size = Vector3(4.40015, 1.36621, 1.41211)
 
+[sub_resource type="Sky" id="Sky_1le8r"]
+
+[sub_resource type="Environment" id="Environment_30ule"]
+background_color = Color(1, 1, 1, 1)
+background_energy_multiplier = 0.0
+sky = SubResource("Sky_1le8r")
+ambient_light_source = 1
+ambient_light_energy = 0.0
+reflected_light_source = 1
+tonemap_mode = 2
+tonemap_exposure = 0.79
+tonemap_white = 7.01
+fog_enabled = true
+fog_light_color = Color(0.188235, 0.207843, 0.235294, 1)
+fog_light_energy = 0.55
+fog_density = 0.014
+volumetric_fog_density = 0.025
+volumetric_fog_albedo = Color(0.447059, 0.447059, 0.447059, 1)
+adjustment_enabled = true
+adjustment_brightness = 0.83
+adjustment_contrast = 1.27
+adjustment_saturation = 0.78
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6m8ug"]
+size = Vector3(1, 3.55713, 5.21289)
+
 [node name="Tutorial" type="Node"]
 script = ExtResource("1_h5xc7")
 scene_name = "tutorial"
@@ -203,9 +229,6 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 20, 0,
 [node name="Elevator3" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("6_nyqol")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 16, 0, -4)
 
-[node name="WallDoor" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("7_tlxmr")]
-enabled = false
-
 [node name="WallDoor2" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("7_tlxmr")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 26, 0, -2)
 enabled = false
@@ -216,6 +239,22 @@ flicker_chance = 0.0
 
 [node name="CeilingLight2" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+flicker_chance = 0.0
+
+[node name="CeilingLight3" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -12)
+flicker_chance = 0.0
+
+[node name="CeilingLight4" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -5)
+flicker_chance = 0.0
+
+[node name="CeilingLight6" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -12)
+flicker_chance = 0.0
+
+[node name="CeilingLight7" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -5)
 flicker_chance = 0.0
 
 [node name="CeilingLight5" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
@@ -240,7 +279,7 @@ mesh = SubResource("PlaneMesh_ydcio")
 skeleton = NodePath("../../../..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="PostProcessing/SubViewport/NavigationRegion3D/Floor"]
-collision_layer = 15
+collision_layer = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PostProcessing/SubViewport/NavigationRegion3D/Floor/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.497555, 0)
@@ -249,6 +288,8 @@ shape = SubResource("BoxShape3D_yasvj")
 [node name="Walls" type="Node3D" parent="PostProcessing/SubViewport/NavigationRegion3D"]
 
 [node name="BlankWall" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("4_1bgwx")]
+
+[node name="BlankWall11" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("4_1bgwx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
 [node name="BlankWall6" parent="PostProcessing/SubViewport/NavigationRegion3D/Walls" instance=ExtResource("4_1bgwx")]
@@ -305,10 +346,24 @@ shape = SubResource("BoxShape3D_58407")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
 close_on_exit = false
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="PostProcessing/SubViewport"]
+environment = SubResource("Environment_30ule")
+
 [node name="TutorialManager" type="Node" parent="."]
 script = ExtResource("15_p7pmk")
 
+[node name="EnemyTrigger" type="Area3D" parent="TutorialManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.70791, 0, -2.27154)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TutorialManager/EnemyTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.136171, 1.27856, 0.270171)
+shape = SubResource("BoxShape3D_6m8ug")
+
+[node name="EnemyPoint" type="Node3D" parent="TutorialManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8999, 9.53674e-07, -2.13262)
+
 [connection signal="guns_collected" from="PostProcessing/SubViewport/BagOfGuns" to="TutorialManager" method="_on_bag_of_guns_guns_collected"]
 [connection signal="elevator_closed" from="PostProcessing/SubViewport/NavigationRegion3D/ElevatorMain" to="TutorialManager" method="_on_elevator_main_elevator_closed"]
+[connection signal="body_entered" from="TutorialManager/EnemyTrigger" to="TutorialManager" method="_on_enemy_trigger_body_entered"]
 
 [editable path="PostProcessing/SubViewport/Player"]
