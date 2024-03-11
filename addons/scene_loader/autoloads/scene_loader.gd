@@ -39,8 +39,9 @@ func set_configuration(config: Dictionary) -> void:
 ## - next_scene: The path to the scene to be loaded.
 ##
 ## Returns: None
-func load_scene(current_scene: Node, next_scene: String) -> void:
+func load_scene(current_scene: Node, next_scene: String, use_loading_screen := true) -> void:
 	var loading_screen_instance: Node = initialize_loading_screen()
+	
 	var path: String = find_scene_path(next_scene)
 	
 	# Load scene
@@ -50,12 +51,13 @@ func load_scene(current_scene: Node, next_scene: String) -> void:
 	
 	# Wait for loading screen to be ready
 	await loading_screen_instance.safe_to_load
+	
 	current_scene.queue_free()
 	
 	while true:
 		var load_progress = []
 		var load_status = ResourceLoader.load_threaded_get_status(path, load_progress)
-	
+		
 		match load_status:
 			ThreadStatus.INVALID_RESOURCE:
 				printerr("Can not load the resource.")
@@ -77,7 +79,7 @@ func load_scene(current_scene: Node, next_scene: String) -> void:
 func initialize_loading_screen() -> Node:
 	var loading_screen_instance: Node = loading_screen.instantiate()
 	get_tree().get_root().call_deferred("add_child", loading_screen_instance)
-
+	
 	return loading_screen_instance
 
 
@@ -110,9 +112,9 @@ func find_scene_path(next_scene: String) -> String:
 func update_progress_bar(loading_screen_instance: Node, path_to_progress_bar: String, load_progress: int) -> void:
 	if path_to_progress_bar == "":
 		return
-
+	
 	var progress_bar := loading_screen_instance.get_node(path_to_progress_bar)
-
+	
 	if progress_bar == null:
 		printerr("Path to progress bar is invalid.")
 	else:

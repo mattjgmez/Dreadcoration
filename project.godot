@@ -27,7 +27,7 @@ GameManager="*res://scripts/managers/game_manager.gd"
 
 window/size/viewport_width=860
 window/size/viewport_height=520
-window/size/mode=2
+window/size/mode=3
 window/stretch/mode="viewport"
 window/stretch/aspect="ignore"
 mouse_cursor/custom_image="res://click.svg"

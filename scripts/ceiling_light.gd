@@ -15,7 +15,7 @@ func _ready():
 func turn_on():
 	var random_float = randf()
 	
-	$ceiling_light/LightHum.playing = true
+	$LightHum.playing = true
 	
 	if random_float <= flicker_chance:
 		animator.play("flicker")
@@ -24,4 +24,4 @@ func turn_on():
 
 
 func turn_off():
-	animator.play("RESET")
+	animator.play("off")

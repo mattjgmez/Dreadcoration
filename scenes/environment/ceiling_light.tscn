@@ -1,18 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxypfnemryiwm"]
+[gd_scene load_steps=10 format=3 uid="uid://bxypfnemryiwm"]
 
 [ext_resource type="PackedScene" uid="uid://dksu2ahkwc1qv" path="res://models/ceiling_light.blend" id="1_or77h"]
 [ext_resource type="Script" path="res://scripts/ceiling_light.gd" id="1_wtevt"]
 [ext_resource type="AudioStream" uid="uid://bpegsbkfy56aq" path="res://audio/buzzing.mp3" id="3_k1ett"]
-
-[sub_resource type="FogMaterial" id="FogMaterial_7hmju"]
-density = 0.0
 
 [sub_resource type="Animation" id="Animation_2m7th"]
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ceiling_light/OmniLight3D:light_energy")
+tracks/0/path = NodePath("OmniLight3D:light_energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -28,13 +25,29 @@ loop_mode = 1
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ceiling_light/OmniLight3D:light_energy")
+tracks/0/path = NodePath("OmniLight3D:light_energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
 "points": PackedFloat32Array(7, -0.25, 0, 0.4, -1.32542, 1.67862, 0, 6.22553, 0.1, 0.962936, 4.00742, -0.0788934, -1.18509, 0.25, 0, 1.91845, -0.25, 0, 0.25, 0, 7.22122, -0.2, -2.0887, 0.25, 0),
 "times": PackedFloat32Array(0, 0.8, 0.9, 1, 2)
+}
+
+[sub_resource type="Animation" id="Animation_p35hi"]
+resource_name = "off"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OmniLight3D:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_ex2qw"]
@@ -44,7 +57,7 @@ loop_mode = 1
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ceiling_light/OmniLight3D:light_energy")
+tracks/0/path = NodePath("OmniLight3D:light_energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -57,18 +70,27 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_2m7th"),
 "flicker": SubResource("Animation_pq28q"),
+"off": SubResource("Animation_p35hi"),
 "on": SubResource("Animation_ex2qw")
 }
+
+[sub_resource type="FogMaterial" id="FogMaterial_7hmju"]
+density = 0.0
 
 [node name="CeilingLight" type="Node3D"]
 script = ExtResource("1_wtevt")
 flicker_chance = 0.1
 
-[node name="ceiling_light" parent="." instance=ExtResource("1_or77h")]
+[node name="Model" parent="." instance=ExtResource("1_or77h")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.03, 2.954, -0.086)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="ceiling_light"]
-transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, -0.92756, 0)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cyyjj")
+}
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 2.58521, -0.086)
 light_color = Color(1, 0.85098, 0.588235, 1)
 light_energy = 0.0
 light_volumetric_fog_energy = 2.0
@@ -76,18 +98,14 @@ shadow_enabled = true
 omni_range = 3.80806
 omni_attenuation = 0.5
 
-[node name="LightHum" type="AudioStreamPlayer3D" parent="ceiling_light"]
+[node name="LightHum" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 2.954, -0.086)
 stream = ExtResource("3_k1ett")
 volume_db = -16.0
 max_distance = 60.0
 
-[node name="FogVolume" type="FogVolume" parent="ceiling_light"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.87103, 0)
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -0.03, 2.954, -0.086)
 size = Vector3(40, 25, 40)
 shape = 1
 material = SubResource("FogMaterial_7hmju")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_cyyjj")
-}

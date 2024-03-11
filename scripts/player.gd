@@ -18,6 +18,7 @@ var interactable
 @onready var animation = $AnimationPlayer
 @onready var hud = $HUD
 @onready var interaction = $Camera3D/InteractionDetection
+@onready var flashlight = $Camera3D/SpotLight3D
 
 
 func _ready():
