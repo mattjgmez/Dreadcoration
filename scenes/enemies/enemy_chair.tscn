@@ -1,0 +1,411 @@
+[gd_scene load_steps=28 format=3 uid="uid://bmsnaupu43ubc"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_58463"]
+[ext_resource type="Shader" path="res://shaders/aberration.gdshader" id="3_jnydy"]
+[ext_resource type="AudioStream" uid="uid://3dgdqo8hus2b" path="res://audio/enemy/death_scream.mp3" id="4_4fefh"]
+[ext_resource type="PackedScene" uid="uid://dl76r8voth7r1" path="res://models/chair.blend" id="4_5owap"]
+[ext_resource type="AudioStream" uid="uid://c7wh60g1drmdj" path="res://audio/enemy/aggressive_scream.mp3" id="5_iavhr"]
+[ext_resource type="AudioStream" uid="uid://dv7yrhj3hrr16" path="res://audio/enemy/no_ammo_scream.mp3" id="6_835fk"]
+[ext_resource type="Script" path="res://scripts/random_sound.gd" id="7_u44ll"]
+[ext_resource type="AudioStream" uid="uid://b2b60ljoud276" path="res://audio/enemy/movement/movement_1.mp3" id="8_unli2"]
+[ext_resource type="AudioStream" uid="uid://c2gg5apx38cr4" path="res://audio/enemy/movement/movement_2.mp3" id="9_0lfkm"]
+[ext_resource type="AudioStream" uid="uid://ojfyb5vngbyd" path="res://audio/enemy/movement/movement_3.mp3" id="10_q8vpr"]
+[ext_resource type="AudioStream" uid="uid://cno8qf6kt5ii1" path="res://audio/enemy/movement/movement_4.mp3" id="11_0pm0w"]
+[ext_resource type="AudioStream" uid="uid://bv5m2skxreo8l" path="res://audio/enemy/movement/movement_5.mp3" id="12_wquxm"]
+[ext_resource type="AudioStream" uid="uid://d0jvu31e3sxej" path="res://audio/enemy/movement/movement_6.mp3" id="13_07r8l"]
+[ext_resource type="AudioStream" uid="uid://ch2mumevauxkq" path="res://audio/enemy/movement/movement_7.mp3" id="14_lpd8n"]
+[ext_resource type="AudioStream" uid="uid://buy67rqw8bv8p" path="res://audio/enemy/movement/movement_8.mp3" id="15_f7k74"]
+[ext_resource type="AudioStream" uid="uid://cog15m0m2t6jl" path="res://audio/enemy/movement/movement_9.mp3" id="16_rr2d2"]
+[ext_resource type="Script" path="res://addons/health_node/health_node.gd" id="17_1h3tb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4srcr"]
+size = Vector3(0.693359, 1.39432, 0.595703)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_a1kbo"]
+frequency = 1.0
+fractal_type = 3
+fractal_octaves = 10
+fractal_lacunarity = 3.01
+fractal_gain = 0.345
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_88pvg"]
+seamless = true
+noise = SubResource("FastNoiseLite_a1kbo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_145s8"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_jnydy")
+shader_parameter/speed = 20.0
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/fade_threshold = 2.0
+shader_parameter/static_radius = 0.2
+shader_parameter/static_texture = SubResource("NoiseTexture2D_88pvg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ahiwo"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_jnydy")
+shader_parameter/speed = 20.0
+shader_parameter/base_color = Color(0.0313726, 0.0901961, 0.184314, 1)
+shader_parameter/fade_threshold = 2.0
+shader_parameter/static_radius = 0.2
+shader_parameter/static_texture = SubResource("NoiseTexture2D_88pvg")
+
+[sub_resource type="Animation" id="Animation_ar6pa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Audio/DeathScream:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Audio/AggressionScream:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Audio/AggressionScream:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-5.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Model/MiddleCylinder:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Model/Back:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+
+[sub_resource type="Animation" id="Animation_0uyj5"]
+resource_name = "aggression"
+length = 2.35
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Audio/AggressionScream:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model/MiddleCylinder:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.264]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Model/Back:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.512]
+}
+
+[sub_resource type="Animation" id="Animation_8a8wi"]
+resource_name = "caught_player_start"
+length = 2.35
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Audio/AggressionScream:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Audio/AggressionScream:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-55.314, -5.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["aggression", -1, 1.0, false],
+"method": &"play"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Model/Back:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.512]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Model/MiddleCylinder:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.314]
+}
+
+[sub_resource type="Animation" id="Animation_iqjxg"]
+resource_name = "death"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Audio/DeathScream:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Model/Back:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [1.132, -0.17]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Model/MiddleCylinder:surface_material_override/0:shader_parameter/fade_threshold")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [0.834, 0.0790001]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rnx35"]
+_data = {
+"RESET": SubResource("Animation_ar6pa"),
+"aggression": SubResource("Animation_0uyj5"),
+"caught_player_start": SubResource("Animation_8a8wi"),
+"death": SubResource("Animation_iqjxg")
+}
+
+[node name="Enemy" type="RigidBody3D" groups=["Damageable", "Enemy"]]
+collision_layer = 2
+collision_mask = 13
+continuous_cd = true
+script = ExtResource("1_58463")
+speed = 0.4
+player_kill_range = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.697415, 0)
+shape = SubResource("BoxShape3D_4srcr")
+
+[node name="Model" parent="." instance=ExtResource("4_5owap")]
+
+[node name="MiddleCylinder" parent="Model" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_145s8")
+
+[node name="Leg" parent="Model/MiddleCylinder" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_145s8")
+
+[node name="Wheel" parent="Model/MiddleCylinder/Leg" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_145s8")
+
+[node name="Leg_001" parent="Model/MiddleCylinder" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_145s8")
+
+[node name="Wheel_001" parent="Model/MiddleCylinder/Leg_001" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_145s8")
+
+[node name="Leg_002" parent="Model/MiddleCylinder" index="2"]
+surface_material_override/0 = SubResource("ShaderMaterial_145s8")
+
+[node name="Wheel_002" parent="Model/MiddleCylinder/Leg_002" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_145s8")
+
+[node name="Leg_003" parent="Model/MiddleCylinder" index="3"]
+surface_material_override/0 = SubResource("ShaderMaterial_145s8")
+
+[node name="Wheel_003" parent="Model/MiddleCylinder/Leg_003" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_145s8")
+
+[node name="Back" parent="Model" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_ahiwo")
+
+[node name="Seat" parent="Model/Back" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_ahiwo")
+
+[node name="Audio" type="Node3D" parent="."]
+
+[node name="DeathScream" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("4_4fefh")
+volume_db = -10.0
+
+[node name="AggressionScream" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("5_iavhr")
+volume_db = -5.0
+max_distance = 15.0
+
+[node name="NoAmmoScream" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("6_835fk")
+volume_db = -18.0
+
+[node name="Movement" type="AudioStreamPlayer3D" parent="Audio"]
+volume_db = -5.0
+max_distance = 10.0
+script = ExtResource("7_u44ll")
+sound_list = [ExtResource("8_unli2"), ExtResource("9_0lfkm"), ExtResource("10_q8vpr"), ExtResource("11_0pm0w"), ExtResource("12_wquxm"), ExtResource("13_07r8l"), ExtResource("14_lpd8n"), ExtResource("15_f7k74"), ExtResource("16_rr2d2")]
+min_replay_time = 3.0
+max_replay_time = 10.0
+min_pitch = 0.81
+max_pitch = 0.935
+
+[node name="AudioTimer" type="Timer" parent="Audio"]
+
+[node name="RayHolder" type="Node3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="RayHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.225551, 0)
+target_position = Vector3(0, 0, -1)
+collision_mask = 4
+hit_from_inside = true
+debug_shape_custom_color = Color(0, 1, 1, 1)
+
+[node name="RayCast3D2" type="RayCast3D" parent="RayHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.340552, 0.629223, 0)
+target_position = Vector3(0, 0, -1)
+collision_mask = 4
+hit_from_inside = true
+
+[node name="RayCast3D3" type="RayCast3D" parent="RayHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.319279, 0.629223, 0)
+target_position = Vector3(0, 0, -1)
+collision_mask = 4
+hit_from_inside = true
+
+[node name="RayCast3D5" type="RayCast3D" parent="RayHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38086, 0)
+target_position = Vector3(0, 0, -1)
+collision_mask = 4
+hit_from_inside = true
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_max_distance = 100.01
+debug_path_custom_color = Color(1, 0, 0, 1)
+
+[node name="LoSAlert" type="VisibleOnScreenNotifier3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16578, 0)
+aabb = AABB(-0.316, 0.21, -0.268, 0.637, 1.326, 0.535)
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("17_1h3tb")
+invulnerable = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rnx35")
+}
+
+[connection signal="timeout" from="Audio/AudioTimer" to="Audio/Movement" method="initialize_audio_timer"]
+[connection signal="timeout" from="Audio/AudioTimer" to="Audio/Movement" method="trigger_random_sound"]
+[connection signal="died" from="Health" to="." method="on_died"]
+
+[editable path="Model"]
