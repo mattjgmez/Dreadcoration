@@ -53,4 +53,4 @@ func enemy_slain():
 	remaining_enemies -= 1
 	
 	if remaining_enemies <= 0:
-		EndUi.enable_end_ui("THE ANOMALIES ARE SLAIN", true, "For Now...")
+		EndUi.enable_end_ui("THEY ARE SLAIN", true, "For Now...")
