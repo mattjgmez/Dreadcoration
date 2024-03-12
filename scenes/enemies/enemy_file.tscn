@@ -410,19 +410,19 @@ hit_from_inside = true
 debug_shape_custom_color = Color(0, 1, 1, 1)
 
 [node name="RayCast3D2" type="RayCast3D" parent="RayHolder"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.164547, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.164547, 0.629223, 0)
 target_position = Vector3(0, 0, -1)
 collision_mask = 4
 hit_from_inside = true
 
 [node name="RayCast3D3" type="RayCast3D" parent="RayHolder"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.176473, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.176473, 0.629223, 0)
 target_position = Vector3(0, 0, -1)
 collision_mask = 4
 hit_from_inside = true
 
 [node name="RayCast3D5" type="RayCast3D" parent="RayHolder"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56751, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00745, 0)
 target_position = Vector3(0, 0, -1)
 collision_mask = 4
 hit_from_inside = true
