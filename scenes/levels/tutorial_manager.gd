@@ -22,6 +22,7 @@ func _on_bag_of_guns_guns_collected():
 	
 	$"../PostProcessing/SubViewport/NavigationRegion3D/ElevatorMain".open_elevator()
 	$"../PostProcessing/SubViewport/CeilingLightElevator".turn_on()
+	$"../PostProcessing/SubViewport/Environment/CeilingLight6".turn_on()
 	
 	EnemyManager.remaining_enemies = 20
 
@@ -39,6 +40,7 @@ func _on_enemy_trigger_body_entered(body):
 	
 	$"../PostProcessing/SubViewport/Environment/CeilingLight5".turn_off()
 	$"../PostProcessing/SubViewport/CeilingLightElevator".turn_off()
+	$"../PostProcessing/SubViewport/Environment/CeilingLight6".turn_off()
 	
 	await get_tree().create_timer(1.0).timeout
 	
@@ -47,3 +49,4 @@ func _on_enemy_trigger_body_entered(body):
 	
 	$"../PostProcessing/SubViewport/Environment/CeilingLight5".turn_on()
 	$"../PostProcessing/SubViewport/CeilingLightElevator".turn_on()
+	$"../PostProcessing/SubViewport/Environment/CeilingLight6".turn_on()

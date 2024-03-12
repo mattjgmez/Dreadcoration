@@ -161,6 +161,7 @@ render_target_update_mode = 4
 
 [node name="Ceiling" type="MeshInstance3D" parent="PostProcessing/SubViewport"]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 2.94639, 0)
+visible = false
 mesh = SubResource("QuadMesh_lovpk")
 skeleton = NodePath("../../..")
 
@@ -234,33 +235,30 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 16, 0,
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 26, 0, -2)
 enabled = false
 
-[node name="CeilingLight" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
-flicker_chance = 0.0
-
-[node name="CeilingLight2" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
-flicker_chance = 0.0
-
-[node name="CeilingLight3" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -12)
-flicker_chance = 0.0
-
-[node name="CeilingLight4" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -5)
-flicker_chance = 0.0
-
-[node name="CeilingLight6" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -12)
-flicker_chance = 0.0
-
 [node name="CeilingLight7" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -5)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, -4)
+flicker_chance = 0.0
+
+[node name="CeilingLight8" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, -4)
+flicker_chance = 0.0
+
+[node name="CeilingLight9" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, -12)
+flicker_chance = 0.0
+
+[node name="CeilingLight10" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, -12)
 flicker_chance = 0.0
 
 [node name="CeilingLight5" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -2)
 flicker_chance = 1.0
+
+[node name="CeilingLight6" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("8_vvw1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -2)
+flicker_chance = 1.0
+start_on = false
 
 [node name="Enemy" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("9_flm5c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -15)
