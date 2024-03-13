@@ -1,5 +1,7 @@
 shader_type spatial;
 
+render_mode diffuse_toon;
+
 uniform int scale_0 : hint_range(1, 1024, 1);
 uniform int scale_1 : hint_range(1, 1024, 1);
 

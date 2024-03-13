@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1y7soam0pt0e"]
+
+[ext_resource type="Script" path="res://scripts/interactables/telephone.gd" id="1_0stgn"]
+[ext_resource type="AudioStream" uid="uid://djp3lyxc6k3ab" path="res://audio/narration.mp3" id="2_cb80m"]
+[ext_resource type="PackedScene" uid="uid://ddk8gi4rxeb2" path="res://models/telephone.blend" id="3_0ht3c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hnlhm"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q781g"]
+albedo_color = Color(0.305882, 0.4, 0.6, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kfifg"]
+albedo_color = Color(0.517647, 0.670588, 0.8, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7qpf3"]
+emission_enabled = true
+emission = Color(1, 0.301961, 0.235294, 1)
+emission_energy_multiplier = 0.65
+
+[node name="Telephone" type="Area3D"]
+collision_layer = 16
+script = ExtResource("1_0stgn")
+message = "Press F to hear voicemail"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+shape = SubResource("BoxShape3D_hnlhm")
+
+[node name="Voicemail" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_cb80m")
+pitch_scale = 0.75
+max_distance = 10.0
+
+[node name="Model" parent="." instance=ExtResource("3_0ht3c")]
+transform = Transform3D(-0.15, 0, -1.31134e-08, 0, 0.15, 0, 1.31134e-08, 0, -0.15, 0, 0, 0)
+
+[node name="Box" parent="Model" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_q781g")
+
+[node name="Keypad" parent="Model" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_kfifg")
+
+[node name="KeypadEven" parent="Model" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7qpf3")
+
+[editable path="Model"]

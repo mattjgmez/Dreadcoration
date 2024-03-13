@@ -1,17 +1,21 @@
-[gd_scene load_steps=17 format=3 uid="uid://drtm5vsexog8i"]
+[gd_scene load_steps=22 format=3 uid="uid://drtm5vsexog8i"]
 
 [ext_resource type="Material" uid="uid://c7480phq8idck" path="res://materials/shag_carpet.tres" id="2_2q1wo"]
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="2_guv5c"]
 [ext_resource type="PackedScene" uid="uid://coogjs1mlytdk" path="res://scenes/player/player.tscn" id="2_y2c3k"]
 [ext_resource type="PackedScene" uid="uid://cl837av6n2lds" path="res://scenes/environment/office_walls/blank_wall.tscn" id="3_k785k"]
 [ext_resource type="PackedScene" uid="uid://23yo4qmrsl18" path="res://scenes/environment/office_walls/corner_wall.tscn" id="4_6l441"]
-[ext_resource type="PackedScene" uid="uid://djtq2f7ysqd8n" path="res://scenes/environment/office_walls/cross_wall.tscn" id="5_bstf6"]
 [ext_resource type="PackedScene" uid="uid://crpa28isiivs1" path="res://scenes/environment/office_walls/wall_door.tscn" id="6_b5bcl"]
-[ext_resource type="PackedScene" uid="uid://bxypfnemryiwm" path="res://scenes/environment/ceiling_light.tscn" id="7_js54b"]
-[ext_resource type="PackedScene" uid="uid://by43c4wv6hqui" path="res://scenes/environment/office_walls/elevator.tscn" id="9_kxd45"]
+[ext_resource type="PackedScene" uid="uid://llgmvxi8mt8w" path="res://scenes/enemies/enemy.tscn" id="7_x6fj7"]
+[ext_resource type="Shader" path="res://shaders/aberration.gdshader" id="8_ri2qn"]
+[ext_resource type="PackedScene" uid="uid://bl47lgp28h55u" path="res://scenes/environment/clock.tscn" id="9_twvo6"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_1mngo"]
-agent_radius = 9.0
+vertices = PackedVector3Array(-6.582, 0.5, -21.396, -4.832, 0.5, -21.646, -5.082, 0.5, -91.396, -91.332, 0.5, -91.396, -91.332, 0.5, -20.146, -91.332, 0.5, -20.146, -6.582, 0.5, -19.896, -6.582, 0.5, -21.396, -4.832, 0.5, -21.646, 4.918, 0.5, -21.646, 5.168, 0.5, -91.396, -5.082, 0.5, -91.396, 5.168, 0.5, -91.396, 4.918, 0.5, -21.646, 6.418, 0.5, -21.646, 5.168, 0.5, -91.396, 6.418, 0.5, -21.646, 6.668, 0.5, -19.896, 91.418, 0.5, -20.146, 91.418, 0.5, -91.396, -6.082, 3.5, -12.896, -0.582001, 3.5, -12.896, -5.832, 3.5, -13.396, 5.918, 3.5, -13.396, 0.667999, 3.5, -12.896, 6.168, 3.5, -12.896, -6.082, 3.5, -21.146, -6.082, 3.5, -12.896, -5.832, 3.5, -13.396, -5.582, 3.5, -20.896, -6.082, 3.5, -21.146, -5.582, 3.5, -20.896, 5.668, 3.5, -20.896, 6.168, 3.5, -21.146, 5.918, 3.5, -13.396, 6.168, 3.5, -12.896, 6.168, 3.5, -21.146, 5.668, 3.5, -20.896, -0.0820007, 0.5, -12.896, 0.167999, 0.5, -12.896, 0.417999, 0.5, -13.646, -0.332001, 0.5, -13.646, 0.417999, 0.5, -13.646, 5.418, 0.5, -20.396, -5.332, 0.5, -20.396, -0.332001, 0.5, -13.646, 0.417999, 0.5, -13.646, 5.418, 0.5, -13.646, 5.418, 0.5, -20.396, -5.332, 0.5, -20.396, -5.332, 0.5, -13.646, -0.332001, 0.5, -13.646, -91.332, 0.5, -13.896, -6.582, 0.5, -14.146, -6.582, 0.5, -19.896, -91.332, 0.5, -20.146, 6.668, 0.5, -19.896, 6.668, 0.5, -14.146, 91.418, 0.5, -13.896, 91.418, 0.5, -20.146, -6.582, 0.5, -12.646, -6.582, 0.5, -14.146, -91.332, 0.5, -13.896, -4.832, 0.5, -12.396, -6.582, 0.5, -12.646, -91.332, 0.5, -13.896, -91.332, 0.5, 91.354, -5.082, 0.5, 91.354, 91.418, 0.5, -13.896, 6.668, 0.5, -14.146, 6.418, 0.5, -12.396, 5.168, 0.5, 91.354, 91.418, 0.5, 91.354, 6.418, 0.5, -12.396, 4.918, 0.5, -12.396, 5.168, 0.5, 91.354, 0.417999, 0.5, -12.396, 0.167999, 0.5, -12.896, -0.0820007, 0.5, -12.896, -0.332001, 0.5, -12.396, -5.082, 0.5, 91.354, 5.168, 0.5, 91.354, -0.332001, 0.5, -12.396, -4.832, 0.5, -12.396, -5.082, 0.5, 91.354, 5.168, 0.5, 91.354, 4.918, 0.5, -12.396, 0.417999, 0.5, -12.396)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(7, 6, 5), PackedInt32Array(8, 11, 9), PackedInt32Array(9, 11, 10), PackedInt32Array(14, 13, 12), PackedInt32Array(16, 15, 17), PackedInt32Array(17, 15, 18), PackedInt32Array(18, 15, 19), PackedInt32Array(22, 21, 20), PackedInt32Array(25, 24, 23), PackedInt32Array(29, 28, 26), PackedInt32Array(26, 28, 27), PackedInt32Array(31, 30, 32), PackedInt32Array(32, 30, 33), PackedInt32Array(37, 36, 34), PackedInt32Array(34, 36, 35), PackedInt32Array(38, 41, 39), PackedInt32Array(39, 41, 40), PackedInt32Array(45, 44, 42), PackedInt32Array(42, 44, 43), PackedInt32Array(48, 47, 46), PackedInt32Array(51, 50, 49), PackedInt32Array(53, 52, 54), PackedInt32Array(54, 52, 55), PackedInt32Array(56, 59, 57), PackedInt32Array(57, 59, 58), PackedInt32Array(62, 61, 60), PackedInt32Array(64, 63, 65), PackedInt32Array(65, 63, 67), PackedInt32Array(65, 67, 66), PackedInt32Array(69, 68, 70), PackedInt32Array(70, 68, 72), PackedInt32Array(70, 72, 71), PackedInt32Array(75, 74, 73), PackedInt32Array(77, 76, 78), PackedInt32Array(78, 76, 79), PackedInt32Array(79, 76, 81), PackedInt32Array(79, 81, 80), PackedInt32Array(84, 83, 82), PackedInt32Array(87, 86, 85)]
+geometry_parsed_geometry_type = 1
+geometry_collision_mask = 4294967228
+agent_radius = 0.25
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7vihn"]
 material = ExtResource("2_2q1wo")
@@ -51,6 +55,48 @@ material = SubResource("ShaderMaterial_o6l7m")
 size = Vector2(200, 200)
 orientation = 1
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xftvq"]
+frequency = 1.0
+fractal_type = 3
+fractal_octaves = 10
+fractal_lacunarity = 3.01
+fractal_gain = 0.345
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aa4rp"]
+seamless = true
+noise = SubResource("FastNoiseLite_xftvq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tdekm"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("8_ri2qn")
+shader_parameter/speed = 20.0
+shader_parameter/base_color = Color(0.184314, 0.160784, 0.0588235, 1)
+shader_parameter/fade_threshold = 2.0
+shader_parameter/static_radius = 0.6
+shader_parameter/static_texture = SubResource("NoiseTexture2D_aa4rp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_44egy"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("8_ri2qn")
+shader_parameter/speed = 20.0
+shader_parameter/base_color = Color(0.184314, 0.160784, 0.0588235, 1)
+shader_parameter/fade_threshold = 2.0
+shader_parameter/static_radius = 0.2
+shader_parameter/static_texture = SubResource("NoiseTexture2D_aa4rp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d7k0f"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("8_ri2qn")
+shader_parameter/speed = 20.0
+shader_parameter/base_color = Color(0.490196, 0.843137, 0.666667, 1)
+shader_parameter/fade_threshold = 2.0
+shader_parameter/static_radius = 0.7
+shader_parameter/static_texture = SubResource("NoiseTexture2D_aa4rp")
+
 [node name="TestScene" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("2_y2c3k")]
@@ -64,6 +110,7 @@ mesh = SubResource("PlaneMesh_7vihn")
 skeleton = NodePath("../..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
+collision_layer = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
@@ -71,30 +118,50 @@ shape = SubResource("BoxShape3D_cykx4")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D"]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 2.94639, 0)
+visible = false
 mesh = SubResource("QuadMesh_8k4ta")
 skeleton = NodePath("../..")
 
-[node name="BlankWall" parent="." instance=ExtResource("3_k785k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -10)
+[node name="CornerWall" parent="NavigationRegion3D" instance=ExtResource("4_6l441")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -13)
 
-[node name="CornerWall" parent="." instance=ExtResource("4_6l441")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -10)
+[node name="CornerWall2" parent="NavigationRegion3D" instance=ExtResource("4_6l441")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, -13)
 
-[node name="CrossWall" parent="." instance=ExtResource("5_bstf6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+[node name="CornerWall3" parent="NavigationRegion3D" instance=ExtResource("4_6l441")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -6, 0, -21)
 
-[node name="WallDoor" parent="." instance=ExtResource("6_b5bcl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.97004, 0, -10.0008)
+[node name="CornerWall4" parent="NavigationRegion3D" instance=ExtResource("4_6l441")]
+transform = Transform3D(5.96046e-08, 0, 1, 0, 1, 0, -1, 0, 5.96046e-08, 6, 0, -21)
 
-[node name="CeilingLight" parent="." instance=ExtResource("7_js54b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.50745, -2.67238, -6.87484)
+[node name="BlankWall" parent="NavigationRegion3D" instance=ExtResource("3_k785k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21)
 
-[node name="OmniLight3D" parent="CeilingLight/ceiling_light" index="1"]
-transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, -0.645409, 0)
-omni_range = 4.998
-omni_attenuation = 0.594604
+[node name="WallDoor" parent="NavigationRegion3D" instance=ExtResource("6_b5bcl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13)
 
-[node name="Elevator" parent="." instance=ExtResource("9_kxd45")]
-visible = false
+[node name="Enemy" parent="." node_paths=PackedStringArray("target_player") instance=ExtResource("7_x6fj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+speed = 2.1
+target_player = NodePath("../Player")
+active = true
 
-[editable path="CeilingLight"]
+[node name="Circle" parent="Enemy/Model" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_tdekm")
+
+[node name="Circle_001" parent="Enemy/Model" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_44egy")
+
+[node name="Circle_002" parent="Enemy/Model" index="2"]
+surface_material_override/0 = SubResource("ShaderMaterial_d7k0f")
+
+[node name="Clock" parent="." instance=ExtResource("9_twvo6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -6)
+
+[node name="GracePeriod" parent="Clock" index="3"]
+wait_time = 1.0
+
+[editable path="Enemy"]
+[editable path="Enemy/Model"]
+[editable path="Clock"]
+[editable path="Clock/Model"]

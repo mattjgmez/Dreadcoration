@@ -7,11 +7,11 @@ const OCC_RAY_TARGET_Y_OFFSET = 1.0
 @export_range(0.0, 100.0, 0.01) var max_speed = 20.0
 @export var target_player : CharacterBody3D
 @export_range(0.0, 10.0) var player_kill_range := 2.0
+@export var active := false
 
 var occlusion_check_rays : Array[RayCast3D]
 var seen_currently := false
 var seen_previously := false
-var active := false
 var angry := false
 var killing_player := false
 var in_center_screen := false
@@ -23,6 +23,7 @@ var obscured := false
 @onready var health := $Health
 @onready var animation := $AnimationPlayer
 @onready var movement_audio := $Audio/Movement
+@onready var door_detection := $DoorDetection
 
 
 func _ready():
@@ -61,6 +62,7 @@ func _physics_process(delta):
 		movement_audio.audio_timer.paused = true
 	
 	handle_movement(delta)
+	handle_interaction()
 
 
 func handle_movement(delta):
@@ -170,3 +172,17 @@ func trigger_aggressive():
 	angry = true
 	$Audio/NoAmmoScream.playing = true
 	animation.play("aggression")
+
+
+func handle_interaction():
+	if door_detection.is_colliding():
+		var door = door_detection.get_collider()
+		
+		if not door:
+			return
+		
+		if not door.visible:
+			return
+		
+		if door.enabled:
+			door.slam_open()

@@ -366,26 +366,26 @@ max_pitch = 0.935
 [node name="RayCast3D" type="RayCast3D" parent="RayHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.225551, 0)
 target_position = Vector3(0, 0, -1)
-collision_mask = 4
+collision_mask = 68
 hit_from_inside = true
 debug_shape_custom_color = Color(0, 1, 1, 1)
 
 [node name="RayCast3D2" type="RayCast3D" parent="RayHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.164547, 1, 0)
 target_position = Vector3(0, 0, -1)
-collision_mask = 4
+collision_mask = 68
 hit_from_inside = true
 
 [node name="RayCast3D3" type="RayCast3D" parent="RayHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.176473, 1, 0)
 target_position = Vector3(0, 0, -1)
-collision_mask = 4
+collision_mask = 68
 hit_from_inside = true
 
 [node name="RayCast3D5" type="RayCast3D" parent="RayHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56751, 0)
 target_position = Vector3(0, 0, -1)
-collision_mask = 4
+collision_mask = 68
 hit_from_inside = true
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -404,6 +404,14 @@ invulnerable = true
 libraries = {
 "": SubResource("AnimationLibrary_rnx35")
 }
+
+[node name="DoorDetection" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.979493, 0)
+target_position = Vector3(0, 0, -1)
+collision_mask = 16
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
 
 [connection signal="timeout" from="Audio/AudioTimer" to="Audio/Movement" method="initialize_audio_timer"]
 [connection signal="timeout" from="Audio/AudioTimer" to="Audio/Movement" method="trigger_random_sound"]

@@ -94,6 +94,7 @@ gameplay_reload={
 3d_physics/layer_4="Floor"
 3d_physics/layer_5="Interaction"
 3d_physics/layer_6="Triggers"
+3d_physics/layer_7="Doors"
 
 [rendering]
 

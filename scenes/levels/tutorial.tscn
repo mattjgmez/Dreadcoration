@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://csq7lqp5lcts2"]
+[gd_scene load_steps=36 format=3 uid="uid://csq7lqp5lcts2"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_h5xc7"]
 [ext_resource type="Shader" path="res://shaders/retro_post-processing.gdshader" id="2_apriv"]
@@ -15,6 +15,7 @@
 [ext_resource type="Shader" path="res://shaders/player_death.gdshader" id="11_y328b"]
 [ext_resource type="Shader" path="res://shaders/grid.gdshader" id="12_5qybj"]
 [ext_resource type="Script" path="res://scenes/levels/tutorial_manager.gd" id="15_p7pmk"]
+[ext_resource type="PackedScene" uid="uid://d1y7soam0pt0e" path="res://scenes/environment/telephone.tscn" id="16_3s1xj"]
 
 [sub_resource type="Gradient" id="Gradient_60ha1"]
 interpolation_mode = 1
@@ -98,8 +99,6 @@ shader_parameter/vignette_noise = SubResource("NoiseTexture2D_88pvg")
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_arlbx"]
 resource_local_to_scene = true
-vertices = PackedVector3Array(-6.8, 0.486834, -16.65, 5.2, 0.486834, -16.9, 5.45, 0.486834, -21.65, -8.3, 0.486834, -21.65, -8.3, 0.486834, -1.4, -6.8, 0.486834, -1.4, -6.8, 0.486834, -16.65, -8.3, 0.486834, -21.65, 14.45, 0.486834, -3.15, 12.7, 0.486834, -3.15, 13.2, 0.486834, -0.900002, 18.45, 0.486834, -0.900002, 21.7, 0.486834, -0.900002, 23.45, 0.486834, -0.900002, 23.45, 0.486834, -3.15, 21.7, 0.486834, -3.15, 6.95, 0.486834, -16.65, 6.95, 0.486834, -4.9, 14.7, 0.486834, -4.65, 21.45, 0.486834, -0.150002, 21.7, 0.486834, -0.900002, 21.7, 0.486834, -3.15, 18.45, 0.486834, -0.900002, 18.7, 0.486834, -0.150002, 21.45, 0.486834, -0.150002, 26.45, 0.486834, -4.9, 26.7, 0.486834, -4.15, 30.2, 0.486834, -4.15, 30.2, 0.486834, -21.65, 18.45, 0.486834, -0.900002, 21.45, 0.486834, -0.150002, 21.7, 0.486834, -3.15, 21.45, 0.486834, -4.65, 14.7, 0.486834, -4.65, 14.45, 0.486834, -3.15, 5.45, 0.486834, -21.65, 5.2, 0.486834, -16.9, 6.95, 0.486834, -16.65, 14.7, 0.486834, -4.65, 21.45, 0.486834, -4.65, 26.45, 0.486834, -4.9, 30.2, 0.486834, -21.65, 5.45, 0.486834, -21.65, 6.95, 0.486834, -16.65, -1.3, 0.486834, 0.0999985, 1.45, 0.486834, 0.0999985, 1.7, 0.486834, -0.900002, -1.55, 0.486834, -0.900002, -1.3, 0.486834, 0.0999985, 1.7, 0.486834, -0.900002, 5.2, 0.486834, -3.4, 5.2, 0.486834, -15.15, 2.95, 0.486834, -15.15, 2.7, 0.486834, -12.65, 5.2, 0.486834, -3.4, -2.55, 0.486834, -12.65, -2.8, 0.486834, -15.15, -5.05, 0.486834, -15.15, -5.05, 0.486834, -0.900002, 13.2, 0.486834, -0.900002, 12.7, 0.486834, -3.15, 5.2, 0.486834, -3.4, 1.7, 0.486834, -0.900002, -5.05, 0.486834, -0.900002, -1.55, 0.486834, -0.900002, 5.2, 0.486834, -3.4, 2.7, 0.486834, -12.65, -2.55, 0.486834, -12.65, -1.8, 1.23683, -14.4, -1.8, 1.23683, -13.65, 1.95, 1.23683, -13.65, 1.95, 1.23683, -14.4, 21.45, 0.486834, -0.150002, 18.7, 0.486834, -0.150002, 18.7, 0.486834, 0.599998, 18.7, 0.486834, 0.599998, 17.95, 0.486834, 0.849998, 17.95, 0.486834, 3.35, 21.7, 0.486834, 0.849998, 21.45, 0.486834, -0.150002, 17.95, 0.486834, 3.35, 15.95, 0.486834, 3.6, 15.95, 0.486834, 13.6, 23.45, 0.486834, -3.15, 23.45, 0.486834, -0.900002, 26.45, 0.486834, -0.900002, 26.45, 0.486834, -3.15, 26.7, 0.486834, 0.599998, 21.7, 0.486834, 0.849998, 17.95, 0.486834, 3.35, 15.95, 0.486834, 13.6, 30.2, 0.486834, 13.6, 26.7, 0.486834, -4.15, 26.45, 0.486834, -3.15, 26.45, 0.486834, -0.900002, 26.7, 0.486834, 0.599998, 30.2, 0.486834, 13.6, 30.2, 0.486834, -4.15, -6.55, 0.486834, 0.849998, -6.8, 0.486834, -1.4, -8.3, 0.486834, -1.4, -8.3, 0.486834, 13.6, 1.7, 0.486834, 0.849998, 1.45, 0.486834, 0.0999985, -1.3, 0.486834, 0.0999985, -1.55, 0.486834, 0.849998, 2.95, 0.486834, 13.6, -8.3, 0.486834, 13.6, 2.95, 0.486834, 13.6, -1.55, 0.486834, 0.849998, -6.55, 0.486834, 0.849998, 2.95, 0.486834, 13.6, 3.2, 0.486834, 0.849998, 1.7, 0.486834, 0.849998, 15.2, 0.486834, 0.849998, 15.2, 0.486834, 2.35, 16.7, 0.486834, 2.35, 16.45, 0.486834, 0.599998, 15.95, 0.486834, 13.6, 15.95, 0.486834, 3.6, 13.95, 0.486834, 3.35, 13.95, 0.486834, 3.35, 13.95, 0.486834, 0.849998, 3.2, 0.486834, 0.849998, 2.95, 0.486834, 13.6, 15.95, 0.486834, 13.6, 13.95, 0.486834, 3.35, 3.2, 0.486834, 0.849998)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(15, 14, 12), PackedInt32Array(12, 14, 13), PackedInt32Array(18, 17, 16), PackedInt32Array(21, 20, 19), PackedInt32Array(24, 23, 22), PackedInt32Array(26, 25, 27), PackedInt32Array(27, 25, 28), PackedInt32Array(31, 30, 32), PackedInt32Array(32, 30, 29), PackedInt32Array(32, 29, 34), PackedInt32Array(32, 34, 33), PackedInt32Array(37, 36, 35), PackedInt32Array(39, 38, 40), PackedInt32Array(40, 38, 43), PackedInt32Array(40, 43, 42), PackedInt32Array(40, 42, 41), PackedInt32Array(46, 45, 44), PackedInt32Array(48, 47, 49), PackedInt32Array(49, 47, 50), PackedInt32Array(52, 51, 53), PackedInt32Array(53, 51, 54), PackedInt32Array(56, 55, 57), PackedInt32Array(57, 55, 58), PackedInt32Array(60, 59, 61), PackedInt32Array(61, 59, 62), PackedInt32Array(64, 63, 65), PackedInt32Array(65, 63, 66), PackedInt32Array(66, 63, 67), PackedInt32Array(71, 70, 68), PackedInt32Array(68, 70, 69), PackedInt32Array(74, 73, 72), PackedInt32Array(76, 75, 77), PackedInt32Array(77, 75, 78), PackedInt32Array(78, 75, 79), PackedInt32Array(82, 81, 80), PackedInt32Array(86, 85, 83), PackedInt32Array(83, 85, 84), PackedInt32Array(88, 87, 89), PackedInt32Array(89, 87, 90), PackedInt32Array(90, 87, 91), PackedInt32Array(93, 92, 94), PackedInt32Array(94, 92, 95), PackedInt32Array(95, 92, 97), PackedInt32Array(95, 97, 96), PackedInt32Array(99, 98, 100), PackedInt32Array(100, 98, 101), PackedInt32Array(103, 102, 104), PackedInt32Array(104, 102, 105), PackedInt32Array(105, 102, 106), PackedInt32Array(110, 109, 107), PackedInt32Array(107, 109, 108), PackedInt32Array(113, 112, 111), PackedInt32Array(114, 117, 115), PackedInt32Array(115, 117, 116), PackedInt32Array(118, 120, 119), PackedInt32Array(123, 122, 121), PackedInt32Array(125, 124, 126), PackedInt32Array(126, 124, 127)]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ydcio"]
 material = ExtResource("3_7iohl")
@@ -261,13 +260,13 @@ flicker_chance = 1.0
 start_on = false
 
 [node name="Enemy" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("9_flm5c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -14)
 
 [node name="Enemy2" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("9_flm5c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)
 
 [node name="Enemy3" parent="PostProcessing/SubViewport/Environment" instance=ExtResource("9_flm5c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -14)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="PostProcessing/SubViewport"]
 navigation_mesh = SubResource("NavigationMesh_arlbx")
@@ -332,6 +331,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6, 0, 
 
 [node name="FrontDesk" type="StaticBody3D" parent="PostProcessing/SubViewport/NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14)
+collision_layer = 4
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PostProcessing/SubViewport/NavigationRegion3D/FrontDesk"]
 transform = Transform3D(4.42, 0, 0, 0, 2.135, 0, 0, 0, 1.415, 0, -0.195666, 0)
@@ -360,6 +360,9 @@ shape = SubResource("BoxShape3D_6m8ug")
 
 [node name="EnemyPoint" type="Node3D" parent="TutorialManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8999, 9.53674e-07, -2.13262)
+
+[node name="Telephone" parent="." instance=ExtResource("16_3s1xj")]
+transform = Transform3D(0.832854, 0, 0.553493, 0, 1, 0, -0.553493, 0, 0.832854, -0.88869, 0.872271, -13.552)
 
 [connection signal="guns_collected" from="PostProcessing/SubViewport/BagOfGuns" to="TutorialManager" method="_on_bag_of_guns_guns_collected"]
 [connection signal="elevator_closed" from="PostProcessing/SubViewport/NavigationRegion3D/ElevatorMain" to="TutorialManager" method="_on_elevator_main_elevator_closed"]

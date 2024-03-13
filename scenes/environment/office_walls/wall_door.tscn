@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://crpa28isiivs1"]
+[gd_scene load_steps=12 format=3 uid="uid://crpa28isiivs1"]
 
 [ext_resource type="Script" path="res://scripts/interactables/door.gd" id="1_28nkr"]
 [ext_resource type="PackedScene" uid="uid://bgj2eue44ovw4" path="res://models/modular_office/wall_door.blend" id="1_d0rww"]
 [ext_resource type="AudioStream" uid="uid://bina0rd4mm183" path="res://audio/door_open_normal.mp3" id="2_ithfc"]
+[ext_resource type="AudioStream" uid="uid://x24nn2l04aqx" path="res://audio/door_slam.mp3" id="4_rer0n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4fnqm"]
 size = Vector3(1, 2.45996, 0.459961)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m7lf1"]
-size = Vector3(1, 2.05316, 0.116211)
+size = Vector3(1, 2.058, 0.121)
 
 [sub_resource type="Animation" id="Animation_rn1fb"]
 length = 0.001
@@ -72,6 +73,52 @@ tracks/4/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Model/Door/DoorCollision:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.5, 0, 0)]
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Model/Door:rotation:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Model/Door:rotation:z")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("DoorOpenSlam:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_lk77s"]
 resource_name = "open_normal"
@@ -131,20 +178,95 @@ tracks/4/path = NodePath("Model/Door/DoorCollision/DoorCollisionShape:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 1.4),
+"times": PackedFloat32Array(0, 0.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Model/Door/DoorCollision:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.5, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ay2iu"]
+resource_name = "open_slam"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DoorDetectionShape:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model/Door/DoorCollision/DoorCollisionShape:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Model/Door:rotation:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.2, -1.76044, -2.00825, -0.2, -0.48788, 0.2, 0.162627, -1.515, -0.2, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.8)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Model/Door:rotation:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.00521782, -0.25, 0, 0.2, -0.108418, -0.118688, -0.3, 0.0774413, 0.25, 0),
+"times": PackedFloat32Array(0.1, 0.8)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DoorOpenSlam:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oxvqc"]
 _data = {
 "RESET": SubResource("Animation_rn1fb"),
-"open_normal": SubResource("Animation_lk77s")
+"open_normal": SubResource("Animation_lk77s"),
+"open_slam": SubResource("Animation_ay2iu")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vvreo"]
-size = Vector3(1.347, 3.072, 0.45)
+size = Vector3(1.2, 3.072, 0.45)
 
 [node name="WallDoor" type="Area3D" groups=["Interactable"]]
 collision_layer = 16
@@ -159,7 +281,8 @@ shape = SubResource("BoxShape3D_4fnqm")
 [node name="Model" parent="." instance=ExtResource("1_d0rww")]
 
 [node name="DoorCollision" type="AnimatableBody3D" parent="Model/Door" index="1"]
-collision_layer = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+collision_layer = 64
 
 [node name="DoorCollisionShape" type="CollisionShape3D" parent="Model/Door/DoorCollision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0192, 0)
@@ -175,15 +298,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.14174, -0.0682935)
 stream = ExtResource("2_ithfc")
 volume_db = -7.321
 
+[node name="DoorOpenSlam" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.14174, -0.0682935)
+stream = ExtResource("4_rer0n")
+volume_db = -6.0
+max_db = -14.0
+
 [node name="WallCollision" type="StaticBody3D" parent="."]
 collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallCollision"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33035, 1.47144, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.40169, 1.47144, 8.17879e-09)
 shape = SubResource("BoxShape3D_vvreo")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="WallCollision"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35712, 1.47144, -0.00115967)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4203, 1.47144, -0.00115967)
 shape = SubResource("BoxShape3D_vvreo")
 
 [editable path="Model"]
