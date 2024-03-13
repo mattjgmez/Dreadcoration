@@ -191,5 +191,5 @@ func ramp_speed(delta):
 		speed = max_speed
 		return
 	
-	var new_speed = clampf(speed, speed + delta * 0.1, max_speed)
+	var new_speed = clampf(speed, speed + delta * 0.05, max_speed)
 	speed = new_speed
