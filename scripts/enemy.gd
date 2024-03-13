@@ -4,7 +4,7 @@ extends RigidBody3D
 const OCC_RAY_TARGET_Y_OFFSET = 1.0
 
 @export_range(0.0, 10.0, 0.01) var speed = 5.0
-@export_range(0.0, 100.0, 0.01) var max_speed = 20.0
+@export_range(0.0, 20.0, 0.01) var max_speed = 5.0
 @export var target_player : CharacterBody3D
 @export_range(0.0, 10.0) var player_kill_range := 2.0
 @export var active := false
@@ -69,9 +69,7 @@ func handle_movement(delta):
 	angular_velocity = Vector3.ZERO
 	linear_velocity = Vector3.ZERO
 	
-	if angry:
-		var s = clampf(speed, speed + delta * 2.0, max_speed)
-		speed = s
+	ramp_speed(delta)
 	
 	# Movement directions
 	var direction := Vector3.ZERO
@@ -186,3 +184,12 @@ func handle_interaction():
 		
 		if door.enabled:
 			door.slam_open()
+
+
+func ramp_speed(delta):
+	if angry and speed != max_speed:
+		speed = max_speed
+		return
+	
+	var new_speed = clampf(speed, speed + delta * 0.1, max_speed)
+	speed = new_speed
