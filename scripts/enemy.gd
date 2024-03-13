@@ -8,6 +8,7 @@ const OCC_RAY_TARGET_Y_OFFSET = 1.0
 @export var target_player : CharacterBody3D
 @export_range(0.0, 10.0) var player_kill_range := 2.0
 @export var active := false
+@export_range(0.0, 60.0, 0.5) var ramp_timer := 30.0
 
 var occlusion_check_rays : Array[RayCast3D]
 var seen_currently := false
@@ -16,6 +17,7 @@ var angry := false
 var killing_player := false
 var in_center_screen := false
 var obscured := false
+var dont_ramp := true
 
 @onready var ray_holder := $RayHolder
 @onready var visible_notifier := $LoSAlert
@@ -99,6 +101,8 @@ func start_killing_player():
 
 func start_following_player():
 	await get_tree().physics_frame
+	
+	wait_to_ramp()
 	
 	target_player = get_tree().get_first_node_in_group("Player")
 	
@@ -187,9 +191,20 @@ func handle_interaction():
 
 
 func ramp_speed(delta):
+	if dont_ramp:
+		return
+	
 	if angry and speed != max_speed:
 		speed = max_speed
 		return
 	
 	var new_speed = clampf(speed, speed + delta * 0.05, max_speed)
 	speed = new_speed
+
+
+func wait_to_ramp():
+	var timer = get_tree().create_timer(ramp_timer)
+	
+	await timer.timeout
+	
+	dont_ramp = false
