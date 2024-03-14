@@ -191,7 +191,7 @@ func handle_interaction():
 
 
 func ramp_speed(delta):
-	if dont_ramp:
+	if dont_ramp and not angry:
 		return
 	
 	if angry and speed != max_speed:

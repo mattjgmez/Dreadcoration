@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dncoyb3cmnx3q"]
 
 [ext_resource type="Script" path="res://scripts/interface/death_ui.gd" id="1_kb663"]
-[ext_resource type="FontFile" uid="uid://hvd4m5fwws3b" path="res://fonts/Vis-A-Vis.ttf" id="1_r8nft"]
+[ext_resource type="FontFile" uid="uid://bo0qgovsuckwq" path="res://fonts/Doctor Glitch.otf" id="2_63jpx"]
 
 [sub_resource type="Animation" id="Animation_f4ip3"]
 length = 0.001
@@ -109,8 +109,8 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.643137)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 40
 theme_override_constants/shadow_offset_y = 25
-theme_override_fonts/font = ExtResource("1_r8nft")
-theme_override_font_sizes/font_size = 61
+theme_override_fonts/font = ExtResource("2_63jpx")
+theme_override_font_sizes/font_size = 42
 text = "A  MOST  UNWELCOME  END"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -121,16 +121,16 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -317.0
-offset_top = 133.0
+offset_top = 115.0
 offset_right = 317.0
-offset_bottom = 183.0
+offset_bottom = 165.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.643137)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 40
 theme_override_constants/shadow_offset_y = 25
-theme_override_fonts/font = ExtResource("1_r8nft")
-theme_override_font_sizes/font_size = 49
+theme_override_fonts/font = ExtResource("2_63jpx")
+theme_override_font_sizes/font_size = 30
 text = "FOR NOW..."
 horizontal_alignment = 1
 vertical_alignment = 1
